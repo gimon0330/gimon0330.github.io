@@ -1,0 +1,84 @@
+[
+  {
+    "id": "rl-agents",
+    "title": "RL 에이전트 실험",
+    "year": 2025,
+    "period": "2025.03 – 2025.07",
+    "tech": ["Python", "PyTorch", "RL", "Numpy"],
+    "tags": ["Reinforcement Learning", "Multi-Agent", "ELO"],
+    "featured": true,
+    "summary": "멀티에이전트 환경에서 전략 탐색과 보상 설계를 실험하고 ELO로 성능을 추정.",
+    "links": {
+      "github": "https://github.com/your-id/rl-agents",
+      "demo": "https://your-demo.example/rl"
+    }
+  },
+  {
+    "id": "fpga-counter",
+    "title": "7-세그먼트 카운터 & 미니게임 (Basys3)",
+    "year": 2025,
+    "period": "2025.04 – 2025.06",
+    "tech": ["Verilog", "FPGA"],
+    "tags": ["Basys3", "FSM", "Debounce"],
+    "featured": true,
+    "summary": "Basys3 보드에서 십진 카운터와 간단한 게임 구현, 버튼 바운싱 처리 및 상태머신 구성.",
+    "links": {
+      "video": "https://your-video.example/fpga",
+      "docs": "https://your-docs.example/fpga"
+    }
+  },
+  {
+    "id": "img-search",
+    "title": "임베딩 기반 이미지 검색 API",
+    "year": 2024,
+    "period": "2024.10 – 2024.12",
+    "tech": ["Python", "FastAPI", "Milvus", "Docker"],
+    "tags": ["Vector Search", "Embeddings"],
+    "featured": true,
+    "summary": "벡터DB(Milvus)와 임베딩으로 유사 이미지/키워드 검색 API 구축.",
+    "links": {
+      "github": "https://github.com/your-id/img-search",
+      "docs": "https://your-docs.example/img-search"
+    }
+  },
+  {
+    "id": "uwb-localization",
+    "title": "UWB 실내 위치 추정 데모",
+    "year": 2024,
+    "period": "2024.06 – 2024.09",
+    "tech": ["Kotlin", "Android", "UWB"],
+    "tags": ["IoT", "HRP-UWB"],
+    "featured": true,
+    "summary": "태그–앵커 거리 측정과 2D 위치 추정을 시각화한 데모 앱.",
+    "links": {
+      "github": "https://github.com/your-id/uwb-localization",
+      "overview": "https://your-site.example/uwb"
+    }
+  },
+  {
+    "id": "aiot-dashboard",
+    "title": "AIoT 장치 모니터링 대시보드",
+    "year": 2025,
+    "period": "2025.02 – 2025.05",
+    "tech": ["TypeScript", "Vite", "WebSocket"],
+    "tags": ["Dashboard", "IoT"],
+    "featured": false,
+    "summary": "WebSocket으로 센서 스트림 수집 및 경보 룰 기반 시각화 대시보드.",
+    "links": {
+      "github": "https://github.com/your-id/aiot-dashboard"
+    }
+  },
+  {
+    "id": "rl-eval",
+    "title": "RL 실험 자동 평가 스크립트",
+    "year": 2025,
+    "period": "2025.01 – 2025.03",
+    "tech": ["Python", "Pandas"],
+    "tags": ["Automation", "Experiment"],
+    "featured": false,
+    "summary": "학습 로그에서 승률/ELO를 집계하여 비교 리포트 생성.",
+    "links": {
+      "github": "https://github.com/your-id/rl-eval"
+    }
+  }
+]
