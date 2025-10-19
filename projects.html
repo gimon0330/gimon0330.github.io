@@ -6,15 +6,11 @@
   <title>안강현 · 프로젝트 전체</title>
   <meta name="description" content="안강현의 모든 프로젝트 목록을 검색/필터와 함께 확인하세요.">
   <style>
-    :root {
-      --bg: #0b0c10; --card: #121319; --muted: #9aa1ac; --text: #e6e9ef; --accent: #4f7cff; --accent-2: #8a7dff; --border: #232836; --shadow: rgba(0,0,0,0.25);
-    }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08); }
-    }
+    :root { --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e9ef; --accent:#4f7cff; --accent-2:#8a7dff; --border:#232836; --shadow:rgba(0,0,0,0.25); }
+    @media (prefers-color-scheme: light){ :root{ --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08);} }
     *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin:0 auto;padding:32px} /* more breathing room */
+    .container{max-width:1100px;margin:0 auto;padding:32px}
     header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
     .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:14px 0}
     .brand{font-weight:700;color:var(--text)}
@@ -26,13 +22,18 @@
     .tags{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 18px}
     .tag{padding:5px 10px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer}
     .tag.active{border-style:solid;color:var(--text)}
-    .grid{display:grid;gap:22px;grid-template-columns:repeat(12,1fr);margin-top:8px} /* bigger gap */
+    .grid{display:grid;gap:22px;grid-template-columns:repeat(12,1fr);margin-top:8px}
     .col-4{grid-column:span 4}
     .card{background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 3%),var(--card));border:1px solid var(--border);border-radius:18px;padding:16px;box-shadow:0 10px 28px var(--shadow)}
-    .thumb{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--border);object-fit:cover;display:block;margin-bottom:12px;background:#0e1015}
+    .thumb{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--border);object-fit:cover;display:block;margin:10px 0 12px;background:#0e1015}
     .pill{font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:4px 8px;border-radius:999px}
     .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px;margin-top:6px}
     .skillrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .icons{display:flex;gap:10px;align-items:center;margin-top:12px}
+    .icons.end{justify-content:flex-start}
+    .icon-btn{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border:1px solid var(--border);border-radius:10px;background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 4%),var(--card));box-shadow:0 2px 8px var(--shadow)}
+    .icon-btn svg{width:18px;height:18px;fill:var(--text)}
+    .icon-btn:hover{transform:translateY(-1px)}
     @media (max-width: 980px){.col-4{grid-column:span 6}}
     @media (max-width: 680px){.col-4{grid-column:span 12} .container{padding:24px}}
   </style>
@@ -86,20 +87,40 @@
 let DATA = [];
 let ACTIVE_TAGS = new Set();
 
+const linkOf = (p) => (p && p.links) ? (p.links.github || p.links.demo || p.links.video || p.links.overview || p.links.docs || "#") : "#";
+const imgOf = (title) => `src/projects/${encodeURIComponent(title)}.jpg`;
+
+// Inline SVGs
+const SVGs = {
+  github: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .5A11.4 11.4 0 0 0 .6 11.9c0 5 3.3 9.2 7.8 10.7.6.1.8-.2.8-.5v-2c-3.2.7-3.8-1.5-3.8-1.5-.5-1.2-1.2-1.6-1.2-1.6-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 .1.8-.8 1.7-1 .1-.7.4-1.1.7-1.3-2.5-.3-5.1-1.3-5.1-5.8 0-1.3.5-2.4 1.2-3.3 0-.3-.5-1.5.1-3 0 0 1-.3 3.4 1.2a11.6 11.6 0 0 1 6.2 0c2.4-1.5 3.4-1.2 3.4-1.2.6 1.5.1 2.7.1 3 .7.9 1.2 2 1.2 3.3 0 4.5-2.6 5.5-5.2 5.8.4.3.8 1 .8 2v3c0 .3.2.6.8.5 4.6-1.5 7.8-5.7 7.8-10.7A11.4 11.4 0 0 0 12 .5z"/></svg>',
+  docs: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 1.5V8h4.5L14 3.5zM8 11h8v1.5H8V11zm0 3h8v1.5H8V14zm0 3h5v1.5H8V17z"/></svg>',
+  overview: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.3 2.3-5.4 5.4 3.4 3.4 5.4-5.4L21 12V3zM3 21h18v-2H5V5H3v16z"/></svg>'
+};
+
+function iconButtons(p){
+  const out = [];
+  if (p.links && p.links.github) out.push(`<a class="icon-btn" href="${p.links.github}" target="_blank" rel="noopener" aria-label="GitHub">${SVGs.github}</a>`);
+  if (p.links && p.links.docs) out.push(`<a class="icon-btn" href="${p.links.docs}" target="_blank" rel="noopener" aria-label="Docs">${SVGs.docs}</a>`);
+  if (p.links && p.links.overview) out.push(`<a class="icon-btn" href="${p.links.overview}" target="_blank" rel="noopener" aria-label="Overview">${SVGs.overview}</a>`);
+  return out.join("");
+}
+
 function card(p){
-  const link = p.links?.github || p.links?.demo || p.links?.video || p.links?.overview || p.links?.docs || "#";
   const tech = (p.tech||[]).map(t=>`<span class="pill">${t}</span>`).join(' ');
   const tags = (p.tags||[]).map(t=>`<span class="tag" data-tag="${t}">${t}</span>`).join('');
-  const img = p.image ? `<img class="thumb" src="${p.image}" alt="${p.title} 썸네일" onerror="this.style.display='none'">` : "";
+  const img = `<img class="thumb" src="${imgOf(p.title)}" alt="${p.title} 썸네일" onerror="this.style.display='none'">`;
+  const icons = iconButtons(p);
+  const footer = icons ? `<div class="icons end">${icons}</div>` : `<p style="margin-top:10px;"><a href="${linkOf(p)}">자세히 보기 ↗</a></p>`;
+
   return `<article class="card col-4">
-    ${img}
     <div class="pill">${p.year}${p.featured ? " · Featured" : ""}</div>
     <h3 style="margin:8px 0">${p.title}</h3>
+    ${img}
     <p style="min-height:48px">${p.summary||""}</p>
     <div class="meta"><span>${p.period||""}</span></div>
     <div class="skillrow">${tech}</div>
     <div class="tags" style="margin-top:8px">${tags}</div>
-    <p style="margin-top:10px;"><a href="${link}">자세히 보기 ↗</a></p>
+    ${footer}
   </article>`;
 }
 
@@ -116,14 +137,9 @@ function render(){
     });
   }
   if(y){ list = list.filter(p => String(p.year) === String(y)); }
-  if(ACTIVE_TAGS.size){
-    list = list.filter(p => (p.tags||[]).some(t => ACTIVE_TAGS.has(t)));
-  }
-  if(sort === 'alpha'){
-    list.sort((a,b)=>a.title.localeCompare(b.title,'ko'));
-  } else {
-    list.sort((a,b)=>(b.year||0)-(a.year||0));
-  }
+  if(ACTIVE_TAGS.size){ list = list.filter(p => (p.tags||[]).some(t => ACTIVE_TAGS.has(t))); }
+  if(sort === 'alpha'){ list.sort((a,b)=>a.title.localeCompare(b.title,'ko')); }
+  else { list.sort((a,b)=>(b.year||0)-(a.year||0)); }
 
   document.getElementById('grid').innerHTML = list.map(card).join('');
 

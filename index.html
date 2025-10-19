@@ -6,14 +6,9 @@
   <title>안강현 · 포트폴리오</title>
   <meta name="description" content="안강현의 포트폴리오. 프로젝트, 스킬, 연락처.">
   <style>
-    :root {
-      --bg: #0b0c10; --card: #121319; --muted: #9aa1ac; --text: #e6e9ef; --accent: #4f7cff; --accent-2: #8a7dff; --border: #232836; --shadow: rgba(0,0,0,0.25);
-    }
-    @media (prefers-color-scheme: light) {
-      :root { --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08); }
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+    :root { --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e9ef; --accent:#4f7cff; --accent-2:#8a7dff; --border:#232836; --shadow:rgba(0,0,0,0.25); }
+    @media (prefers-color-scheme: light){ :root{ --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08);} }
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:1100px;margin:0 auto;padding:24px}
     header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
@@ -22,7 +17,6 @@
     .links a{padding:8px 10px;border-radius:8px;color:var(--text)}
     .links a:hover{background:var(--card);text-decoration:none}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 4%),var(--card));color:var(--text);box-shadow:0 2px 8px var(--shadow)}
-    /* Hero */
     .hero{display:grid;grid-template-columns:1.8fr 1fr;gap:36px;align-items:center;padding:56px 0 24px}
     .hero h3{font-size:clamp(18px,2.2vw,22px);margin:0 0 8px;color:var(--muted)}
     .hero h1{font-size:clamp(40px,6vw,64px);line-height:1.08;margin:0 0 12px}
@@ -32,11 +26,10 @@
     .avatar{width:clamp(180px,30vw,320px);aspect-ratio:1/1;border-radius:20px;border:1px solid var(--border);object-fit:cover;display:block;margin-left:auto;box-shadow:0 8px 26px var(--shadow)}
     section{padding:36px 0}
     h2{font-size:24px;margin:0 0 14px}
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+    .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
     .col-6{grid-column:span 6}
     .card{background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 3%),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 6px 20px var(--shadow)}
     .pill{font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:4px 8px;border-radius:999px}
-    .skills{display:flex;flex-wrap:wrap;gap:8px}
     .footer{border-top:1px solid var(--border);padding:22px 0 40px;color:var(--muted);font-size:14px}
     .socials{display:flex;gap:10px;align-items:center}
     @media (max-width: 900px){.hero{grid-template-columns:1fr}.avatar{margin:0 auto} .col-6{grid-column:span 12}}
@@ -55,22 +48,21 @@
 </header>
 
 <main id="top" class="container">
-  <!-- New hero (no surrounding box for image) -->
   <section class="hero">
     <div>
-      <h3>👋 안녕하세요!</h3>
+      <h3>안녕하세요</h3>
       <h1><span class="name">안강현</span>입니다.</h1>
-      <h2>
-        Currently Majoring CSE at POSTECH<br>
-        Postech 24학번 · BSIS 10기
-      </h2>
+      <h2>Currently Majoring CSE at POSTECH · Postech 24학번 · BSIS 10기</h2>
+      <div class="cta">
+        <a class="btn" href="#featured">프로젝트 보기</a>
+        <a class="btn" href="#contact">연락하기</a>
+      </div>
     </div>
     <div>
       <img class="avatar" src="src/profile.jpg" alt="프로필 이미지" />
     </div>
   </section>
 
-  <!-- About (kept concise) -->
   <section id="about">
     <h2>소개</h2>
     <div class="card">
@@ -81,7 +73,6 @@
     </div>
   </section>
 
-  <!-- Featured from projects.json -->
   <section id="featured">
     <h2>프로젝트 (상위 4개)</h2>
     <div id="featured-grid" class="grid"></div>
@@ -91,15 +82,9 @@
     <h2>스킬</h2>
     <div class="card">
       <div class="skills">
-        <span class="pill">Python</span>
-        <span class="pill">PyTorch</span>
-        <span class="pill">C/C++</span>
-        <span class="pill">Verilog</span>
-        <span class="pill">FastAPI</span>
-        <span class="pill">Docker</span>
-        <span class="pill">Milvus</span>
-        <span class="pill">UWB / IoT</span>
-        <span class="pill">Git / GitHub</span>
+        <span class="pill">Python</span><span class="pill">PyTorch</span><span class="pill">C/C++</span>
+        <span class="pill">Verilog</span><span class="pill">FastAPI</span><span class="pill">Docker</span>
+        <span class="pill">Milvus</span><span class="pill">UWB / IoT</span><span class="pill">Git / GitHub</span>
       </div>
     </div>
   </section>
@@ -144,27 +129,33 @@
     });
   }
 
-  // Load featured projects
+  // Helpers (centralized)
+  const linkOf = (p) => p.links?.github || p.links?.demo || p.links?.video || p.links?.overview || p.links?.docs || "#";
+  const imgOf = (title) => `src/projects/${encodeURIComponent(title)}.jpg`; // 제목.jpg 자동 매핑
+
+  // Featured cards: Title -> Image -> Summary
   const grid = document.getElementById('featured-grid');
   function cardHTML(p) {
-    const tech = (p.tech||[]).map(t=>`<span class="pill">${t}</span>`).join(' ');
-    const link = p.links?.github || p.links?.demo || p.links?.video || p.links?.overview || p.links?.docs || "#";
-    const subtitle = [p.period, (p.tags||[]).slice(0,2).join(' · ')].filter(Boolean).join(" · ");
+    const img = `<img src="${imgOf(p.title)}" alt="${p.title} 썸네일" style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:12px;border:1px solid var(--border);margin:8px 0;" onerror="this.style.display='none'">`;
     return `<article class="card col-6">
-      <div class="pill">${p.year} · ${(p.tech||[]).slice(0,2).join(', ')}</div>
-      <h3>${p.title}</h3>
-      <p>${p.summary||""}</p>
-      <p class="pill" style="display:inline-block;margin-top:6px;">${subtitle}</p>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">${tech}</div>
-      <p style="margin-top:10px;"><a href="${link}">자세히 보기 ↗</a></p>
+      <div class="pill">${p.year}${p.featured ? " · Featured" : ""}</div>
+      <h3 style="margin:6px 0 4px;">${p.title}</h3>
+      ${img}
+      <p>${p.summary || ""}</p>
+      <p style="margin-top:8px;"><a href="${linkOf(p)}">자세히 보기 ↗</a></p>
     </article>`;
   }
+
   async function load() {
     try {
       const res = await fetch('projects.json', { cache: 'no-store' });
       const data = await res.json();
-      const featured = data.filter(d => d.featured).sort((a,b)=> (b.year||0)-(a.year||0)).slice(0,4);
-      grid.innerHTML = featured.map(cardHTML).join('');
+      const featured = data.filter(d => d.featured);
+
+      // 정렬: 연도 내림차순, 그 다음 제목 오름차순 (일반 규칙)
+      featured.sort((a,b)=> (b.year||0)-(a.year||0) || a.title.localeCompare(b.title,'ko'));
+
+      grid.innerHTML = featured.slice(0,4).map(cardHTML).join('');
     } catch (e) {
       grid.innerHTML = `<div class="card col-6"><b>로딩 실패</b><p>projects.json을 저장소 루트에 두었는지 확인하세요.</p></div>`;
     }

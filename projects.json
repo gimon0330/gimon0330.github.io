@@ -64,7 +64,7 @@
     "summary": "벡터DB(Milvus)와 임베딩으로 유사 이미지/키워드 검색 API 구축.",
     "image": "src/projects/img-search.jpg",
     "links": {
-      "github": "https://github.com/your-id/img-search",
+      "github": "https://github.com/gimon0330/226-practice3",
       "docs": "https://your-docs.example/img-search"
     }
   },
