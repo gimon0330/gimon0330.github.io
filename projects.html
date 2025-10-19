@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>안강현 · 프로젝트 전체</title>
+  <meta name="description" content="안강현의 모든 프로젝트 목록을 검색/필터와 함께 확인하세요.">
+  <style>
+    :root {
+      --bg: #0b0c10; --card: #121319; --muted: #9aa1ac; --text: #e6e9ef; --accent: #4f7cff; --accent-2: #8a7dff; --border: #232836; --shadow: rgba(0,0,0,0.25);
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08); }
+    }
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:980px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
+    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{font-weight:700;color:var(--text)}
+    .links a{padding:8px 10px;border-radius:8px;color:var(--text)}
+    .links a:hover{background:var(--card);text-decoration:none}
+    h1{font-size:clamp(26px,4vw,36px);line-height:1.15;margin:12px 0 8px}
+    .controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+    input,select{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:10px;padding:10px 12px}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+    .col-4{grid-column:span 4}
+    .card{background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 3%),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 6px 20px var(--shadow)}
+    .pill{font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:4px 8px;border-radius:999px}
+    .meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--muted);font-size:13px}
+    .tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+    .tag{padding:3px 8px;border-radius:999px;border:1px solid var(--border);font-size:12px;color:var(--muted);cursor:pointer}
+    .tag.active{border-style:solid;color:var(--text)}
+    @media (max-width: 860px){.col-4{grid-column:span 12}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">안강현</a>
+    <nav class="links">
+      <a href="index.html#featured">메인</a>
+      <a href="projects.html">프로젝트 전체</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <h1>프로젝트 전체</h1>
+  <div class="controls">
+    <input id="q" type="search" placeholder="검색: 제목, 설명, 기술, 태그" />
+    <select id="year">
+      <option value="">모든 연도</option>
+      <option>2025</option>
+      <option>2024</option>
+      <option>2023</option>
+    </select>
+    <select id="sort">
+      <option value="recent">최신순</option>
+      <option value="alpha">이름순</option>
+    </select>
+  </div>
+
+  <div id="tagbar" class="tags"></div>
+  <div id="grid" class="grid"></div>
+</main>
+
+<script>
+let DATA = [];
+let ACTIVE_TAGS = new Set();
+
+function card(p){
+  const link = p.links?.github || p.links?.demo || p.links?.video || p.links?.overview || p.links?.docs || "#";
+  const tech = (p.tech||[]).map(t=>`<span class="pill">${t}</span>`).join(' ');
+  const tags = (p.tags||[]).map(t=>`<span class="tag" data-tag="${t}">${t}</span>`).join('');
+  return `<article class="card col-4">
+    <div class="pill">${p.year}${p.featured ? " · Featured" : ""}</div>
+    <h3 style="margin:8px 0">${p.title}</h3>
+    <p style="min-height:48px">${p.summary||""}</p>
+    <div class="meta"><span>${p.period||""}</span></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;">${tech}</div>
+    <div class="tags" style="margin-top:8px">${tags}</div>
+    <p style="margin-top:10px;"><a href="${link}">자세히 보기 ↗</a></p>
+  </article>`;
+}
+
+function render(){
+  const q = document.getElementById('q').value.trim().toLowerCase();
+  const y = document.getElementById('year').value;
+  const sort = document.getElementById('sort').value;
+  let list = [...DATA];
+
+  if(q){
+    list = list.filter(p => {
+      const hay = [p.title, p.summary, ...(p.tech||[]), ...(p.tags||[])].join(" ").toLowerCase();
+      return hay.includes(q);
+    });
+  }
+  if(y){ list = list.filter(p => String(p.year) === String(y)); }
+  if(ACTIVE_TAGS.size){
+    list = list.filter(p => (p.tags||[]).some(t => ACTIVE_TAGS.has(t)));
+  }
+  if(sort === 'alpha'){
+    list.sort((a,b)=>a.title.localeCompare(b.title,'ko'));
+  } else {
+    list.sort((a,b)=>(b.year||0)-(a.year||0));
+  }
+
+  document.getElementById('grid').innerHTML = list.map(card).join('');
+
+  document.querySelectorAll('.tag').forEach(el=>{
+    el.addEventListener('click', () => {
+      const t = el.dataset.tag;
+      if(ACTIVE_TAGS.has(t)) { ACTIVE_TAGS.delete(t); el.classList.remove('active'); }
+      else { ACTIVE_TAGS.add(t); el.classList.add('active'); }
+      render();
+    });
+  });
+}
+
+function buildTagBar(){
+  const all = new Set(DATA.flatMap(p => p.tags || []));
+  const tagbar = document.getElementById('tagbar');
+  tagbar.innerHTML = [...all].sort((a,b)=>a.localeCompare(b,'ko')).map(t=>`<span class="tag" data-tag="${t}">${t}</span>`).join('');
+  tagbar.querySelectorAll('.tag').forEach(el=>{
+    el.addEventListener('click', () => {
+      const t = el.dataset.tag;
+      if(ACTIVE_TAGS.has(t)) { ACTIVE_TAGS.delete(t); el.classList.remove('active'); }
+      else { ACTIVE_TAGS.add(t); el.classList.add('active'); }
+      render();
+    });
+  });
+}
+
+async function load(){
+  try {
+    const res = await fetch('projects.json', { cache: 'no-store' });
+    DATA = await res.json();
+    buildTagBar();
+    render();
+  } catch (e) {
+    document.getElementById('grid').innerHTML = `<div class="card col-4"><b>로딩 실패</b><p>projects.json을 저장소 루트에 두었는지 확인하세요.</p></div>`;
+  }
+}
+
+document.getElementById('q').addEventListener('input', render);
+document.getElementById('year').addEventListener('change', render);
+document.getElementById('sort').addEventListener('change', render);
+load();
+</script>
+
+<footer class="container" style="border-top:1px solid var(--border);padding:22px 0 40px;color:var(--muted);font-size:14px;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <span>© <span id="y"></span> 안강현</span>
+    <div class="socials">
+      <a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a>
+      <span>·</span>
+      <a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
+      <span>·</span>
+      <a href="mailto:gimon0331@postech.ac.kr">Email</a>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

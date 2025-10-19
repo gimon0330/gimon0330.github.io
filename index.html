@@ -4,226 +4,115 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>안강현 · 포트폴리오</title>
-  <meta name="description" content="안강현의 간단한 포트폴리오 사이트. 프로젝트, 스킬, 연락처 정보가 포함되어 있습니다.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
+  <meta name="description" content="안강현의 포트폴리오. 상위 프로젝트 4개를 소개합니다.">
   <style>
     :root {
-      --bg: #0b0c10;
-      --card: #121319;
-      --muted: #9aa1ac;
-      --text: #e6e9ef;
-      --accent: #4f7cff;
-      --accent-2: #8a7dff;
-      --border: #232836;
-      --shadow: rgba(0,0,0,0.25);
+      --bg: #0b0c10; --card: #121319; --muted: #9aa1ac; --text: #e6e9ef; --accent: #4f7cff; --accent-2: #8a7dff; --border: #232836; --shadow: rgba(0,0,0,0.25);
     }
     @media (prefers-color-scheme: light) {
-      :root {
-        --bg: #ffffff;
-        --card: #f7f8fa;
-        --muted: #5a6472;
-        --text: #0b1220;
-        --accent: #3056ff;
-        --accent-2: #6a5cff;
-        --border: #e6e8ee;
-        --shadow: rgba(0,0,0,0.08);
-      }
+      :root { --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08); }
     }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: "Pretendard", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .container { max-width: 980px; margin: 0 auto; padding: 24px; }
-    header {
-      position: sticky; top: 0; z-index: 10;
-      backdrop-filter: saturate(150%) blur(8px);
-      background: color-mix(in sRGB, var(--bg), transparent 25%);
-      border-bottom: 1px solid var(--border);
-    }
-    .nav {
-      display: flex; gap: 16px; align-items: center; justify-content: space-between;
-      padding: 12px 0;
-    }
-    .nav a.brand { font-weight: 700; letter-spacing: 0.2px; color: var(--text); }
-    .nav .links a { padding: 8px 10px; border-radius: 8px; color: var(--text); }
-    .nav .links a:hover { background: var(--card); text-decoration: none; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 10px 14px; border-radius: 10px; border: 1px solid var(--border);
-      background: linear-gradient(180deg, color-mix(in sRGB, var(--card), white 4%), var(--card));
-      color: var(--text); box-shadow: 0 2px 8px var(--shadow); cursor: pointer;
-    }
-    .btn:active { transform: translateY(1px); }
-    .hero {
-      display: grid; grid-template-columns: 1.2fr 1fr; gap: 28px; align-items: center; padding: 56px 0 24px;
-    }
-    .badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border: 1px solid var(--border); color: var(--muted); border-radius: 999px; font-size: 13px; }
-    h1 { font-size: clamp(28px, 4vw, 42px); line-height: 1.15; margin: 12px 0 8px; }
-    .subtitle { color: var(--muted); font-size: 16px; line-height: 1.6; }
-    .hero .cta { display: flex; gap: 12px; margin-top: 18px; flex-wrap: wrap; }
-    .card {
-      background: linear-gradient(180deg, color-mix(in sRGB, var(--card), white 3%), var(--card));
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 18px; box-shadow: 0 6px 20px var(--shadow);
-    }
-    .avatar {
-      width: 160px; aspect-ratio: 1/1; border-radius: 16px; border: 1px solid var(--border);
-      background: linear-gradient(135deg, var(--accent), var(--accent-2));
-      display: grid; place-items: center; font-weight: 700; font-size: 28px; color: white;
-      margin: 0 auto;
-    }
-    section { padding: 36px 0; }
-    section h2 { font-size: 24px; margin: 0 0 14px; }
-    .grid { display: grid; gap: 14px; grid-template-columns: repeat(12, 1fr); }
-    .col-6 { grid-column: span 6; }
-    .col-4 { grid-column: span 4; }
-    .col-12 { grid-column: span 12; }
-    .project {
-      display: grid; gap: 10px;
-    }
-    .pill { font-size: 12px; color: var(--muted); border: 1px dashed var(--border); padding: 4px 8px; border-radius: 999px; }
-    .skills { display: flex; flex-wrap: wrap; gap: 8px; }
-    .footer { border-top: 1px solid var(--border); padding: 22px 0 40px; color: var(--muted); font-size: 14px; }
-    .socials { display: flex; gap: 10px; align-items: center; }
-    .kicker { color: var(--muted); font-size: 14px; }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; }
-      .col-6 { grid-column: span 12; }
-      .col-4 { grid-column: span 12; }
-    }
+    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+    a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+    .container{max-width:980px;margin:0 auto;padding:24px}
+    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
+    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
+    .brand{font-weight:700;color:var(--text)}
+    .links a{padding:8px 10px;border-radius:8px;color:var(--text)}
+    .links a:hover{background:var(--card);text-decoration:none}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 4%),var(--card));color:var(--text);box-shadow:0 2px 8px var(--shadow)}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:28px;align-items:center;padding:56px 0 24px}
+    h1{font-size:clamp(28px,4vw,42px);line-height:1.15;margin:12px 0 8px}
+    .subtitle{color:var(--muted);font-size:16px;line-height:1.6}
+    section{padding:36px 0}
+    h2{font-size:24px;margin:0 0 14px}
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+    .col-6{grid-column:span 6}
+    .card{background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 3%),var(--card));border:1px solid var(--border);border-radius:16px;padding:18px;box-shadow:0 6px 20px var(--shadow)}
+    .pill{font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:4px 8px;border-radius:999px}
+    .kicker{color:var(--muted);font-size:14px}
+    @media (max-width: 860px){.hero{grid-template-columns:1fr}.col-6{grid-column:span 12}}
   </style>
 </head>
 <body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#top">안강현</a>
-      <nav class="links">
-        <a href="#about">소개</a>
-        <a href="#projects">프로젝트</a>
-        <a href="#skills">스킬</a>
-        <a href="#contact">연락처</a>
-      </nav>
+<header>
+  <div class="container nav">
+    <a class="brand" href="#top">안강현</a>
+    <nav class="links">
+      <a href="#featured">프로젝트</a>
+      <a href="projects.html">프로젝트 전체</a>
+      <a href="#contact">연락처</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top" class="container">
+  <section class="hero">
+    <div>
+      <div class="pill">업데이트: <span id="up"></span></div>
+      <h1>상위 4개 프로젝트</h1>
+      <p class="subtitle">아래는 <b>projects.json</b>에서 <b>featured=true</b>로 표시된 상위 4개입니다. 모두 보려면 ‘프로젝트 전체’로 이동하세요.</p>
+      <div class="hero cta">
+        <a class="btn" href="projects.html">프로젝트 전체 보기</a>
+      </div>
     </div>
-  </header>
+    <div class="card">
+      <p class="kicker">데이터는 <code>projects.json</code>에서 불러옵니다.</p>
+      <p class="kicker">같은 저장소 루트에 파일을 두면 GitHub Pages에서 동작합니다.</p>
+    </div>
+  </section>
 
-  <main id="top" class="container">
-    <section class="hero">
-      <div>
-        <h3>👋 안녕하세요!</h3>
-        <h1><span style="background:linear-gradient(90deg,var(--accent),var(--accent-2));-webkit-background-clip:text;background-clip:text;color:transparent;">안강현</span>입니다.</h1>
-        <h2>POSTECH 24', Currently Majoring CSE</h2>
-        <p class="subtitle">
-          AI, Machine Learning에 관심이 많습니다. 학부 연구, 동아리, 개인 프로젝트를 통해 배우고 만들고 공유합니다.
-        </p>
-        <div class="hero cta">
-          <a class="btn" href="#projects">프로젝트 보기</a>
-          <a class="btn" href="#contact">연락하기</a>
-        </div>
-      </div>
-      <div class="card">
-        <div class="avatar">AGH</div>
-      </div>
-    </section>
+  <section id="featured">
+    <h2>Featured</h2>
+    <div id="featured-grid" class="grid"></div>
+  </section>
 
-    <section id="about">
-      <h2>소개</h2>
-      <div class="card">
-        <p>
-          안녕하세요. POSTECH 컴퓨터공학과에 재학중인 24학번 <b>안강현</b>입니다.<br>
-          생각하는 것을 좋아합니다.<br>
-          부산일과학고등학교 10기로 졸업하였으며, MathCOM의 회장으로 활동했습니다.<br>
-        </p>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2>프로젝트</h2>
-      <div class="grid">
-        <article class="card project col-6">
-          <div class="pill">2025 · Python, PyTorch, RL</div>
-          <h3>RL 에이전트 실험</h3>
-          <p>멀티에이전트 환경에서의 전략 탐색과 보상 설계를 실험했습니다. 승률 변화와 ELO 지표를 기반으로 학습 안정성을 평가했습니다.</p>
-          <a href="#" onclick="alert('레포지토리 링크로 바꾸세요!');return false;">GitHub ↗</a>
-        </article>
-
-        <article class="card project col-6">
-          <div class="pill">2025 · Verilog, FPGA</div>
-          <h3>7-세그먼트 카운터 & 미니게임</h3>
-          <p>Basys3 보드에서 동작하는 십진 카운터와 간단한 게임을 구현했습니다. 타이머/상태머신을 사용하고 버튼 바운싱을 처리했습니다.</p>
-          <a href="#" onclick="alert('데모 영상 링크로 바꾸세요!');return false;">Demo ↗</a>
-        </article>
-
-        <article class="card project col-6">
-          <div class="pill">2024 · Python, FastAPI</div>
-          <h3>간단한 AI 이미지 검색</h3>
-          <p>임베딩과 벡터 검색을 활용한 키워드/유사도 기반 이미지 검색 API를 만들었습니다. 로컬 Milvus로 인덱싱했습니다.</p>
-          <a href="#" onclick="alert('문서/레포 링크로 바꾸세요!');return false;">Docs ↗</a>
-        </article>
-
-        <article class="card project col-6">
-          <div class="pill">2024 · Kotlin, Android</div>
-          <h3>UWB 실내 위치 추정 데모</h3>
-          <p>HRP-UWB 기반 데모 앱을 제작해 태그-앵커 간 거리 측정과 단순 2D 위치 추정을 시각화했습니다.</p>
-          <a href="#" onclick="alert('레포/노션 링크로 바꾸세요!');return false;">Overview ↗</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="skills">
-      <h2>스킬</h2>
-      <div class="card">
-        <div class="skills">
-          <span class="pill">Python</span>
-          <span class="pill">PyTorch / Tensorflow</span>
-          <span class="pill">C/C++</span>
-          <span class="pill">Verilog</span>
-          <span class="pill">Scala</span>
-          <span class="pill">Docker</span>
-          <span class="pill">Milvus</span>
-          <span class="pill">UWB / IoT</span>
-          <span class="pill">Git / GitHub</span>
-        </div>
-      </div>
-    </section>
-
+  
     <section id="contact">
       <h2>연락처</h2>
-      <div class="card" style="display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap: wrap;">
+      <div class="card" style="display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;">
         <div>
-          <p style="margin: 6px 0;">📧 <a href="mailto:gimon0331@postech.ac.kr">gimon0331@postech.ac.kr</a></p>
-          <p style="margin: 6px 0;">🐙 <a href="https://github.com/gimon0330">github.com/your-id</a></p>
-          <p style="margin: 6px 0;">💼 <a href="@gimon0303">Instagram</a></p>
+          <p style="margin:6px 0;">📧 <a href="mailto:gimon0331@postech.ac.kr">gimon0331@postech.ac.kr</a></p>
+          <p style="margin:6px 0;">🌐 <a href="https://gimon0330.github.io" target="_blank" rel="noopener">gimon0330.github.io</a></p>
+          <p style="margin:6px 0;">📷 <a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">@gimon0303</a></p>
         </div>
         <a class="btn" href="#top">맨 위로 ↑</a>
       </div>
     </section>
-  </main>
+    
+</main>
 
-  <footer class="container footer">
-    <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap: wrap;">
-      <span>© <span id="y"></span> 안강현</span>
-      <div class="socials">
-        <a href="https://github.com/gimon0330">GitHub</a>
-        <span>·</span>
-        <a href="mailto:gimon0331@postech.ac.kr">Email</a>
-      </div>
-    </div>
-  </footer>
+<script>
+const grid = document.getElementById('featured-grid');
+const updated = document.getElementById('up');
 
-  <script>
-    document.getElementById("y").textContent = new Date().getFullYear();
-    // Smooth scroll for in-page links
-    for (const a of document.querySelectorAll('a[href^="#"]')) {
-      a.addEventListener("click", (e) => {
-        const href = a.getAttribute("href");
-        if (href && href.startsWith("#") && href.length > 1) {
-          const el = document.querySelector(href);
-          if (el) { e.preventDefault(); el.scrollIntoView({ behavior: "smooth", block: "start" }); }
-        }
-      });
-    }
-  </script>
+function cardHTML(p) {
+  const tech = (p.tech||[]).map(t=>`<span class="pill">${t}</span>`).join(' ');
+  const link = p.links?.github || p.links?.demo || p.links?.video || p.links?.overview || p.links?.docs || "#";
+  const subtitle = [p.period, (p.tags||[]).slice(0,2).join(' · ')].filter(Boolean).join(" · ");
+  return `<article class="card col-6">
+    <div class="pill">${p.year} · ${ (p.tech||[]).slice(0,2).join(', ') }</div>
+    <h3>${p.title}</h3>
+    <p>${p.summary||""}</p>
+    <p class="kicker">${subtitle}</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;">${tech}</div>
+    <p style="margin-top:10px;"><a href="${link}">자세히 보기 ↗</a></p>
+  </article>`;
+}
+
+async function load() {
+  try {
+    const res = await fetch('projects.json', { cache: 'no-store' });
+    const data = await res.json();
+    updated.textContent = new Date().toLocaleDateString();
+    const featured = data.filter(d => d.featured).sort((a,b)=> (b.year||0)-(a.year||0)).slice(0,4);
+    grid.innerHTML = featured.map(cardHTML).join('');
+  } catch (e) {
+    grid.innerHTML = `<div class="card col-6"><b>로딩 실패</b><p>projects.json을 저장소 루트에 두었는지 확인하세요.</p></div>`;
+    updated.textContent = "불명";
+  }
+}
+load();
+</script>
 </body>
 </html>
