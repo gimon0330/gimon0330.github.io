@@ -1,0 +1,27 @@
+
+title: "안강현 · 포트폴리오"
+description: "GitHub Pages + Jekyll 기반 포트폴리오 & 블로그"
+url: "https://gimon0330.github.io"
+baseurl: ""
+theme: minima
+plugins:
+  - jekyll-feed
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:name/
+
+defaults:
+  - scope:
+      path: ""
+      type: "projects"
+    values:
+      layout: project
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: post
+
+paginate: 5

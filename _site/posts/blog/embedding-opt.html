@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>임베딩 검색 최적화 노트 — Milvus 파라미터 스윕 · 안강현</title>
+  <meta name="description" content="GitHub Pages + Jekyll 기반 포트폴리오 & 블로그">
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script defer src="/assets/main.js"></script>
+</head>
+<body>
+  <!-- 상단바 -->
+  <header class="nav-wrap">
+    <div class="container nav">
+      <a class="brand" href="/">안강현</a>
+      <nav class="links" aria-label="주요 메뉴">
+        <a href="/">Main</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/posts/">Posts</a>
+        <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="card" style="max-width:900px;margin:20px auto">
+      <div class="post-meta" style="margin-bottom:8px">
+        <span class="pill">2025-03-12</span>
+        <span class="pill">blog</span>
+        <span class="pill">Embeddings</span><span class="pill">Vector-DB</span><span class="pill">Milvus</span>
+      </div>
+
+      <h1 style="margin:6px 0 12px">임베딩 검색 최적화 노트 — Milvus 파라미터 스윕</h1>
+
+      
+        <img class="post-cover" src="/src/posts/blog/embedding-opt.jpg" alt="임베딩 검색 최적화 노트 — Milvus 파라미터 스윕 표지" onerror="this.style.display='none'">
+      
+
+      <div class="post-body">
+        <p>이미지/텍스트 임베딩 혼합 검색에서 Milvus 파라미터를 스윕해 <strong>지연시간–정확도 타협점</strong>을 찾았다.</p>
+
+<h2 id="인덱스">인덱스</h2>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">HNSW</code>: M=16, efConstruction=200 근방이 가장 안정적</li>
+  <li><code class="language-plaintext highlighter-rouge">IVF_FLAT</code>: nlist 증가는 리콜 개선에 유의미하나 latency 증가</li>
+</ul>
+
+<h2 id="결론">결론</h2>
+<ul>
+  <li>콘테스트 환경 기준 <strong>HNSW</strong>가 우세</li>
+  <li>쿼리 시 <code class="language-plaintext highlighter-rouge">ef</code>를 요청당 동적으로 조절하면 안정성↑</li>
+</ul>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot-flex">
+      <span>© <span id="year"></span> 안강현</span>
+      <nav class="foot-links" aria-label="바닥글">
+        <a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a>
+        <span>·</span><a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
+        <span>·</span><a href="mailto:gimon0331@postech.ac.kr">Email</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

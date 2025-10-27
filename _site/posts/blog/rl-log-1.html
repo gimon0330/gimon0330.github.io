@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RL 실험 로그 #1 — 멀티에이전트 셋업 · 안강현</title>
+  <meta name="description" content="GitHub Pages + Jekyll 기반 포트폴리오 & 블로그">
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script defer src="/assets/main.js"></script>
+</head>
+<body>
+  <!-- 상단바 -->
+  <header class="nav-wrap">
+    <div class="container nav">
+      <a class="brand" href="/">안강현</a>
+      <nav class="links" aria-label="주요 메뉴">
+        <a href="/">Main</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/posts/">Posts</a>
+        <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <article class="card" style="max-width:900px;margin:20px auto">
+      <div class="post-meta" style="margin-bottom:8px">
+        <span class="pill">2025-03-20</span>
+        <span class="pill">blog</span>
+        <span class="pill">RL</span><span class="pill">Multi-Agent</span><span class="pill">ELO</span>
+      </div>
+
+      <h1 style="margin:6px 0 12px">RL 실험 로그 #1 — 멀티에이전트 셋업</h1>
+
+      
+        <img class="post-cover" src="/src/posts/blog/rl-log-1.jpg" alt="RL 실험 로그 #1 — 멀티에이전트 셋업 표지" onerror="this.style.display='none'">
+      
+
+      <div class="post-body">
+        <p>첫 로그. 멀티에이전트 환경을 최소 구성으로 올리고, 에이전트 간 <strong>self-play</strong>로 성능을 추정했다.</p>
+
+<h2 id="환경">환경</h2>
+<ul>
+  <li>Gym 스타일 인터페이스</li>
+  <li>보상: 승리 +1, 패배 -1, 무승부 0</li>
+  <li>상태 표현: 원-핫 + 간단한 특징량</li>
+</ul>
+
+<h2 id="메모">메모</h2>
+<ul>
+  <li>Elo 추정치가 초반엔 변동이 큼 → <strong>평활화</strong> 필요</li>
+  <li>랜덤 초기 정책이면, 탐색률을 충분히 높게 시작하는 편이 안정적</li>
+</ul>
+
+      </div>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container foot-flex">
+      <span>© <span id="year"></span> 안강현</span>
+      <nav class="foot-links" aria-label="바닥글">
+        <a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a>
+        <span>·</span><a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
+        <span>·</span><a href="mailto:gimon0331@postech.ac.kr">Email</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

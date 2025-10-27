@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Projects · 안강현</title>
-  <meta name="description" content="안강현의 프로젝트 모음" />
+  <title>Posts · 안강현</title>
+  <meta name="description" content="안강현의 글 모음" />
   <link rel="stylesheet" href="/assets/site.css" />
   <script defer src="/assets/main.js"></script>
 </head>
@@ -15,7 +15,7 @@
       <a class="brand" href="/">안강현</a>
       <nav class="links" aria-label="주요 메뉴">
         <a href="/">Main</a>
-        <a href="/projects.html" aria-current="page">Projects</a>
+        <a href="/projects.html">Projects</a>
         <a href="/posts/">Posts</a>
         <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
       </nav>
@@ -23,17 +23,20 @@
   </header>
 
   <main class="container">
-    <section class="section">
-      <div class="section-head">
-        <h1 style="margin:0">프로젝트 전체</h1>
-        <a class="ghost" href="/" aria-label="메인으로">메인 ←</a>
-      </div>
+    <section class="posts-grid">
+      <!-- 왼쪽 사이드바 -->
+      <aside class="sidebar" aria-label="포스트 분류">
+        <a class="sidebtn" href="/posts/blog/">Blog</a>
+        <a class="sidebtn" href="/projects.html">Projects</a>
+        <a class="sidebtn" href="/posts/bsis/">bsis</a>
+        <a class="sidebtn" href="/posts/postech/">postech</a>
+      </aside>
 
-      <div id="projects-grid" class="grid cards" role="list"></div>
-      <p id="projects-fallback" class="muted" hidden>
-        <code>projects.json</code>을 아직 못 찾았어요. 루트에 파일을 추가해 주세요.
-      </p>
-      <noscript class="muted">자바스크립트를 켜면 프로젝트 목록이 표시됩니다.</noscript>
+      <!-- 오른쪽 내용 (지금은 안내문만) -->
+      <section class="posts-body">
+        <h1 style="margin:0 0 10px">Posts</h1>
+        <p class="muted">왼쪽에서 카테고리를 선택하면 해당 페이지로 이동합니다.</p>
+      </section>
     </section>
   </main>
 

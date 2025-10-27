@@ -1,0 +1,26 @@
+[
+  {
+    "title": "RL 실험 로그 #1",
+    "date": "2025-03-20",
+    "url": "/posts/blog/rl-log-1.html",
+    "excerpt": "멀티에이전트 환경 셋업과 ELO 측정 파이프라인을 정리합니다."
+  },
+  {
+    "title": "임베딩 검색 최적화 노트",
+    "date": "2025-03-12",
+    "url": "/posts/blog/embedding-opt.html",
+    "excerpt": "Milvus 인덱스 구성, 파라미터 스윕 결과를 요약합니다."
+  },
+  {
+    "title": "UWB 실내 측위 데모 회고",
+    "date": "2025-02-28",
+    "url": "/posts/blog/uwb-demo-retro.html",
+    "excerpt": "태그-앵커 거리 오차와 필터링 실험."
+  },
+  {
+    "title": "학부 생활 Q&A",
+    "date": "2025-02-10",
+    "url": "/posts/blog/undergrad-qa.html",
+    "excerpt": "CSE 24학번으로서 자주 받는 질문 모음."
+  }
+]

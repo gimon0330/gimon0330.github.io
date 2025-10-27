@@ -1,0 +1,210 @@
+:root{
+  --bg:#0b0c10; --card:#121319; --text:#e6e9ef; --muted:#9aa1ac;
+  --accent:#4f7cff; --accent2:#8a7dff; --border:#232836; --shadow:rgba(0,0,0,0.25);
+  --radius:16px; --container:1100px;
+}
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#fff; --card:#f7f8fa; --text:#0b1220; --muted:#5a6472;
+    --accent:#3056ff; --accent2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08);
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+.container{max-width:var(--container);margin-inline:auto;padding:24px}
+
+.nav-wrap{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);
+  background:color-mix(in oklab,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-weight:800;color:var(--text)}
+.links a{padding:8px 10px;border-radius:10px;color:var(--text)}
+.links a:hover{background:var(--card);text-decoration:none}
+
+.grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
+@media (max-width: 880px){ .grid{grid-template-columns:repeat(12,1fr)} }
+
+.hero{grid-template-columns:8fr 4fr;align-items:center;padding:28px 0 8px;gap:36px}
+@media (max-width: 880px){ .hero{grid-template-columns:1fr} }
+
+.eyebrow{color:var(--muted);margin:0 0 6px 0;font-weight:600}
+.headline{font-size:clamp(28px,4.5vw,46px);line-height:1.15;margin:0 0 10px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{font-size:18px;color:var(--muted);font-weight:500;margin:0 0 18px}
+
+.actions{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;
+  border:1px solid var(--border);
+  background:linear-gradient(180deg,color-mix(in oklab,var(--card),white 4%),var(--card));
+  color:var(--text);box-shadow:0 2px 8px var(--shadow)}
+.btn:hover{text-decoration:none;transform:translateY(-1px)}
+
+/* === Gradient overlay base === */
+.btn, .sidebtn{
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card), white 4%), var(--card));
+  color: var(--text);
+  transition: color .25s ease, box-shadow .25s ease, transform .12s ease, border-color .25s ease;
+}
+
+.btn::before,
+.sidebtn::before{
+  content:"";
+  position:absolute; inset:0;
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  opacity: 0;                         /* 기본은 투명 */
+  transform: scale(1.03);
+  transition: opacity .35s linear, transform .35s ease; /* 페이드인/아웃 공통 */
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* JS가 붙이는 상태 클래스: grad-on = 완전 불투명까지 페이드인 */
+.btn.grad-on::before,
+.sidebtn.grad-on::before{
+  opacity: 1;
+  transform: scale(1.00);
+}
+
+.btn.grad-on,
+.sidebtn.grad-on{
+  color: #fff;
+  text-decoration: none;
+  border-color: transparent;
+  box-shadow: 0 6px 18px var(--shadow);
+  transform: translateY(-1px);
+}
+
+/* (선택) 호버 중 미세 흐름 효과 */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.btn.grad-on::before,
+.sidebtn.grad-on::before{
+  background-size: 200% 200%;
+  animation: gradient-shift 3s linear infinite;
+}
+
+/* 키보드 포커스 접근성 */
+.btn:focus-visible, .sidebtn:focus-visible{
+  outline: 2px solid color-mix(in oklab, var(--accent), white 20%);
+  outline-offset: 2px;
+}
+
+/* 모션 최소화 환경 */
+@media (prefers-reduced-motion: reduce){
+  .btn::before, .sidebtn::before{ transition: opacity .2s linear; }
+  .btn.grad-on::before, .sidebtn.grad-on::before{ animation: none; }
+  .btn, .sidebtn{ transform: none !important; }
+}
+
+
+.avatar{width:clamp(180px,30vw,320px);aspect-ratio:1/1;border-radius:20px;border:1px solid var(--border);
+  object-fit:cover;box-shadow:0 8px 26px var(--shadow)}
+
+.section{margin-top:26px}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.muted{color:var(--muted);font-size:14px}
+
+.cards{gap:18px}
+.card{background:linear-gradient(180deg,color-mix(in oklab,var(--card),white 3%),var(--card));
+  border:1px solid var(--border);border-radius:var(--radius);padding:18px;box-shadow:0 6px 20px var(--shadow)}
+.card h3{margin:8px 0}
+.pill{display:inline-block;font-size:12px;color:var(--muted);border:1px dashed var(--border);
+  padding:4px 8px;border-radius:999px}
+.thumb{width:100%;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--border);
+  object-fit:cover;background:#0e1015}
+
+.ghost{color:var(--muted)}
+.ghost:hover{color:var(--text)}
+
+.footer{border-top:1px solid var(--border)}
+.foot-flex{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot-links{display:flex;gap:8px;align-items:center}
+
+/* ---- Posts page layout ---- */
+.posts-grid{
+  display:grid;
+  grid-template-columns: 260px 1fr;
+  gap:22px;
+  align-items:start;
+}
+@media (max-width: 880px){
+  .posts-grid{ grid-template-columns: 1fr; }
+}
+.sidebar{
+  position:sticky; top:76px;
+  display:flex; flex-direction:column; gap:10px;
+}
+.sidebtn{
+  display:block;
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in oklab,var(--card),white 4%),var(--card));
+  color:var(--text);
+  text-decoration:none;
+}
+.sidebtn:hover{ text-decoration:none; transform: translateY(-1px); }
+.posts-body .muted{ color:var(--muted); }
+/* ---- Project card icon buttons ---- */
+.icons{
+  display:flex; gap:10px; align-items:center; margin-top:12px;
+}
+.icon-btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:36px; height:36px; border:1px solid var(--border);
+  border-radius:12px;
+  background:linear-gradient(180deg, color-mix(in oklab, var(--card), white 4%), var(--card));
+  color:var(--text);
+  transition: background .35s ease, transform .12s ease, border-color .25s ease;
+  overflow:hidden; position:relative; isolation:isolate;
+}
+.icon-btn svg{ width:18px; height:18px; fill:currentColor }
+
+/* 그라데이션 페이드인/아웃(버튼들과 동일 로직) */
+.icon-btn::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+  opacity:0; transform:scale(1.03);
+  transition:opacity .35s linear, transform .35s ease;
+  z-index:-1; pointer-events:none;
+}
+.icon-btn:hover, .icon-btn:focus-visible{
+  color:#fff; border-color:transparent; transform:translateY(-1px);
+}
+.icon-btn.grad-on::before{ opacity:1; transform:scale(1.00); }
+@keyframes gradient-shift { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+.icon-btn.grad-on::before{ background-size:200% 200%; animation:gradient-shift 3s linear infinite; }
+
+/* ---- Blog list cards ---- */
+.blog-cards{
+  gap:18px;
+}
+.post-card{
+  grid-column: span 12;
+  display:grid;
+  grid-template-columns: 220px 1fr;
+  gap:16px;
+}
+@media (max-width: 880px){
+  .post-card{ grid-template-columns: 1fr; }
+}
+.post-cover{
+  width:100%;
+  aspect-ratio:16/9;
+  border-radius:12px;
+  border:1px solid var(--border);
+  object-fit:cover;
+  background:#0e1015;
+}
+.post-meta{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+.post-meta .pill{ margin-top:0; }
+.post-excerpt{ color:var(--text); opacity:.9; }

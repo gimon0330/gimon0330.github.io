@@ -1,0 +1,48 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · 안강현</title>
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <script>
+    window.__BASEURL__ = "{{ site.baseurl }}"; // JS에서 쓸 baseurl
+  </script>
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
+</head>
+<body>
+  <header class="nav-wrap">
+    <div class="container nav">
+      <a class="brand" href="{{ '/' | relative_url }}">안강현</a>
+      <nav class="links">
+        <a href="{{ '/' | relative_url }}">Main</a>
+        <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a href="{{ '/posts/' | relative_url }}">Posts</a>
+        <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="posts-grid">
+      <aside class="sidebar">
+        <a class="sidebtn" href="{{ '/posts/blog/' | relative_url }}">Blog</a>
+        <a class="sidebtn" href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a class="sidebtn" href="{{ '/posts/bsis/' | relative_url }}">bsis</a>
+        <a class="sidebtn" href="{{ '/posts/postech/' | relative_url }}">postech</a>
+      </aside>
+
+      <section class="posts-body">
+        <h1 style="margin:0 0 10px">Blog</h1>
+        <div id="cat-list" class="grid blog-cards" data-category="blog" role="list"></div>
+        <p id="cat-fallback" class="muted" hidden>
+          <code>/posts/blog/index.json</code>을 못 불러왔어요.
+        </p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>

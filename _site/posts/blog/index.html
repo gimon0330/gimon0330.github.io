@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Blog · 안강현</title>
+  <link rel="stylesheet" href="/assets/site.css" />
+  <script>
+    window.__BASEURL__ = ""; // JS에서 쓸 baseurl
+  </script>
+  <script defer src="/assets/main.js"></script>
+</head>
+<body>
+  <header class="nav-wrap">
+    <div class="container nav">
+      <a class="brand" href="/">안강현</a>
+      <nav class="links">
+        <a href="/">Main</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/posts/">Posts</a>
+        <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="posts-grid">
+      <aside class="sidebar">
+        <a class="sidebtn" href="/posts/blog/">Blog</a>
+        <a class="sidebtn" href="/projects.html">Projects</a>
+        <a class="sidebtn" href="/posts/bsis/">bsis</a>
+        <a class="sidebtn" href="/posts/postech/">postech</a>
+      </aside>
+
+      <section class="posts-body">
+        <h1 style="margin:0 0 10px">Blog</h1>
+        <div id="cat-list" class="grid blog-cards" data-category="blog" role="list"></div>
+        <p id="cat-fallback" class="muted" hidden>
+          <code>/posts/blog/index.json</code>을 못 불러왔어요.
+        </p>
+      </section>
+    </section>
+  </main>
+</body>
+</html>
