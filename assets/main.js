@@ -69,7 +69,7 @@ function postItemHTML(category, item){
         </h3>
         <p class="post-excerpt">${excerpt}</p>
         <div style="margin-top:10px">
-          <a class="btn" href="${item.url}" target="_blank" rel="noopener">읽기 →</a>
+          <a class="btn btn-3" href="${item.url}" target="_blank" rel="noopener"><span>읽기 →</span></a>
         </div>
       </div>
     </article>
@@ -322,7 +322,7 @@ function postItemHTML(category, item){
         </h3>
         <p class="post-excerpt">${excerpt}</p>
         <div style="margin-top:10px">
-          <a class="btn" href="${item.url}" target="_blank" rel="noopener">읽기 →</a>
+          <a class="btn btn-3" href="${item.url}" target="_blank" rel="noopener"><span>읽기 →</span></a>
         </div>
       </div>
     </article>
