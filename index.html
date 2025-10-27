@@ -48,14 +48,19 @@ layout: null
       </div>
     </section>
 
-    <!-- 👇 여기: 소개(About) 섹션 (프로젝트 위) -->
+    <!-- 소개(About) 섹션 -->
     <section class="section">
-      <div class="section-head">
-        <h2>소개</h2>
-      </div>
-      <div class="prose">
-        {% capture about_md %}{% include_relative about.md %}{% endcapture %}
-        {{ about_md | markdownify }}
+      <div class="about-card">
+        <div class="about-head">
+          <h2>소개</h2>
+          <!-- (선택) GitHub에서 바로 수정하기 버튼 -->
+          <a class="ghost small" href="https://github.com/gimon0330/gimon0330.github.io/edit/main/about.md" target="_blank" rel="noopener">about.md 수정</a>
+        </div>
+
+        <div class="about-body prose">
+          {% capture about_md %}{% include_relative about.md %}{% endcapture %}
+          {{ about_md | markdownify }}
+        </div>
       </div>
     </section>
 

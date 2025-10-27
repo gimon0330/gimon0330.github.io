@@ -231,3 +231,51 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   margin: 10px 0; padding: 8px 12px; border-left: 3px solid var(--accent);
   background: color-mix(in oklab, var(--card), white 3%); border-radius: 8px;
 }
+
+/* ==== About wrapper card ==== */
+.about-card{
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: linear-gradient(180deg, color-mix(in oklab, var(--card), white 3%), var(--card));
+  box-shadow: 0 8px 24px var(--shadow);
+  padding: 22px;
+  overflow: hidden;
+}
+
+.about-card::before{
+  /* 좌측 얇은 포인트 라인 (그라데이션) */
+  content:"";
+  position:absolute; left:0; top:0; bottom:0; width:4px;
+  background: linear-gradient(180deg, var(--accent), var(--accent2));
+  opacity:.9;
+}
+
+.about-head{
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin-bottom: 10px;
+}
+.about-head h2{
+  margin:0;
+  font-size: clamp(18px, 2.2vw, 22px);
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ghost.small{
+  font-size: 13px;
+  padding: 6px 8px;
+  border-radius: 10px;
+  border: 1px dashed var(--border);
+  color: var(--muted);
+}
+.ghost.small:hover{ color: var(--text); text-decoration: none; }
+
+.about-body{
+  margin-top: 6px;
+}
+
+/* 넓은 화면에서 본문 폭 조절(가독성) */
+@media (min-width: 900px){
+  .about-body{ max-width: 820px; }
+}
+  
