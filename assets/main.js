@@ -371,47 +371,73 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ====== 도우미: 학기 파싱/정렬 ====== */
-function parseTerm(term){
-  // "YYYY-Season" 형식만 인정 (Season: Spring/Summer/Fall)
-  const m = (term || "").match(/^(\d{4})-(Spring|Summer|Fall)$/i);
-  if(!m) return null;
-  return { year: +m[1], season: m[2][0].toUpperCase()+m[2].slice(1).toLowerCase() };
+// ✅ "YYYY-Season"와 "YYYY-MM-DD" 둘 다 인식
+function parseTerm(term) {
+  if (!term) return null;
+
+  // 1) YYYY-Season
+  let m = term.match(/^(\d{4})-(Spring|Summer|Fall)$/i);
+  if (m) {
+    return { year: +m[1], season: m[2][0].toUpperCase() + m[2].slice(1).toLowerCase(), raw: term };
+  }
+
+  // 2) YYYY-MM-DD → 월을 Season으로 매핑
+  m = term.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+  if (m) {
+    const year = +m[1];
+    const month = +m[2];
+    const season = month === 3 ? "Spring" : month === 7 ? "Summer" : month === 9 ? "Fall" : null;
+    if (!season) return { year, season: null, raw: term };
+    return { year, season, raw: term };
+  }
+
+  return null;
 }
+
 const SEASON_ORDER = { Spring: 1, Summer: 2, Fall: 3 };
-function termCompareDesc(a, b){
+
+// ✅ 정렬: 최신 학기 우선
+function termCompareDesc(a, b) {
   const A = parseTerm(a), B = parseTerm(b);
-  if(!A && !B) return 0; if(!A) return 1; if(!B) return -1;
-  if(A.year !== B.year) return B.year - A.year;
+  if (!A && !B) return 0;
+  if (!A) return 1;
+  if (!B) return -1;
+  if (A.year !== B.year) return B.year - A.year;
   return (SEASON_ORDER[B.season] || 0) - (SEASON_ORDER[A.season] || 0);
 }
 
-/* ====== Lecture 전용: 학기 버튼 만들기 & 필터 ====== */
+// ✅ 라벨: 화면엔 항상 "YYYY-Season" 표기
+function termLabel(term) {
+  const t = parseTerm(term);
+  if (!t) return term || "";
+  if (t.season) return `${t.year}-${t.season}`;
+  // 시즌을 못 정하면 원문 반환
+  return term;
+}
+
+
 function buildLectureTermFilter(list, container, renderInto){
   if(!container) return;
 
-  // 고유 학기 수집 및 최신순 정렬
+  // 고유 학기 수집
   const termsSet = new Set();
   list.forEach(item => { if(item.date) termsSet.add(item.date); });
   const terms = Array.from(termsSet).sort(termCompareDesc);
 
-  // 칩 HTML 생성
-  const chip = (label, active=false) =>
-    `<button type="button" class="chip${active?' is-active':''}" data-term="${label}">${label}</button>`;
+  // ⬇️ 칩에 보이는 텍스트만 termLabel() 사용 (data-term은 원본 유지)
+  const chip = (value, active = false) =>
+    `<button type="button" class="chip${active ? ' is-active' : ''}" data-term="${value}">${termLabel(value)}</button>`;
 
   container.innerHTML = [ chip("ALL", true), ...terms.map(t => chip(t)) ].join("");
 
-  // 렌더 함수
   const doRender = (term) => {
     const target = term === "ALL" ? list : list.filter(x => x.date === term);
     renderInto.innerHTML = target.map(item => postItemHTML("lecture", item)).join("");
-    // "읽기" 버튼 등 기존 에니메이션 유지
     setupGradientButtons(renderInto);
   };
 
-  // 초기 렌더
   doRender("ALL");
 
-  // 칩 클릭 이벤트
   container.addEventListener("click", (e)=>{
     const btn = e.target.closest(".chip");
     if(!btn) return;
@@ -420,6 +446,7 @@ function buildLectureTermFilter(list, container, renderInto){
     doRender(term);
   });
 }
+
 
 
 /* ====== 기존 카테고리 렌더 함수 수정 ====== */
