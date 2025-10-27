@@ -3,10 +3,11 @@ const BASE = (typeof window !== "undefined" && window.__BASEURL__) || "";
 const PROJECTS_URL  = BASE + "/projects.json";
 const BLOG_INDEX_URL = BASE + "/posts/blog/index.json";
 
-const CATEGORY_INDEX_URL = {
+const CATEGORY_INDEX = {
   blog:   BASE + "/posts/blog/index.json",
   bsis:   BASE + "/posts/bsis/index.json",
   postech:BASE + "/posts/postech/index.json",
+  lecture: BASE + "/posts/lecture/index.json"
 };
 
 
@@ -285,13 +286,6 @@ function setupGradientButtons(root = document) {
     el.addEventListener("focusout", scheduleFadeOut);
   });
 }
-
-// ========= Category pages =========
-const CATEGORY_INDEX = {
-  blog:   "/posts/blog/index.json",
-  bsis:   "/posts/bsis/index.json",
-  postech:"/posts/postech/index.json",
-};
 
 function postCoverSrc(category, slug){
   // slug는 url에서 파일명만 추정할 때 사용 (index.json에 cover가 없을 경우)

@@ -24,10 +24,11 @@
   <main class="container">
     <section class="posts-grid">
       <aside class="sidebar" aria-label="분류">
-        <a class="sidebtn" href="/posts/blog/">Blog</a>
-        <a class="sidebtn" href="/projects.html">Projects</a>
-        <a class="sidebtn" href="/posts/bsis/">bsis</a>
-        <a class="sidebtn" href="/posts/postech/">postech</a>
+        <a class="sidebtn" href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a class="sidebtn" href="{{ '/posts/blog/'   | relative_url }}">Blog</a>
+        <a class="sidebtn" href="{{ '/posts/bsis/'   | relative_url }}">bsis</a>
+        <a class="sidebtn" href="{{ '/posts/postech/'| relative_url }}">postech</a>
+        <a class="sidebtn" href="{{ '/posts/lecture/' | relative_url }}">lecture</a>
       </aside>
 
       <section class="posts-body">

@@ -6,10 +6,11 @@ layout: null
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Blog · 안강현</title>
+  <title>lecture · 안강현</title>
+  <meta name="description" content="수강 과목 기록" />
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
   <script>
-    window.__BASEURL__ = "{{ site.baseurl }}"; // JS에서 쓸 baseurl
+    window.__BASEURL__ = "{{ site.baseurl }}";
   </script>
   <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
 </head>
@@ -29,18 +30,18 @@ layout: null
   <main class="container">
     <section class="posts-grid">
       <aside class="sidebar">
-        <a class="sidebtn" href="{{ '/projects.html' | relative_url }}">Projects</a>
-        <a class="sidebtn" href="{{ '/posts/blog/'   | relative_url }}">Blog</a>
-        <a class="sidebtn" href="{{ '/posts/bsis/'   | relative_url }}">bsis</a>
-        <a class="sidebtn" href="{{ '/posts/postech/'| relative_url }}">postech</a>
+        <a class="sidebtn" href="{{ '/projects.html'  | relative_url }}">Projects</a>
+        <a class="sidebtn" href="{{ '/posts/blog/'    | relative_url }}">Blog</a>
+        <a class="sidebtn" href="{{ '/posts/bsis/'    | relative_url }}">bsis</a>
+        <a class="sidebtn" href="{{ '/posts/postech/' | relative_url }}">postech</a>
         <a class="sidebtn" href="{{ '/posts/lecture/' | relative_url }}">lecture</a>
       </aside>
 
       <section class="posts-body">
-        <h1 style="margin:0 0 10px">Blog</h1>
-        <div id="cat-list" class="grid blog-cards" data-category="blog" role="list"></div>
+        <h1 style="margin:0 0 10px">lecture</h1>
+        <div id="cat-list" class="grid blog-cards" data-category="lecture" role="list"></div>
         <p id="cat-fallback" class="muted" hidden>
-          <code>/posts/blog/index.json</code>을 못 불러왔어요.
+          <code>/posts/lecture/index.json</code>을 아직 못 찾았어요.
         </p>
       </section>
     </section>
