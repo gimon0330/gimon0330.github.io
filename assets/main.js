@@ -240,8 +240,17 @@ const HOVER_FADE_IN = 350;   // CSS opacity .35s와 동일
 const HOLD_AT_FULL  = 120;   // 완전 불투명 유지 시간(ms)
 
 function setupGradientButtons(root = document) {
-  const selectors = [".btn", ".sidebtn", ".icon-btn"].join(",");
+  // btn-3는 라인 애니메이션을 쓰므로 제외
+  const selectors = [
+    ".btn:not(.btn-3)",
+    ".sidebtn:not(.btn-3)",
+    ".icon-btn"
+  ].join(",");
+
   const els = Array.from(root.querySelectorAll(selectors));
+
+  const HOVER_FADE_IN = 350;   // ms
+  const HOLD_AT_FULL  = 120;   // ms
 
   els.forEach((el) => {
     let inTimer = null, holdTimer = null;

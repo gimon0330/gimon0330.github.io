@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,19 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>안강현 · 포트폴리오</title>
   <meta name="description" content="안강현의 포트폴리오 — 프로젝트와 글을 한 곳에서.">
-  <link rel="preload" href="/assets/site.css" as="style" />
-  <link rel="stylesheet" href="/assets/site.css" />
-  <script defer src="/assets/main.js"></script>
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
 </head>
 <body>
   <!-- 상단바 -->
   <header class="nav-wrap">
     <div class="container nav">
-      <a class="brand" href="/">안강현</a>
+      <a class="brand" href="{{ '/' | relative_url }}">안강현</a>
       <nav class="links" aria-label="주요 메뉴">
-        <a href="/">Main</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/posts/">Posts</a>
+        <a href="{{ '/' | relative_url }}">Main</a>
+        <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a href="{{ '/posts/' | relative_url }}">Posts</a>
         <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -32,14 +34,13 @@
         <h2 class="sub">Currently Majoring CSE at POSTECH · Postech 24학번 · BSIS 10기</h2>
 
         <div class="actions">
-          <a class="btn btn-3" href="/projects.html"><span>프로젝트 보기</span></a>
-          <a class="btn btn-3" href="/posts/"><span>포스트 보러가기</span></a>
+          <a class="btn btn-3" href="{{ '/projects.html' | relative_url }}"><span>프로젝트 보기</span></a>
+          <a class="btn btn-3" href="{{ '/posts/' | relative_url }}"><span>포스트 보러가기</span></a>
         </div>
       </div>
-
       <div class="hero-visual">
         <img
-          src="/src/profile.jpg"
+          src="{{ '/src/profile.jpg' | relative_url }}"
           alt="프로필 이미지"
           class="avatar"
           onerror="this.style.display='none'"
@@ -47,11 +48,22 @@
       </div>
     </section>
 
+    <!-- 👇 여기: 소개(About) 섹션 (프로젝트 위) -->
+    <section class="section">
+      <div class="section-head">
+        <h2>소개</h2>
+      </div>
+      <div class="prose">
+        {% capture about_md %}{% include_relative about.md %}{% endcapture %}
+        {{ about_md | markdownify }}
+      </div>
+    </section>
+
     <!-- 상위 4개 Featured 프로젝트 -->
     <section class="section">
       <div class="section-head">
         <h2>프로젝트 (상위 4개)</h2>
-        <a class="ghost" href="/projects.html" aria-label="프로젝트 전체 보러가기">전체 보기 →</a>
+        <a class="ghost" href="{{ '/projects.html' | relative_url }}" aria-label="프로젝트 전체 보러가기">전체 보기 →</a>
       </div>
 
       <div id="featured-grid" class="grid cards" role="list"></div>
@@ -61,13 +73,12 @@
       <noscript class="muted">자바스크립트를 켜면 상위 프로젝트가 표시됩니다.</noscript>
     </section>
 
-    <!-- 최근 포스트 4개 -->
+    <!-- 최근 포스트 4개 (있다면) -->
     <section class="section">
       <div class="section-head">
         <h2>최근 포스트</h2>
-        <a class="ghost" href="/posts/" aria-label="포스트 전체 보러가기">전체 보기 →</a>
+        <a class="ghost" href="{{ '/posts/' | relative_url }}" aria-label="포스트 전체 보러가기">전체 보기 →</a>
       </div>
-
       <div id="recent-grid" class="grid cards" role="list"></div>
       <p id="recent-fallback" class="muted" hidden>
         <code>/posts/blog/index.json</code>을 아직 못 찾았어요. 폴더에 파일을 추가해 주세요.
@@ -80,10 +91,8 @@
       <span>© <span id="year"></span> 안강현</span>
       <nav class="foot-links" aria-label="바닥글">
         <a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a>
-        <span>·</span>
-        <a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
-        <span>·</span>
-        <a href="mailto:gimon0331@postech.ac.kr">Email</a>
+        <span>·</span><a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
+        <span>·</span><a href="mailto:gimon0331@postech.ac.kr">Email</a>
       </nav>
     </div>
   </footer>
