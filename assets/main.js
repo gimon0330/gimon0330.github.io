@@ -389,39 +389,38 @@ function termCompareDesc(a, b){
 function buildLectureTermFilter(list, container, renderInto){
   if(!container) return;
 
-  // 고유 학기 수집
+  // 고유 학기 수집 및 최신순 정렬
   const termsSet = new Set();
   list.forEach(item => { if(item.date) termsSet.add(item.date); });
   const terms = Array.from(termsSet).sort(termCompareDesc);
 
-  // 버튼 렌더
-  const btn = (label, active=false) =>
-    `<a href="#" class="termbtn btn-3${active?' active':''}" data-term="${label}"><span>${label}</span></a>`;
-  container.innerHTML = [
-    btn("ALL", true),
-    ...terms.map(t => btn(t, false))
-  ].join("");
+  // 칩 HTML 생성
+  const chip = (label, active=false) =>
+    `<button type="button" class="chip${active?' is-active':''}" data-term="${label}">${label}</button>`;
+
+  container.innerHTML = [ chip("ALL", true), ...terms.map(t => chip(t)) ].join("");
 
   // 렌더 함수
   const doRender = (term) => {
-    const target = term==="ALL" ? list : list.filter(x => x.date === term);
+    const target = term === "ALL" ? list : list.filter(x => x.date === term);
     renderInto.innerHTML = target.map(item => postItemHTML("lecture", item)).join("");
+    // "읽기" 버튼 등 기존 에니메이션 유지
     setupGradientButtons(renderInto);
   };
 
-  // 초기 그리기
+  // 초기 렌더
   doRender("ALL");
 
-  // 이벤트 위임
+  // 칩 클릭 이벤트
   container.addEventListener("click", (e)=>{
-    const a = e.target.closest(".termbtn");
-    if(!a) return;
-    e.preventDefault();
-    const term = a.dataset.term;
-    container.querySelectorAll(".termbtn").forEach(el => el.classList.toggle("active", el === a));
+    const btn = e.target.closest(".chip");
+    if(!btn) return;
+    const term = btn.dataset.term;
+    container.querySelectorAll(".chip").forEach(el => el.classList.toggle("is-active", el === btn));
     doRender(term);
   });
 }
+
 
 /* ====== 기존 카테고리 렌더 함수 수정 ====== */
 async function renderCategoryList(){
