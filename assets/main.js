@@ -369,3 +369,94 @@ document.addEventListener("DOMContentLoaded", () => {
   // 기존: featured/recent/projects 초기화 ...
   if (document.getElementById("cat-list")) renderCategoryList();
 });
+
+/* ====== 도우미: 학기 파싱/정렬 ====== */
+function parseTerm(term){
+  // "YYYY-Season" 형식만 인정 (Season: Spring/Summer/Fall)
+  const m = (term || "").match(/^(\d{4})-(Spring|Summer|Fall)$/i);
+  if(!m) return null;
+  return { year: +m[1], season: m[2][0].toUpperCase()+m[2].slice(1).toLowerCase() };
+}
+const SEASON_ORDER = { Spring: 1, Summer: 2, Fall: 3 };
+function termCompareDesc(a, b){
+  const A = parseTerm(a), B = parseTerm(b);
+  if(!A && !B) return 0; if(!A) return 1; if(!B) return -1;
+  if(A.year !== B.year) return B.year - A.year;
+  return (SEASON_ORDER[B.season] || 0) - (SEASON_ORDER[A.season] || 0);
+}
+
+/* ====== Lecture 전용: 학기 버튼 만들기 & 필터 ====== */
+function buildLectureTermFilter(list, container, renderInto){
+  if(!container) return;
+
+  // 고유 학기 수집
+  const termsSet = new Set();
+  list.forEach(item => { if(item.date) termsSet.add(item.date); });
+  const terms = Array.from(termsSet).sort(termCompareDesc);
+
+  // 버튼 렌더
+  const btn = (label, active=false) =>
+    `<a href="#" class="termbtn btn-3${active?' active':''}" data-term="${label}"><span>${label}</span></a>`;
+  container.innerHTML = [
+    btn("ALL", true),
+    ...terms.map(t => btn(t, false))
+  ].join("");
+
+  // 렌더 함수
+  const doRender = (term) => {
+    const target = term==="ALL" ? list : list.filter(x => x.date === term);
+    renderInto.innerHTML = target.map(item => postItemHTML("lecture", item)).join("");
+    setupGradientButtons(renderInto);
+  };
+
+  // 초기 그리기
+  doRender("ALL");
+
+  // 이벤트 위임
+  container.addEventListener("click", (e)=>{
+    const a = e.target.closest(".termbtn");
+    if(!a) return;
+    e.preventDefault();
+    const term = a.dataset.term;
+    container.querySelectorAll(".termbtn").forEach(el => el.classList.toggle("active", el === a));
+    doRender(term);
+  });
+}
+
+/* ====== 기존 카테고리 렌더 함수 수정 ====== */
+async function renderCategoryList(){
+  const listEl = document.getElementById("cat-list");
+  const fallback = document.getElementById("cat-fallback");
+  if (!listEl) return;
+
+  const category = listEl.dataset.category; // "blog" | "bsis" | "postech" | "lecture"
+  const src = CATEGORY_INDEX[category];
+  if (!src){ if (fallback) fallback.hidden = false; return; }
+
+  try{
+    const res = await fetch(src, { cache: "no-store" });
+    if (!res.ok) throw new Error("missing index");
+    const data = await res.json();
+
+    // 최신순 정렬 (YYYY-Season 문자열 기준: 우리가 따로 비교함)
+    const list = data.slice().sort((a,b)=>{
+      const ta = parseTerm(a.date), tb = parseTerm(b.date);
+      if(ta && tb){
+        if(ta.year !== tb.year) return tb.year - ta.year;
+        return (SEASON_ORDER[tb.season]||0) - (SEASON_ORDER[ta.season]||0);
+      }
+      // fallback: 문자열 비교
+      return (b.date ?? "").localeCompare(a.date ?? "");
+    });
+
+    if(category === "lecture"){
+      const filterBox = document.getElementById("term-filter");
+      buildLectureTermFilter(list, filterBox, listEl);
+    }else{
+      listEl.innerHTML = list.map(item => postItemHTML(category, item)).join("");
+      setupGradientButtons(listEl);
+    }
+  }catch{
+    if (fallback) fallback.hidden = false;
+  }
+}
