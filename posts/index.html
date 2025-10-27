@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,18 +8,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Posts · 안강현</title>
   <meta name="description" content="안강현의 글 모음" />
-  <link rel="stylesheet" href="/assets/site.css" />
-  <script defer src="/assets/main.js"></script>
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <script>
+    window.__BASEURL__ = "{{ site.baseurl }}";  // main.js에서 fetch 경로 생성에 사용
+  </script>
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
 </head>
 <body>
   <!-- 상단바 -->
   <header class="nav-wrap">
     <div class="container nav">
-      <a class="brand" href="/">안강현</a>
+      <a class="brand" href="{{ '/' | relative_url }}">안강현</a>
       <nav class="links" aria-label="주요 메뉴">
-        <a href="/">Main</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/posts/">Posts</a>
+        <a href="{{ '/' | relative_url }}">Main</a>
+        <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a href="{{ '/posts/' | relative_url }}" aria-current="page">Posts</a>
         <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
@@ -26,16 +32,22 @@
     <section class="posts-grid">
       <!-- 왼쪽 사이드바 -->
       <aside class="sidebar" aria-label="포스트 분류">
-        <a class="sidebtn" href="/posts/blog/">Blog</a>
-        <a class="sidebtn" href="/projects.html">Projects</a>
-        <a class="sidebtn" href="/posts/bsis/">bsis</a>
-        <a class="sidebtn" href="/posts/postech/">postech</a>
+        <a class="sidebtn" href="{{ '/posts/blog/'   | relative_url }}">Blog</a>
+        <a class="sidebtn" href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a class="sidebtn" href="{{ '/posts/bsis/'   | relative_url }}">bsis</a>
+        <a class="sidebtn" href="{{ '/posts/postech/'| relative_url }}">postech</a>
       </aside>
 
-      <!-- 오른쪽 내용 (지금은 안내문만) -->
+      <!-- 오른쪽: 모든 글 최신순 -->
       <section class="posts-body">
-        <h1 style="margin:0 0 10px">Posts</h1>
-        <p class="muted">왼쪽에서 카테고리를 선택하면 해당 페이지로 이동합니다.</p>
+        <h1 style="margin:0 0 10px">모든 글</h1>
+        <p class="muted" style="margin:0 0 12px">Blog · bsis · postech의 최신 글 모음</p>
+
+        <div id="all-posts" class="grid blog-cards" role="list"></div>
+        <p id="all-posts-fallback" class="muted" hidden>
+          목록을 불러오지 못했어요. <code>/posts/*/index.json</code> 파일을 확인해 주세요.
+        </p>
+        <noscript class="muted">자바스크립트를 켜면 글 목록이 표시됩니다.</noscript>
       </section>
     </section>
   </main>

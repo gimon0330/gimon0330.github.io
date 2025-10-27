@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("featured-grid")) renderFeatured();
   if (document.getElementById("recent-grid")) renderRecentPosts();
   if (document.getElementById("projects-grid")) renderAllProjects();
+  if (document.getElementById("all-posts"))     renderAllPostsIndex();
 
   // 버튼 그라데이션 컨트롤러
   setupGradientButtons();
@@ -28,6 +29,84 @@ document.addEventListener("DOMContentLoaded", () => {
 const imgOf = (title) => `/src/projects/${encodeURIComponent(title)}.jpg`;
 const linkOf = (p) =>
   (p?.links?.overview) || (p?.links?.github) || (p?.links?.docs) || "#";
+
+function categoryFromUrl(url) {
+  try {
+    const m = url.match(/\/posts\/([^\/]+)\//i);
+    return m ? m[1] : null;
+  } catch { return null; }
+}
+
+function postCoverSrc(category, slug){
+  return BASE + `/src/posts/${category}/${encodeURIComponent(slug)}.jpg`;
+}
+
+function postItemHTML(category, item){
+  const date = item.date ?? "";
+  const excerpt = (item.excerpt ?? "").slice(0, 180);
+  // cover 우선순위: item.cover > 규칙 경로
+  let cover = item.cover;
+  if (!cover && item.url){
+    const m = item.url.match(/\/([^\/]+)\.(html|md)$/i);
+    const slug = m ? m[1] : null;
+    if (slug && category) cover = postCoverSrc(category, slug);
+  }
+  const coverImg = cover
+    ? `<img class="post-cover" src="${cover}" alt="${item.title} 표지" onerror="this.style.display='none'">`
+    : `<img class="post-cover" src="" alt="" style="display:none">`;
+
+  return `
+    <article class="card post-card" role="listitem">
+      <div>${coverImg}</div>
+      <div>
+        <div class="post-meta">
+          <span class="pill">${date}</span>
+          ${category ? `<span class="pill">${category}</span>` : ""}
+        </div>
+        <h3 style="margin:8px 0">
+          <a href="${item.url}" target="_blank" rel="noopener">${item.title}</a>
+        </h3>
+        <p class="post-excerpt">${excerpt}</p>
+        <div style="margin-top:10px">
+          <a class="btn" href="${item.url}" target="_blank" rel="noopener">읽기 →</a>
+        </div>
+      </div>
+    </article>
+  `;
+}
+
+/* ======= 모든 글 최신순(Posts 인덱스) ======= */
+async function renderAllPostsIndex(){
+  const listEl = document.getElementById("all-posts");
+  const fallback = document.getElementById("all-posts-fallback");
+  if (!listEl) return;
+
+  try{
+    const [blog, bsis, postech] = await Promise.all([
+      fetch(CATEGORY_INDEX.blog,   { cache: "no-store" }).then(r=>r.ok?r.json():[]),
+      fetch(CATEGORY_INDEX.bsis,   { cache: "no-store" }).then(r=>r.ok?r.json():[]),
+      fetch(CATEGORY_INDEX.postech,{ cache: "no-store" }).then(r=>r.ok?r.json():[]),
+    ]);
+
+    // 카테고리 라벨을 URL에서 추정해 부착
+    const withCat = (arr) => (arr || []).map(item => ({
+      ...item,
+      __cat: categoryFromUrl(item.url) || null
+    }));
+
+    const merged = [...withCat(blog), ...withCat(bsis), ...withCat(postech)]
+      // Projects 카테고리는 원래 안 섞었지만, 혹시 섞여도 필터
+      .filter(item => item.__cat !== "projects");
+
+    // 최신순 정렬 (YYYY-MM-DD 문자열 비교)
+    merged.sort((a,b) => (b.date ?? "").localeCompare(a.date ?? ""));
+
+    listEl.innerHTML = merged.map(item => postItemHTML(item.__cat, item)).join("");
+    setupGradientButtons(listEl); // "읽기" 버튼 애니메이션 적용
+  }catch{
+    if (fallback) fallback.hidden = false;
+  }
+}
 
 function projectIconsHTML(p){
   if (!p?.links) return "";
