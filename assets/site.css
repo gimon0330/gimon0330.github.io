@@ -46,6 +46,7 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .btn:hover{text-decoration:none;transform:translateY(-1px)}
 
 /* === 이전 그라데이션 오버레이(기본 버튼용) === */
+/* === Gradient overlay base (btn-3 제외) === */
 .btn, .sidebtn{
   position: relative;
   isolation: isolate;
@@ -55,27 +56,54 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
   color: var(--text);
   transition: color .25s ease, box-shadow .25s ease, transform .12s ease, border-color .25s ease;
 }
-.btn::before, .sidebtn::before{
-  content:""; position:absolute; inset:0;
+
+.btn:not(.btn-3)::before,
+.sidebtn:not(.btn-3)::before{
+  content:"";
+  position:absolute; inset:0;
   background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
   opacity: 0; transform: scale(1.03);
   transition: opacity .35s linear, transform .35s ease;
-  z-index: -1; pointer-events: none;
+  z-index: -1;
+  pointer-events: none;
 }
-.btn.grad-on::before, .sidebtn.grad-on::before{ opacity:1; transform:scale(1.00) }
-.btn.grad-on, .sidebtn.grad-on{
-  color:#fff; text-decoration:none; border-color:transparent;
-  box-shadow:0 6px 18px var(--shadow); transform:translateY(-1px);
+
+.btn.grad-on:not(.btn-3)::before,
+.sidebtn.grad-on:not(.btn-3)::before{
+  opacity:1; transform:scale(1.00);
 }
-@keyframes gradient-shift{0%{background-position:0% 50%}100%{background-position:200% 50%}}
-.btn.grad-on::before, .sidebtn.grad-on::before{ background-size:200% 200%; animation:gradient-shift 3s linear infinite; }
-.btn:focus-visible, .sidebtn:focus-visible{
+
+.btn.grad-on:not(.btn-3),
+.sidebtn.grad-on:not(.btn-3){
+  color:#fff;
+  text-decoration:none;
+  border-color:transparent;
+  box-shadow:0 6px 18px var(--shadow);
+  transform:translateY(-1px);
+}
+
+@keyframes gradient-shift{
+  0%{background-position:0% 50%}
+  100%{background-position:200% 50%}
+}
+
+.btn.grad-on:not(.btn-3)::before,
+.sidebtn.grad-on:not(.btn-3)::before{
+  background-size:200% 200%;
+  animation:gradient-shift 3s linear infinite;
+}
+
+.btn:focus-visible,
+.sidebtn:focus-visible{
   outline: 2px solid color-mix(in oklab, var(--accent), white 20%);
   outline-offset: 2px;
 }
+
 @media (prefers-reduced-motion: reduce){
-  .btn::before, .sidebtn::before{ transition: opacity .2s linear; }
-  .btn.grad-on::before, .sidebtn.grad-on::before{ animation: none; }
+  .btn:not(.btn-3)::before,
+  .sidebtn:not(.btn-3)::before{ transition: opacity .2s linear; }
+  .btn.grad-on:not(.btn-3)::before,
+  .sidebtn.grad-on:not(.btn-3)::before{ animation: none; }
   .btn, .sidebtn{ transform: none !important; }
 }
 
@@ -278,4 +306,3 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 @media (min-width: 900px){
   .about-body{ max-width: 820px; }
 }
-  
