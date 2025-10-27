@@ -208,3 +208,92 @@ code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
 .post-meta{ display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 .post-meta .pill{ margin-top:0; }
 .post-excerpt{ color:var(--text); opacity:.9; }
+
+/* ===== btn-3 style (site palette version) ===== */
+.btn.btn-3,
+.sidebtn.btn-3{
+  --g1: var(--accent);
+  --g2: var(--accent2);
+  position: relative;
+  display: inline-block;
+  width: auto;              /* 필요시 130px로 고정도 가능 */
+  min-width: 130px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  background: linear-gradient(0deg, var(--g1) 0%, var(--g2) 100%);
+  box-shadow: 0 2px 8px var(--shadow);
+  text-align: center;
+  overflow: hidden;
+  transition: background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+.btn.btn-3 span,
+.sidebtn.btn-3 span{
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: color .3s ease;
+}
+
+/* top/right 라인 */
+.btn.btn-3::before,
+.btn.btn-3::after,
+.sidebtn.btn-3::before,
+.sidebtn.btn-3::after{
+  content:"";
+  position: absolute;
+  right: 0; top: 0;
+  background: var(--g2);
+  transition: all .3s ease;
+}
+.btn.btn-3::before,
+.sidebtn.btn-3::before{ width: 2px; height: 0%; }
+.btn.btn-3::after,
+.sidebtn.btn-3::after{ height: 2px; width: 0%; }
+
+/* bottom/left 라인 (span을 이용) */
+.btn.btn-3 span::before,
+.btn.btn-3 span::after,
+.sidebtn.btn-3 span::before,
+.sidebtn.btn-3 span::after{
+  content:"";
+  position: absolute;
+  left: 0; bottom: 0;
+  background: var(--g2);
+  transition: all .3s ease;
+}
+.btn.btn-3 span::before,
+.sidebtn.btn-3 span::before{ width: 2px; height: 0%; }
+.btn.btn-3 span::after,
+.sidebtn.btn-3 span::after{ height: 2px; width: 0%; }
+
+/* hover state */
+.btn.btn-3:hover,
+.sidebtn.btn-3:hover{
+  background: transparent;
+  box-shadow: none;
+  text-decoration: none;
+  color: var(--accent2);
+  border: 1px solid var(--border); /* 배경 투명해졌을 때 경계감 유지 */
+}
+.btn.btn-3:hover::before,
+.sidebtn.btn-3:hover::before{ height: 100%; }
+.btn.btn-3:hover::after,
+.sidebtn.btn-3:hover::after{ width: 100%; }
+.btn.btn-3:hover span,
+.sidebtn.btn-3:hover span{ color: var(--accent2); }
+.btn.btn-3:hover span::before,
+.sidebtn.btn-3:hover span::before{ height: 100%; }
+.btn.btn-3:hover span::after,
+.sidebtn.btn-3:hover span::after{ width: 100%; }
+
+/* 접근성 포커스 */
+.btn.btn-3:focus-visible,
+.sidebtn.btn-3:focus-visible{
+  outline: 2px solid color-mix(in oklab, var(--accent), white 20%);
+  outline-offset: 2px;
+}
