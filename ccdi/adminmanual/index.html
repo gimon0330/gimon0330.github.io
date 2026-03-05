@@ -18,6 +18,7 @@ layout: null
   <script defer src="{{ '/assets/ccdi.js' | relative_url }}"></script>
 </head>
 <body>
+  <!-- CCDI nav -->
   <header class="ccdi-nav-wrap">
     <div class="container ccdi-container ccdi-nav">
       <a class="ccdi-brand" href="{{ '/ccdi/' | relative_url }}">
@@ -39,20 +40,44 @@ layout: null
   </header>
 
   <main class="container ccdi-container" style="padding-top:18px">
-    <section class="card">
-      <div class="ccdi-badge" style="margin-bottom:10px">
-        <span class="dot" aria-hidden="true"></span>
-        <span>관리자 매뉴얼</span>
+    <div class="doc-head">
+      <div>
+        <div class="ccdi-badge" style="margin-bottom:10px">
+          <span class="dot" aria-hidden="true"></span>
+          <span>관리자 매뉴얼</span>
+        </div>
+        <h2 style="margin:0">신청서 검토 · 상태 변경 · 서류 열람/다운로드</h2>
       </div>
-      <h2 style="margin:0 0 8px">준비 중입니다</h2>
-      <p class="muted" style="margin:0">
-        로그인 → 신청 목록/필터 → 상태 변경 → 서류 미리보기·다운로드 → 관리자 계정 관리 흐름을
-        실제 코드 기준으로 정리한 문서를 여기에 추가할 예정입니다.
-      </p>
-      <div style="margin-top:12px">
-        <a class="btn btn-3" href="{{ '/ccdi/usermanual/' | relative_url }}"><span>사용자 매뉴얼 먼저 보기 →</span></a>
+      <div class="doc-meta">
+        <span class="pill">/admin</span>
+        <span class="pill">Applications</span>
+        <span class="pill">Admins</span>
+        <span class="pill">Korean</span>
       </div>
-    </section>
+    </div>
+
+    <div class="callout" style="margin-bottom:14px">
+      <strong>중요:</strong>
+      <span class="muted">서류 링크는 서명 URL 기반으로 발급되며 유효시간이 짧습니다. 미리보기는 약 5분, 다운로드는 약 2분 후 만료될 수 있어요. 만료된 것 같으면 버튼을 다시 눌러 새 URL을 발급받으세요.</span>
+    </div>
+
+    <div class="doc-grid">
+      <aside class="doc-sidebar">
+        <a class="sidebtn btn-3" href="#applications"><span>Applications부터 보기</span></a>
+        <a class="sidebtn" href="#admins">관리자 계정 관리</a>
+        <a class="sidebtn" href="#troubleshooting">문제 해결(FAQ)</a>
+
+        <div class="card">
+          <div class="pill" style="margin-bottom:10px">On this page</div>
+          <nav id="toc" class="toc" aria-label="목차"></nav>
+        </div>
+      </aside>
+
+      <article id="doc" class="card prose">
+        {% capture manual_md %}{% include ccdi/content/adminmanual.ko.md %}{% endcapture %}
+        {{ manual_md | markdownify }}
+      </article>
+    </div>
   </main>
 
   <footer class="footer">

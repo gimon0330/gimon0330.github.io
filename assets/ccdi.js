@@ -278,9 +278,13 @@
   async function applyLang(lang){
     await loadChromeI18n(lang);
     const page = document.documentElement.getAttribute('data-ccdi-page');
+
     if(page === 'ccdi-usermanual'){
       await loadUserManual(lang);
-      // If we are in static mode (default), enhance whatever is already in DOM.
+    }
+
+    if(page === 'ccdi-usermanual' || page === 'ccdi-adminmanual' || page === 'ccdi-developermanual'){
+      // Static docs: build TOC + add copyable heading anchors
       enhanceStaticDoc();
     }
   }

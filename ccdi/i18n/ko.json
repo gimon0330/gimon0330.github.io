@@ -1,38 +1,30 @@
 {
   "ccdi.brand": "CCDI Docs",
-
   "ccdi.nav.home": "Home",
   "ccdi.nav.user": "User Manual",
   "ccdi.nav.admin": "Admin Manual",
   "ccdi.nav.dev": "Developer Manual",
   "ccdi.nav.portfolio": "포트폴리오로",
-
   "ccdi.badge": "CCDI Internship Platform",
   "ccdi.title": "매뉴얼 모음",
   "ccdi.desc": "학생 신청자(사용자) / 관리자 / 개발자를 위한 문서를 한 곳에서 확인할 수 있어요. (언어는 구조만 준비되어 있고, 현재는 한국어 콘텐츠만 제공됩니다.)",
-
   "ccdi.cta.user": "사용자 매뉴얼 보기",
   "ccdi.cta.admin": "관리자 매뉴얼",
   "ccdi.cta.dev": "개발자 매뉴얼",
-
   "ccdi.section.guides": "가이드",
   "ccdi.section.hint": "각 문서는 상단 메뉴로도 이동할 수 있어요.",
-
   "ccdi.card.user.title": "사용자 매뉴얼 (학생 신청자)",
   "ccdi.card.user.pill": "Ready",
   "ccdi.card.user.desc": "/apply에서 신청서 작성(6단계) → 서류 업로드 → 최종 제출까지, 실패/오류 상황까지 포함해 안내합니다.",
   "ccdi.card.user.cta": "바로 열기 →",
-
   "ccdi.card.admin.title": "관리자 매뉴얼",
+  "ccdi.card.admin.pill": "Ready",
   "ccdi.card.admin.desc": "로그인, 신청 목록/필터, 상태 변경, 서류 미리보기·다운로드, 관리자 계정 관리 흐름을 정리합니다.",
   "ccdi.card.admin.cta": "페이지로 →",
-
   "ccdi.card.dev.title": "개발자 매뉴얼",
   "ccdi.card.dev.desc": "아키텍처/라우팅, DB 스키마, 파일 업로드/다운로드(Supabase), 환경변수와 배포까지 개발 관점으로 정리합니다.",
   "ccdi.card.dev.cta": "페이지로 →",
-
   "ccdi.card.soon": "Coming soon",
-
   "ccdi.card.tip.kicker": "팁",
   "ccdi.card.tip.title": "문서 사용성",
   "ccdi.card.tip.1": "좌측 사이드바의 목차로 빠르게 이동할 수 있어요.",
