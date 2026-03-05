@@ -295,3 +295,110 @@
     await applyLang(lang);
   });
 })();
+
+// ===== Language switcher: enable option only if target page exists =====
+function ccdiJoinUrl(base, path){
+  // base: "" or "/repo"
+  if (!base) return path;
+  if (base.endsWith("/") && path.startsWith("/")) return base.slice(0, -1) + path;
+  if (!base.endsWith("/") && !path.startsWith("/")) return base + "/" + path;
+  return base + path;
+}
+
+async function ccdiUrlExists(url){
+  // Prefer HEAD, fallback to GET (GitHub Pages usually supports HEAD)
+  try{
+    const r = await fetch(url, { method: "HEAD", cache: "no-store", redirect: "follow" });
+    if (r.ok) return true;
+  }catch{}
+  try{
+    const r = await fetch(url, { method: "GET", cache: "no-store", redirect: "follow" });
+    return r.ok;
+  }catch{
+    return false;
+  }
+}
+
+function ccdiGetLangBasePath(pageKey){
+  // 확장 예시:
+  // - ccdi-home: "/ccdi/" + lang subdir ("/ccdi/en/")
+  // - ccdi-usermanual: "/ccdi/usermanual/" + lang subdir ("/ccdi/usermanual/en/")
+  switch(pageKey){
+    case "ccdi-usermanual": return "/ccdi/usermanual/";
+    case "ccdi-home": return "/ccdi/";
+    default: return null;
+  }
+}
+
+function ccdiCurrentLangFromPath(basePath){
+  // basePath: "/ccdi/usermanual/"
+  // current:
+  // - "/ccdi/usermanual/" => ko
+  // - "/ccdi/usermanual/en/" => en
+  const p = location.pathname;
+  if (!p.includes(basePath)) return "ko";
+  const rest = p.split(basePath)[1] || "";
+  const seg = rest.split("/").filter(Boolean)[0]; // first segment
+  if (seg === "en" || seg === "zh" || seg === "ja") return seg;
+  return "ko";
+}
+
+function ccdiLangTargetUrl(basePath, lang){
+  // ko는 기본 경로 유지, 나머지는 서브폴더로
+  if (lang === "ko") return ccdiJoinUrl(window.__BASEURL__ || "", basePath);
+  return ccdiJoinUrl(window.__BASEURL__ || "", basePath + lang + "/");
+}
+
+async function initLangSelectAutoEnable(){
+  const sel = document.getElementById("lang-select");
+  if (!sel) return;
+
+  const root = document.documentElement;
+  const pageKey = root?.dataset?.ccdiPage;
+  const basePath = ccdiGetLangBasePath(pageKey);
+  if (!basePath) return;
+
+  // 현재 언어 세팅
+  const current = ccdiCurrentLangFromPath(basePath);
+  sel.value = current;
+
+  // 옵션 리스트 (select에 있는 값 기준)
+  const langs = Array.from(sel.options).map(o => o.value);
+
+  // 존재 여부 검사 후 enable/disable
+  await Promise.all(langs.map(async (lang) => {
+    const url = ccdiLangTargetUrl(basePath, lang);
+    const ok = await ccdiUrlExists(url);
+
+    const opt = Array.from(sel.options).find(o => o.value === lang);
+    if (!opt) return;
+
+    opt.disabled = !ok;
+    // UI: 준비중 표시 (예: English (coming soon))
+    const baseLabel = opt.textContent.replace(/\s*\(coming soon\)\s*$/i, "").trim();
+    opt.textContent = ok ? baseLabel : `${baseLabel} (coming soon)`;
+  }));
+
+  // 변경 이벤트: 가능한 언어면 해당 페이지로 이동
+  sel.addEventListener("change", () => {
+    const lang = sel.value;
+    const opt = Array.from(sel.options).find(o => o.value === lang);
+
+    if (opt?.disabled){
+      // 선택이 막힌 경우: 현재 언어로 되돌림
+      sel.value = current;
+      // 이미 ccdi.js에 toast 함수가 있다면 그걸 호출하면 되고,
+      // 없다면 alert로라도 처리 가능:
+      if (typeof window.ccdiToast === "function") window.ccdiToast("해당 언어 페이지가 아직 준비되지 않았어요.");
+      else alert("해당 언어 페이지가 아직 준비되지 않았어요.");
+      return;
+    }
+
+    location.href = ccdiLangTargetUrl(basePath, lang);
+  });
+}
+
+// ===== Boot hook =====
+document.addEventListener("DOMContentLoaded", () => {
+  initLangSelectAutoEnable();
+});
