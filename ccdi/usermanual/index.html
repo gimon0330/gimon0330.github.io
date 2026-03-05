@@ -1,0 +1,99 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="ko" data-ccdi-page="ccdi-usermanual" data-ccdi-langs="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>CCDI · 사용자 매뉴얼</title>
+  <meta name="description" content="CCDI Internship Platform 사용자 매뉴얼 (학생 신청자)" />
+
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/ccdi.css' | relative_url }}" />
+  <script>
+    window.__BASEURL__ = "{{ site.baseurl }}";
+  </script>
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/ccdi.js' | relative_url }}"></script>
+</head>
+<body>
+  <!-- CCDI nav -->
+  <header class="ccdi-nav-wrap">
+    <div class="container ccdi-container ccdi-nav">
+      <a class="ccdi-brand" href="{{ '/ccdi/' | relative_url }}">
+        <span class="logo" aria-hidden="true"></span>
+        <span>CCDI Docs</span>
+      </a>
+
+      <nav class="ccdi-links" aria-label="CCDI 메뉴">
+        <a href="{{ '/ccdi/' | relative_url }}">Home</a>
+        <a href="{{ '/ccdi/usermanual/' | relative_url }}">User Manual</a>
+        <a href="{{ '/ccdi/adminmanual/' | relative_url }}">Admin Manual</a>
+        <a href="{{ '/ccdi/developermanual/' | relative_url }}">Developer Manual</a>
+      </nav>
+
+      <div class="ccdi-nav-right">
+        <div class="lang-wrap" title="Language">
+          <select id="lang-select" class="lang-select" aria-label="언어 선택">
+            <option value="ko">한국어</option>
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+            <option value="ja">日本語</option>
+          </select>
+        </div>
+        <a class="btn" href="{{ '/ccdi/' | relative_url }}">CCDI Home</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container ccdi-container" style="padding-top:18px">
+    <div class="doc-head">
+      <div>
+        <div class="ccdi-badge" style="margin-bottom:10px">
+          <span class="dot" aria-hidden="true"></span>
+          <span>사용자 매뉴얼</span>
+        </div>
+        <h2 style="margin:0">학생 신청자(외국인 유학생) 가이드</h2>
+      </div>
+      <div class="doc-meta">
+        <span class="pill">/apply</span>
+        <span class="pill">6 Steps</span>
+        <span class="pill">Korean</span>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-bottom:14px">
+      <strong>중요:</strong>
+      <span class="muted">현재 구현 기준으로는 새로고침(F5) 시 입력/업로드 상태가 화면에서 복구되지 않을 수 있어요. 작성 중에는 새로고침/탭 종료를 피해주세요.</span>
+    </div>
+
+    <div class="doc-grid">
+      <aside class="doc-sidebar">
+        <a class="sidebtn btn-3" href="#step-1-개인-정보"><span>Step 1부터 보기</span></a>
+        <a class="sidebtn" href="#6-자주-발생하는-상황-해결법">자주 묻는 질문</a>
+
+        <div class="card">
+          <div class="pill" style="margin-bottom:10px">On this page</div>
+          <nav id="toc" class="toc" aria-label="목차"></nav>
+        </div>
+      </aside>
+
+      <article id="doc" class="card prose">
+        {% capture manual_md %}{% include_relative ../content/usermanual.ko.md %}{% endcapture %}
+        {{ manual_md | markdownify }}
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container ccdi-container foot-flex">
+      <span>© <span id="year"></span> 안강현</span>
+      <nav class="foot-links" aria-label="바닥글">
+        <a href="{{ '/ccdi/' | relative_url }}">CCDI</a>
+        <span>·</span><a href="{{ '/' | relative_url }}">Portfolio</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>
