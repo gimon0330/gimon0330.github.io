@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Gowun+Dodum&family=Noto+Serif+KR:wght@500;600;700;800&display=swap");
+
 @font-face {
   font-family: "Pretendard Variable";
   font-weight: 45 920;
@@ -7,7 +9,9 @@
 }
 
 :root {
-  --font-sans: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-body: "Gowun Dodum", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+  --font-display: "Noto Serif KR", "Gowun Dodum", "Pretendard Variable", Georgia, serif;
+  --font-sans: var(--font-body);
 }
 
 html,
@@ -16,7 +20,7 @@ button,
 input,
 textarea,
 select {
-  font-family: var(--font-sans);
+  font-family: var(--font-body);
 }
 
 body {
