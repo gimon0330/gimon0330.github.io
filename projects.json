@@ -32,6 +32,14 @@
     "links": { "github": "https://github.com/gimon0330/omok-ai" }
   },
   {
+    "title": "Natural Selection Simulator",
+    "year": 2021,
+    "featured": false,
+    "summary": "생명과학II 프로젝트로 제작한 Pygame 기반 natural selection simulator. predator와 prey가 같은 공간에서 움직이고, 살아남은 prey가 speed와 radius trait을 mutation과 함께 다음 세대로 전달하면서 selection pressure에 따라 population의 형질 분포가 달라지는 과정을 시각화했습니다. 처음에는 spaghetti code에 가까웠지만, 생명과학 개념을 직접 눈에 보이는 simulation으로 바꾸며 과학 개념과 programming이 만나는 재미를 느꼈던 프로젝트입니다.",
+    "tech": ["Pygame", "Python", "Simulation", "Biology", "Natural Selection", "Evolution"],
+    "links": { "github": "https://github.com/gimon0330/Natural-Selection-Simulator" }
+  },
+  {
     "title": "RTbot",
     "year": 2021,
     "featured": false,
