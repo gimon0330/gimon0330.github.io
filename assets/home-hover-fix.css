@@ -1,0 +1,50 @@
+/* Ensure every homepage card gets the same hover motion.
+   Earlier nth-child transform rules gave the first/third cards a custom offset,
+   which accidentally blocked the shared hover movement. */
+
+.achievement-card,
+.project-preview-grid .card,
+#featured-grid .card {
+  --home-card-offset-y: 0px;
+  transform:
+    translate3d(0, calc(var(--card-y, 0px) + var(--home-card-offset-y)), 0)
+    rotateX(var(--card-tilt, 0deg))
+    scale(var(--card-scale, 1)) !important;
+}
+
+.achievement-card:nth-child(1),
+#featured-grid .card:nth-child(1) {
+  --home-card-offset-y: 10px;
+}
+
+.achievement-card:nth-child(3),
+#featured-grid .card:nth-child(3) {
+  --home-card-offset-y: 18px;
+}
+
+.achievement-card:hover,
+.project-preview-grid .card:hover,
+#featured-grid .card:hover {
+  transform:
+    translate3d(0, calc(var(--card-y, 0px) + var(--home-card-offset-y) - 9px), 0)
+    rotateX(var(--card-tilt, 0deg))
+    scale(calc(var(--card-scale, 1) * 1.025)) !important;
+  box-shadow: var(--home-shadow) !important;
+  background: var(--home-card-strong) !important;
+}
+
+@media (max-width: 980px) {
+  .achievement-card,
+  .project-preview-grid .card,
+  #featured-grid .card {
+    --home-card-offset-y: 0px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .achievement-card:hover,
+  .project-preview-grid .card:hover,
+  #featured-grid .card:hover {
+    transform: none !important;
+  }
+}
