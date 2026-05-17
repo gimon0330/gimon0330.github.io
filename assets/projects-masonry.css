@@ -1,0 +1,40 @@
+/* Projects page masonry layout.
+   Prevents short cards from stretching to match the tallest card in the same row. */
+
+#projects-grid {
+  display: block !important;
+  column-count: 3;
+  column-gap: 18px;
+  width: 100%;
+}
+
+#projects-grid .card {
+  display: inline-block !important;
+  width: 100% !important;
+  grid-column: auto !important;
+  break-inside: avoid;
+  page-break-inside: avoid;
+  margin: 0 0 18px;
+  vertical-align: top;
+}
+
+#projects-grid .card p {
+  min-height: 0 !important;
+}
+
+@media (max-width: 980px) {
+  #projects-grid {
+    column-count: 2;
+    column-gap: 16px;
+  }
+
+  #projects-grid .card {
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  #projects-grid {
+    column-count: 1;
+  }
+}
