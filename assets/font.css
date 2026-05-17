@@ -12,6 +12,23 @@
   --font-body: "Gowun Dodum", "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
   --font-display: "Noto Serif KR", "Gowun Dodum", "Pretendard Variable", Georgia, serif;
   --font-sans: var(--font-body);
+  --surface-glass: color-mix(in oklab, var(--card), transparent 10%);
+  --surface-soft: color-mix(in oklab, var(--card), white 4%);
+  --surface-warm: color-mix(in oklab, var(--card), #ffd7eb 3%);
+  --card-shadow-soft: 0 18px 50px rgba(0, 0, 0, .22);
+  --card-shadow-hover: 0 28px 80px rgba(0, 0, 0, .32);
+  --glow-blue: color-mix(in oklab, var(--accent3), transparent 75%);
+  --glow-violet: color-mix(in oklab, var(--accent2), transparent 72%);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --surface-glass: rgba(255, 255, 255, .78);
+    --surface-soft: rgba(255, 255, 255, .92);
+    --surface-warm: color-mix(in oklab, #fff, #f7eaff 18%);
+    --card-shadow-soft: 0 18px 44px rgba(55, 67, 110, .12);
+    --card-shadow-hover: 0 26px 70px rgba(55, 67, 110, .18);
+  }
 }
 
 html,
@@ -20,7 +37,7 @@ button,
 input,
 textarea,
 select {
-  font-family: var(--font-body);
+  font-family: var(--font-body) !important;
 }
 
 body {
@@ -28,4 +45,314 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  letter-spacing: -.012em;
+  background:
+    radial-gradient(circle at 12% 10%, color-mix(in oklab, var(--accent), transparent 72%), transparent 34rem),
+    radial-gradient(circle at 88% 18%, color-mix(in oklab, var(--accent2), transparent 78%), transparent 30rem),
+    radial-gradient(circle at 50% 100%, color-mix(in oklab, var(--accent3), transparent 86%), transparent 38rem),
+    var(--bg) !important;
+}
+
+h1,
+h2,
+.headline,
+.page-hero h1,
+.section-head h2 {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -.055em !important;
+}
+
+.brand,
+.links a,
+.pill,
+.eyebrow,
+.contact-chip,
+.icon-link,
+.card-link,
+.ghost,
+.inline-link {
+  font-family: var(--font-body) !important;
+}
+
+.headline {
+  letter-spacing: -.075em !important;
+  filter: drop-shadow(0 20px 42px rgba(108, 140, 255, .16));
+}
+
+.hero-lead,
+.section-head p,
+.edu-content p,
+.card p,
+.timeline-card p {
+  line-height: 1.78 !important;
+}
+
+.card,
+.timeline-card,
+.edu-card,
+.contact-chip,
+.logo-slot,
+.portrait-frame,
+.thumb,
+.pill {
+  border: 0 !important;
+}
+
+.card {
+  position: relative !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  border-radius: 30px !important;
+  background:
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 3%)),
+    var(--card) !important;
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, .08) !important;
+  transform: translateZ(0);
+}
+
+.card::before {
+  content: "" !important;
+  position: absolute !important;
+  inset: -1px !important;
+  z-index: -1 !important;
+  opacity: .75 !important;
+  background:
+    radial-gradient(circle at 14% 0%, var(--glow-blue), transparent 36%),
+    radial-gradient(circle at 90% 8%, var(--glow-violet), transparent 32%) !important;
+  transition: opacity .28s ease, transform .28s ease !important;
+}
+
+.card::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  background: linear-gradient(120deg, rgba(255,255,255,.10), transparent 24%, transparent 72%, rgba(255,255,255,.04)) !important;
+  opacity: .42 !important;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.01) !important;
+  box-shadow: var(--card-shadow-hover), inset 0 1px 0 rgba(255, 255, 255, .12) !important;
+}
+
+.card:hover::before {
+  opacity: 1 !important;
+  transform: scale(1.04) !important;
+}
+
+.card h3,
+.timeline-card h3,
+.edu-content h3 {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  letter-spacing: -.035em !important;
+}
+
+.pill {
+  background: rgba(255, 255, 255, .075) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08) !important;
+  backdrop-filter: blur(10px);
+}
+
+@media (prefers-color-scheme: light) {
+  .pill {
+    background: rgba(40, 58, 110, .06) !important;
+  }
+}
+
+.thumb {
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05) !important;
+}
+
+.achievement-card,
+.project-preview-grid .card,
+#projects-grid .card,
+.coursework-grid .card {
+  min-height: 250px;
+}
+
+.contact-chip {
+  background: color-mix(in oklab, var(--surface-glass), white 2%) !important;
+  box-shadow: 0 14px 34px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08) !important;
+}
+
+.contact-chip:hover {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent3), transparent 74%), transparent 58%),
+    color-mix(in oklab, var(--surface-glass), white 4%) !important;
+  transform: translateY(-4px) !important;
+}
+
+.education-timeline {
+  position: relative !important;
+  display: grid !important;
+  gap: 26px !important;
+  padding-left: 116px !important;
+  margin-top: 26px !important;
+}
+
+.education-timeline::before {
+  left: 52px !important;
+  top: 48px !important;
+  bottom: 48px !important;
+  width: 3px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(180deg, var(--accent3), var(--accent2), transparent) !important;
+  box-shadow: 0 0 28px color-mix(in oklab, var(--accent3), transparent 55%) !important;
+}
+
+.edu-card {
+  position: relative !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px !important;
+  min-height: 190px !important;
+  padding: 28px 30px !important;
+  overflow: visible !important;
+  border-radius: 34px !important;
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent3), transparent 82%), transparent 42%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 4%)) !important;
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255,255,255,.10) !important;
+}
+
+.edu-card.featured {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent), transparent 74%), transparent 45%),
+    radial-gradient(circle at 95% 0%, color-mix(in oklab, var(--accent2), transparent 76%), transparent 38%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 5%), color-mix(in oklab, var(--surface-warm), black 4%)) !important;
+}
+
+.edu-card:hover {
+  transform: translateY(-8px) scale(1.008) !important;
+  box-shadow: var(--card-shadow-hover), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+
+.edu-card::before {
+  content: "" !important;
+  position: absolute !important;
+  left: -75px !important;
+  top: 50% !important;
+  width: 16px !important;
+  height: 16px !important;
+  border-radius: 999px !important;
+  background: var(--accent3) !important;
+  box-shadow: 0 0 0 9px color-mix(in oklab, var(--accent3), transparent 84%), 0 0 32px var(--accent3) !important;
+  transform: translateY(-50%) !important;
+}
+
+.edu-card::after {
+  content: "" !important;
+  position: absolute !important;
+  left: -58px !important;
+  top: 50% !important;
+  width: 56px !important;
+  height: 2px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(90deg, var(--accent3), color-mix(in oklab, var(--accent3), transparent 65%)) !important;
+  transform: translateY(-50%) !important;
+}
+
+.logo-slot {
+  position: absolute !important;
+  left: -116px !important;
+  top: 50% !important;
+  width: 88px !important;
+  height: 88px !important;
+  padding: 8px !important;
+  border-radius: 28px !important;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.03)),
+    color-mix(in oklab, var(--card2), black 4%) !important;
+  box-shadow: 0 18px 44px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  transform: translateY(-50%) !important;
+}
+
+.logo-slot img {
+  max-width: 92% !important;
+  max-height: 92% !important;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.22)) !important;
+}
+
+.edu-content h3 {
+  font-size: clamp(24px, 3vw, 34px) !important;
+  letter-spacing: -.045em !important;
+}
+
+.edu-content .eyebrow {
+  color: color-mix(in oklab, var(--accent3), white 12%) !important;
+}
+
+.edu-content p {
+  max-width: 720px !important;
+}
+
+.timeline::before {
+  width: 3px !important;
+  border-radius: 999px !important;
+  box-shadow: 0 0 26px color-mix(in oklab, var(--accent), transparent 62%) !important;
+}
+
+.timeline-item::before {
+  border: 0 !important;
+  background: linear-gradient(135deg, var(--accent3), var(--accent2)) !important;
+  box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent3), transparent 86%), 0 0 22px var(--accent3) !important;
+}
+
+.timeline-card {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent), transparent 85%), transparent 44%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 4%)) !important;
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255,255,255,.09) !important;
+  border-radius: 26px !important;
+}
+
+@media (max-width: 880px) {
+  .education-timeline {
+    padding-left: 0 !important;
+    gap: 20px !important;
+  }
+
+  .education-timeline::before {
+    display: none !important;
+  }
+
+  .edu-card {
+    padding: 84px 20px 22px !important;
+    min-height: auto !important;
+  }
+
+  .edu-card::before,
+  .edu-card::after {
+    display: none !important;
+  }
+
+  .logo-slot {
+    left: 20px !important;
+    top: 22px !important;
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 18px !important;
+    transform: none !important;
+  }
+
+  .edu-content h3 {
+    font-size: 24px !important;
+  }
+
+  .achievement-card,
+  .project-preview-grid .card,
+  #projects-grid .card,
+  .coursework-grid .card {
+    min-height: auto !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .edu-card:hover,
+  .contact-chip:hover {
+    transform: none !important;
+  }
 }
