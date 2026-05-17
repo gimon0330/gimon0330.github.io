@@ -1,0 +1,343 @@
+/* Design polish layer: softer cards, cleaner timeline, warmer typography. */
+
+:root {
+  --surface-glass: color-mix(in oklab, var(--card), transparent 10%);
+  --surface-soft: color-mix(in oklab, var(--card), white 4%);
+  --surface-warm: color-mix(in oklab, var(--card), #ffd7eb 3%);
+  --card-shadow-soft: 0 18px 50px rgba(0, 0, 0, .22);
+  --card-shadow-hover: 0 28px 80px rgba(0, 0, 0, .32);
+  --glow-blue: color-mix(in oklab, var(--accent3), transparent 75%);
+  --glow-violet: color-mix(in oklab, var(--accent2), transparent 72%);
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --surface-glass: rgba(255, 255, 255, .78);
+    --surface-soft: rgba(255, 255, 255, .9);
+    --surface-warm: color-mix(in oklab, #fff, #f7eaff 18%);
+    --card-shadow-soft: 0 18px 44px rgba(55, 67, 110, .12);
+    --card-shadow-hover: 0 26px 70px rgba(55, 67, 110, .18);
+  }
+}
+
+body {
+  font-family: var(--font-body, "Gowun Dodum", system-ui, sans-serif) !important;
+  letter-spacing: -.012em;
+  background:
+    radial-gradient(circle at 12% 10%, color-mix(in oklab, var(--accent), transparent 72%), transparent 34rem),
+    radial-gradient(circle at 88% 18%, color-mix(in oklab, var(--accent2), transparent 78%), transparent 30rem),
+    radial-gradient(circle at 50% 100%, color-mix(in oklab, var(--accent3), transparent 86%), transparent 38rem),
+    var(--bg);
+}
+
+h1,
+h2,
+.headline,
+.page-hero h1,
+.section-head h2 {
+  font-family: var(--font-display, "Noto Serif KR", serif);
+  font-weight: 700;
+  letter-spacing: -.055em;
+}
+
+.brand,
+.links a,
+.pill,
+.eyebrow,
+.contact-chip,
+.icon-link,
+.card-link,
+.ghost,
+.inline-link {
+  font-family: var(--font-body, "Gowun Dodum", system-ui, sans-serif);
+}
+
+.headline {
+  letter-spacing: -.075em;
+  filter: drop-shadow(0 20px 42px rgba(108, 140, 255, .16));
+}
+
+.hero-lead,
+.section-head p,
+.edu-content p,
+.card p,
+.timeline-card p {
+  line-height: 1.78;
+}
+
+/* Borderless, designer-style cards */
+.card,
+.timeline-card,
+.edu-card,
+.contact-chip,
+.logo-slot,
+.portrait-frame {
+  border: 0 !important;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  border-radius: 30px;
+  background:
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 3%)),
+    var(--card);
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, .08);
+  transform: translateZ(0);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  opacity: .75;
+  background:
+    radial-gradient(circle at 14% 0%, var(--glow-blue), transparent 36%),
+    radial-gradient(circle at 90% 8%, var(--glow-violet), transparent 32%);
+  transition: opacity .28s ease, transform .28s ease;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(255,255,255,.10), transparent 24%, transparent 72%, rgba(255,255,255,.04));
+  opacity: .42;
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.01);
+  box-shadow: var(--card-shadow-hover), inset 0 1px 0 rgba(255, 255, 255, .12);
+}
+
+.card:hover::before {
+  opacity: 1;
+  transform: scale(1.04);
+}
+
+.card h3 {
+  font-family: var(--font-display, "Noto Serif KR", serif);
+  font-weight: 700;
+  letter-spacing: -.035em;
+}
+
+.pill {
+  border: 0 !important;
+  background: rgba(255, 255, 255, .075);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+  backdrop-filter: blur(10px);
+}
+
+@media (prefers-color-scheme: light) {
+  .pill {
+    background: rgba(40, 58, 110, .06);
+  }
+}
+
+.thumb {
+  border: 0 !important;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.05);
+}
+
+.achievement-card,
+.project-preview-grid .card,
+#projects-grid .card,
+.coursework-grid .card {
+  min-height: 250px;
+}
+
+/* Contact chips should feel soft, not rigid. */
+.contact-chip {
+  background: color-mix(in oklab, var(--surface-glass), white 2%);
+  box-shadow: 0 14px 34px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.contact-chip:hover {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent3), transparent 74%), transparent 58%),
+    color-mix(in oklab, var(--surface-glass), white 4%);
+  transform: translateY(-4px);
+}
+
+/* Education timeline rebuild */
+.education-timeline {
+  position: relative;
+  display: grid;
+  gap: 26px;
+  padding-left: 116px;
+  margin-top: 26px;
+}
+
+.education-timeline::before {
+  left: 52px !important;
+  top: 48px !important;
+  bottom: 48px !important;
+  width: 3px !important;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--accent3), var(--accent2), transparent) !important;
+  box-shadow: 0 0 28px color-mix(in oklab, var(--accent3), transparent 55%);
+}
+
+.edu-card {
+  position: relative;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 12px !important;
+  min-height: 190px;
+  padding: 28px 30px !important;
+  overflow: visible !important;
+  border-radius: 34px;
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent3), transparent 82%), transparent 42%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 4%));
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.edu-card.featured {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent), transparent 74%), transparent 45%),
+    radial-gradient(circle at 95% 0%, color-mix(in oklab, var(--accent2), transparent 76%), transparent 38%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 5%), color-mix(in oklab, var(--surface-warm), black 4%));
+}
+
+.edu-card:hover {
+  transform: translateY(-8px) scale(1.008);
+  box-shadow: var(--card-shadow-hover), inset 0 1px 0 rgba(255,255,255,.14);
+}
+
+.edu-card::before {
+  content: "";
+  position: absolute;
+  left: -75px;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--accent3);
+  box-shadow: 0 0 0 9px color-mix(in oklab, var(--accent3), transparent 84%), 0 0 32px var(--accent3);
+  transform: translateY(-50%);
+}
+
+.edu-card::after {
+  content: "";
+  position: absolute;
+  left: -58px;
+  top: 50%;
+  width: 56px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent3), color-mix(in oklab, var(--accent3), transparent 65%));
+  transform: translateY(-50%);
+}
+
+.logo-slot {
+  position: absolute;
+  left: -116px;
+  top: 50%;
+  width: 88px;
+  height: 88px;
+  padding: 8px;
+  border-radius: 28px;
+  background:
+    linear-gradient(145deg, rgba(255,255,255,.16), rgba(255,255,255,.03)),
+    color-mix(in oklab, var(--card2), black 4%);
+  box-shadow: 0 18px 44px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.12);
+  transform: translateY(-50%);
+}
+
+.logo-slot img {
+  max-width: 92% !important;
+  max-height: 92% !important;
+  filter: drop-shadow(0 8px 18px rgba(0,0,0,.22));
+}
+
+.edu-content h3 {
+  font-family: var(--font-display, "Noto Serif KR", serif);
+  font-size: clamp(24px, 3vw, 34px);
+  letter-spacing: -.045em;
+}
+
+.edu-content .eyebrow {
+  color: color-mix(in oklab, var(--accent3), white 12%);
+}
+
+.edu-content p {
+  max-width: 720px;
+}
+
+/* Make ordinary timeline cards match the same visual language. */
+.timeline::before {
+  width: 3px !important;
+  border-radius: 999px;
+  box-shadow: 0 0 26px color-mix(in oklab, var(--accent), transparent 62%);
+}
+
+.timeline-item::before {
+  border: 0 !important;
+  background: linear-gradient(135deg, var(--accent3), var(--accent2)) !important;
+  box-shadow: 0 0 0 8px color-mix(in oklab, var(--accent3), transparent 86%), 0 0 22px var(--accent3);
+}
+
+.timeline-card {
+  background:
+    radial-gradient(circle at 0% 0%, color-mix(in oklab, var(--accent), transparent 85%), transparent 44%),
+    linear-gradient(145deg, color-mix(in oklab, var(--surface-soft), white 4%), color-mix(in oklab, var(--surface-warm), black 4%));
+  box-shadow: var(--card-shadow-soft), inset 0 1px 0 rgba(255,255,255,.09);
+  border-radius: 26px;
+}
+
+.timeline-card h3 {
+  font-family: var(--font-display, "Noto Serif KR", serif);
+  letter-spacing: -.035em;
+}
+
+@media (max-width: 880px) {
+  .education-timeline {
+    padding-left: 0;
+    gap: 20px;
+  }
+
+  .education-timeline::before {
+    display: none;
+  }
+
+  .edu-card {
+    padding: 84px 20px 22px !important;
+    min-height: auto;
+  }
+
+  .edu-card::before,
+  .edu-card::after {
+    display: none;
+  }
+
+  .logo-slot {
+    left: 20px;
+    top: 22px;
+    width: 54px;
+    height: 54px;
+    border-radius: 18px;
+    transform: none;
+  }
+
+  .edu-content h3 {
+    font-size: 24px;
+  }
+
+  .achievement-card,
+  .project-preview-grid .card,
+  #projects-grid .card,
+  .coursework-grid .card {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover,
+  .edu-card:hover,
+  .contact-chip:hover {
+    transform: none;
+  }
+}
