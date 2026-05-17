@@ -1,5 +1,16 @@
 [
   {
+    "title": "GR 3D Relativity Simulator",
+    "year": 2026,
+    "featured": true,
+    "summary": "일반상대성이론의 Schwarzschild spacetime을 3D game-like simulator로 시각화한 프로젝트. 중심 질량이 black hole에 가까워질수록 light bending, event horizon, photon sphere, gravitational time dilation, coordinate light speed, curved spacetime grid가 어떻게 변하는지 직접 이동하며 확인할 수 있습니다.",
+    "tech": ["Three.js", "WebGL", "JavaScript", "General Relativity", "Simulation", "Physics"],
+    "links": {
+      "github": "https://github.com/gimon0330/gr-3d-relativity-simulator",
+      "overview": "https://gimon0330.github.io/gr-3d-relativity-simulator/"
+    }
+  },
+  {
     "title": "CCDI Internship Platform",
     "year": 2026,
     "featured": true,
