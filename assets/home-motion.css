@@ -1,41 +1,77 @@
 /* Immersive homepage design layer.
-   Goal: roomy full-screen scenes, modern shadow-based cards, and scroll-driven object motion. */
+   Roomy background, compact cards, and scroll-driven object motion. */
 
 :root {
-  --home-bg: #08090d;
-  --home-ink: #f7f1e8;
-  --home-muted: rgba(247, 241, 232, .62);
-  --home-hairline: rgba(255, 255, 255, .08);
-  --home-card: rgba(255, 255, 255, .075);
-  --home-card-strong: rgba(255, 255, 255, .11);
-  --home-shadow: 0 34px 90px rgba(0, 0, 0, .42);
-  --home-shadow-soft: 0 22px 60px rgba(0, 0, 0, .28);
-  --home-sage: #d5e6d5;
-  --home-rose: #f1d1cf;
-  --home-cream: #f6eadb;
+  color-scheme: light dark;
+  --home-bg: Canvas;
+  --home-ink: CanvasText;
+  --home-muted: color-mix(in oklab, CanvasText, transparent 42%);
+  --home-soft-muted: color-mix(in oklab, CanvasText, transparent 62%);
+  --home-card: color-mix(in oklab, Canvas, CanvasText 2%);
+  --home-card-strong: color-mix(in oklab, Canvas, CanvasText 4%);
+  --home-shadow: 0 26px 70px rgba(32, 38, 54, .16);
+  --home-shadow-soft: 0 16px 42px rgba(32, 38, 54, .10);
+  --home-line: color-mix(in oklab, CanvasText, transparent 86%);
+  --home-wash-a: rgba(205, 220, 255, .22);
+  --home-wash-b: rgba(235, 216, 205, .20);
+  --home-wash-c: rgba(218, 232, 218, .22);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --home-bg: Canvas;
+    --home-ink: CanvasText;
+    --home-muted: color-mix(in oklab, CanvasText, transparent 38%);
+    --home-soft-muted: color-mix(in oklab, CanvasText, transparent 62%);
+    --home-card: color-mix(in oklab, Canvas, CanvasText 6%);
+    --home-card-strong: color-mix(in oklab, Canvas, CanvasText 9%);
+    --home-shadow: 0 26px 76px rgba(0, 0, 0, .36);
+    --home-shadow-soft: 0 16px 46px rgba(0, 0, 0, .24);
+    --home-line: color-mix(in oklab, CanvasText, transparent 84%);
+    --home-wash-a: rgba(120, 148, 220, .13);
+    --home-wash-b: rgba(194, 160, 144, .10);
+    --home-wash-c: rgba(150, 190, 160, .10);
+  }
 }
 
 body {
   background:
-    radial-gradient(circle at 18% 12%, rgba(213, 230, 213, .13), transparent 30rem),
-    radial-gradient(circle at 82% 0%, rgba(241, 209, 207, .11), transparent 32rem),
-    linear-gradient(180deg, #08090d 0%, #0d0d12 42%, #08090d 100%) !important;
+    radial-gradient(circle at 18% 14%, var(--home-wash-a), transparent 34rem),
+    radial-gradient(circle at 86% 8%, var(--home-wash-b), transparent 32rem),
+    radial-gradient(circle at 52% 96%, var(--home-wash-c), transparent 40rem),
+    var(--home-bg) !important;
+  color: var(--home-ink) !important;
 }
 
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  pointer-events: none;
   z-index: -1;
-  opacity: .055;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: .018;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
 }
 
 .nav-wrap {
   border-bottom: 0 !important;
-  background: rgba(8, 9, 13, .54) !important;
+  background: color-mix(in oklab, Canvas, transparent 24%) !important;
   box-shadow: none !important;
+}
+
+.links a,
+.brand {
+  color: var(--home-ink) !important;
+}
+
+.links a {
+  opacity: .62;
+}
+
+.links a:hover,
+.links a[aria-current="page"] {
+  opacity: 1;
+  background: color-mix(in oklab, CanvasText, transparent 92%) !important;
 }
 
 .home-main {
@@ -44,24 +80,25 @@ body::before {
 
 .home-main > .hero-full,
 .home-scene {
-  width: min(1180px, calc(100% - 48px));
+  width: min(1440px, calc(100% - clamp(32px, 8vw, 144px)));
   min-height: 100svh;
   margin-inline: auto;
-  padding: clamp(90px, 13svh, 150px) 0;
+  padding: clamp(96px, 14svh, 170px) 0;
   scroll-margin-top: 80px;
 }
 
 .home-main > .hero-full {
   display: grid;
-  grid-template-columns: minmax(0, 1.04fr) minmax(280px, .72fr);
-  gap: clamp(48px, 7vw, 120px);
+  grid-template-columns: minmax(0, .9fr) minmax(220px, 360px);
+  align-items: center;
+  gap: clamp(54px, 10vw, 180px);
 }
 
 .home-scene {
   position: relative;
   display: grid;
   align-items: center;
-  gap: clamp(34px, 5vw, 78px);
+  gap: clamp(34px, 7vw, 90px);
   opacity: var(--scene-opacity, 1);
   transform: translate3d(0, var(--scene-y, 0px), 0) scale(var(--scene-scale, 1));
   transition: opacity .18s linear, transform .18s linear;
@@ -73,25 +110,25 @@ body::before {
   position: absolute;
   pointer-events: none;
   border-radius: 999px;
-  filter: blur(42px);
+  filter: blur(54px);
   transform: translate3d(var(--orb-x, 0px), var(--orb-y, 0px), 0);
   transition: transform .12s linear;
 }
 
 .home-scene::before {
-  width: 28rem;
-  height: 28rem;
-  left: -12rem;
-  top: 18%;
-  background: rgba(213, 230, 213, .10);
+  width: 30rem;
+  height: 30rem;
+  left: -18rem;
+  top: 14%;
+  background: var(--home-wash-a);
 }
 
 .home-scene::after {
-  width: 22rem;
-  height: 22rem;
-  right: -10rem;
-  bottom: 12%;
-  background: rgba(241, 209, 207, .09);
+  width: 24rem;
+  height: 24rem;
+  right: -16rem;
+  bottom: 10%;
+  background: var(--home-wash-b);
 }
 
 .home-scene > * {
@@ -108,51 +145,50 @@ body::before {
   background: none !important;
   -webkit-background-clip: initial !important;
   background-clip: initial !important;
-  font-size: clamp(70px, 14vw, 168px) !important;
+  font-size: clamp(64px, 12vw, 150px) !important;
   line-height: .84 !important;
   letter-spacing: -.095em !important;
   filter: none !important;
 }
 
 .hero-lead {
-  max-width: 760px !important;
+  max-width: 690px !important;
   color: var(--home-muted) !important;
-  font-size: clamp(20px, 2.35vw, 34px) !important;
+  font-size: clamp(20px, 2vw, 30px) !important;
   line-height: 1.58 !important;
   margin-top: 28px;
 }
 
 .eyebrow,
 .section-kicker {
-  color: rgba(247, 241, 232, .54) !important;
+  color: var(--home-soft-muted) !important;
   letter-spacing: .2em !important;
   font-size: 12px !important;
 }
 
 .section-head {
   display: grid !important;
-  grid-template-columns: minmax(0, .88fr) minmax(260px, .45fr);
+  grid-template-columns: minmax(0, .78fr) minmax(260px, .38fr);
   align-items: end !important;
-  gap: clamp(26px, 5vw, 82px) !important;
-  margin-bottom: clamp(30px, 6vw, 82px) !important;
+  gap: clamp(28px, 8vw, 120px) !important;
+  margin-bottom: clamp(28px, 7vw, 96px) !important;
   transform: translate3d(0, var(--scene-head-y, 0px), 0);
   transition: transform .16s linear;
 }
 
 .section-head h2 {
   color: var(--home-ink) !important;
-  font-size: clamp(42px, 7.2vw, 96px) !important;
+  font-size: clamp(42px, 6.6vw, 92px) !important;
   line-height: .98 !important;
   max-width: 820px;
 }
 
 .section-head p {
   color: var(--home-muted) !important;
-  font-size: clamp(16px, 1.45vw, 20px);
+  font-size: clamp(16px, 1.25vw, 19px);
   line-height: 1.82 !important;
 }
 
-/* Designer portfolio style cards: no outline, all depth/material. */
 .card,
 .edu-card,
 .timeline-card,
@@ -168,13 +204,13 @@ body::before {
 .edu-card {
   position: relative !important;
   overflow: hidden !important;
-  border-radius: 38px !important;
+  border-radius: 26px !important;
   background:
-    linear-gradient(180deg, rgba(255,255,255,.125), rgba(255,255,255,.052)),
-    rgba(255,255,255,.054) !important;
-  box-shadow: var(--home-shadow-soft), inset 0 1px 0 rgba(255,255,255,.12) !important;
-  backdrop-filter: blur(26px) saturate(1.22);
-  -webkit-backdrop-filter: blur(26px) saturate(1.22);
+    linear-gradient(180deg, color-mix(in oklab, var(--home-card-strong), white 7%), var(--home-card)),
+    var(--home-card) !important;
+  box-shadow: var(--home-shadow-soft), inset 0 1px 0 color-mix(in oklab, Canvas, CanvasText 5%) !important;
+  backdrop-filter: blur(18px) saturate(1.06);
+  -webkit-backdrop-filter: blur(18px) saturate(1.06);
   transform:
     translate3d(0, var(--card-y, 0px), 0)
     rotateX(var(--card-tilt, 0deg))
@@ -189,10 +225,8 @@ body::before {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 22% 0%, rgba(255,255,255,.14), transparent 34%),
-    radial-gradient(circle at 90% 8%, rgba(213,230,213,.10), transparent 34%);
-  opacity: .9;
+  background: radial-gradient(circle at 20% 0%, color-mix(in oklab, CanvasText, transparent 94%), transparent 34%);
+  opacity: .62;
 }
 
 .card::after,
@@ -202,8 +236,8 @@ body::before {
   inset: 1px;
   border-radius: inherit;
   pointer-events: none;
-  background: linear-gradient(135deg, rgba(255,255,255,.18), transparent 28%, transparent 72%, rgba(255,255,255,.055));
-  opacity: .46;
+  background: linear-gradient(135deg, color-mix(in oklab, Canvas, transparent 86%), transparent 28%, transparent 78%);
+  opacity: .34;
 }
 
 .card > *,
@@ -214,134 +248,121 @@ body::before {
 
 .card:hover,
 .edu-card:hover {
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.066)),
-    rgba(255,255,255,.07) !important;
-  box-shadow: var(--home-shadow), inset 0 1px 0 rgba(255,255,255,.16) !important;
+  box-shadow: var(--home-shadow), inset 0 1px 0 color-mix(in oklab, Canvas, CanvasText 4%) !important;
 }
 
 .card h3,
 .edu-content h3 {
   color: var(--home-ink) !important;
-  font-size: clamp(24px, 2.35vw, 36px) !important;
-  line-height: 1.15 !important;
-  margin-bottom: 18px !important;
+  font-size: clamp(20px, 1.65vw, 27px) !important;
+  line-height: 1.18 !important;
+  margin-bottom: 12px !important;
 }
 
 .card p,
 .edu-content p {
-  color: rgba(247, 241, 232, .64) !important;
-  font-size: 17px;
+  color: var(--home-muted) !important;
+  font-size: 15px;
+  line-height: 1.68 !important;
 }
 
 .pill {
-  color: rgba(247, 241, 232, .72) !important;
-  background: rgba(255,255,255,.075) !important;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.08) !important;
+  color: var(--home-muted) !important;
+  background: color-mix(in oklab, CanvasText, transparent 94%) !important;
+  box-shadow: none !important;
 }
 
 .contact-chip {
-  color: rgba(247,241,232,.88) !important;
-  background: rgba(255,255,255,.07) !important;
-  box-shadow: 0 18px 42px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.10) !important;
+  color: var(--home-ink) !important;
+  background: color-mix(in oklab, CanvasText, transparent 94%) !important;
+  box-shadow: 0 10px 30px rgba(32, 38, 54, .08) !important;
 }
 
 .contact-chip:hover {
-  transform: translateY(-5px) scale(1.01) !important;
-  background: rgba(255,255,255,.11) !important;
+  transform: translateY(-4px) scale(1.01) !important;
+  background: color-mix(in oklab, CanvasText, transparent 90%) !important;
 }
 
 .portrait-frame {
-  background: rgba(255,255,255,.075) !important;
-  box-shadow: 0 38px 110px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  width: min(300px, 70vw) !important;
+  background: color-mix(in oklab, CanvasText, transparent 95%) !important;
+  box-shadow: 0 28px 80px rgba(32, 38, 54, .16) !important;
   transform: translate3d(var(--hero-visual-x, 0px), var(--hero-visual-y, 0px), 0) scale(var(--hero-visual-scale, 1));
 }
 
-/* Education: separate timeline object from content card. */
 .education-timeline {
   display: grid !important;
-  gap: clamp(28px, 5vw, 66px) !important;
-  padding-left: clamp(92px, 11vw, 140px) !important;
+  gap: clamp(22px, 4vw, 42px) !important;
+  padding-left: clamp(84px, 10vw, 126px) !important;
   position: relative !important;
+  max-width: 940px;
 }
 
 .education-timeline::before {
-  left: clamp(36px, 5vw, 58px) !important;
-  top: 52px !important;
-  bottom: 52px !important;
+  left: clamp(34px, 5vw, 54px) !important;
+  top: 34px !important;
+  bottom: 34px !important;
   width: 1px !important;
-  background: linear-gradient(180deg, transparent, rgba(247,241,232,.42), transparent) !important;
+  background: linear-gradient(180deg, transparent, var(--home-line), transparent) !important;
   box-shadow: none !important;
 }
 
 .edu-card {
   display: grid !important;
   grid-template-columns: minmax(0, 1fr) !important;
-  min-height: 260px !important;
-  padding: clamp(34px, 5vw, 58px) !important;
+  min-height: 168px !important;
+  padding: clamp(24px, 3vw, 34px) !important;
   overflow: visible !important;
-}
-
-.edu-card::before {
-  background:
-    radial-gradient(circle at 4% 0%, rgba(246,234,219,.16), transparent 28%),
-    radial-gradient(circle at 100% 0%, rgba(213,230,213,.105), transparent 32%);
-}
-
-.edu-card::after {
-  inset: 0;
 }
 
 .logo-slot {
   position: absolute !important;
-  left: calc(-1 * clamp(92px, 11vw, 140px)) !important;
+  left: calc(-1 * clamp(84px, 10vw, 126px)) !important;
   top: 50% !important;
-  width: clamp(70px, 8vw, 104px) !important;
-  height: clamp(70px, 8vw, 104px) !important;
-  padding: 10px !important;
-  border-radius: 30px !important;
-  background:
-    linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.055)),
-    rgba(255,255,255,.06) !important;
-  box-shadow: 0 24px 64px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.12) !important;
+  width: clamp(58px, 6.6vw, 78px) !important;
+  height: clamp(58px, 6.6vw, 78px) !important;
+  padding: 8px !important;
+  border-radius: 22px !important;
+  background: color-mix(in oklab, CanvasText, transparent 94%) !important;
+  box-shadow: 0 16px 42px rgba(32,38,54,.12) !important;
   transform: translateY(-50%) !important;
 }
 
 .logo-slot::before {
   content: "";
   position: absolute;
-  left: calc(100% + 14px);
+  left: calc(100% + 12px);
   top: 50%;
-  width: clamp(26px, 4vw, 54px);
+  width: clamp(24px, 3.6vw, 48px);
   height: 1px;
-  background: rgba(247,241,232,.34);
+  background: var(--home-line);
 }
 
 .logo-slot img {
   max-width: 94% !important;
   max-height: 94% !important;
-  filter: drop-shadow(0 10px 22px rgba(0,0,0,.30));
+  filter: drop-shadow(0 8px 16px rgba(32,38,54,.18));
 }
 
 .edu-content .eyebrow {
-  color: rgba(247,241,232,.50) !important;
+  color: var(--home-soft-muted) !important;
 }
 
 .edu-content h3 {
-  font-size: clamp(32px, 4vw, 58px) !important;
+  font-size: clamp(26px, 3vw, 40px) !important;
 }
 
 .edu-content p {
-  max-width: 760px !important;
-  font-size: clamp(17px, 1.5vw, 21px) !important;
+  max-width: 680px !important;
+  font-size: clamp(15px, 1.2vw, 17px) !important;
 }
 
 .inline-link,
 .ghost,
 .card-link,
 .icon-link {
-  color: var(--home-cream) !important;
-  opacity: .88;
+  color: var(--home-ink) !important;
+  opacity: .72;
 }
 
 .inline-link:hover,
@@ -351,44 +372,44 @@ body::before {
   opacity: 1;
 }
 
-/* Make achievement and project areas feel like separate screens. */
 .achievement-grid,
 .project-preview-grid {
-  gap: clamp(20px, 3vw, 34px) !important;
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(220px, 292px)) !important;
+  justify-content: center !important;
+  align-items: start !important;
+  gap: clamp(18px, 2.4vw, 30px) !important;
 }
 
 .achievement-card,
-.project-preview-grid .card {
-  min-height: clamp(280px, 35svh, 410px) !important;
-  padding: clamp(28px, 4vw, 44px) !important;
+.project-preview-grid .card,
+#featured-grid .card {
+  grid-column: auto !important;
+  min-height: 220px !important;
+  padding: 22px !important;
 }
 
-.achievement-card:nth-child(1) {
-  margin-top: 34px;
-}
-
-.achievement-card:nth-child(2) {
-  margin-top: 0;
-}
-
-.achievement-card:nth-child(3) {
-  margin-top: 68px;
-}
-
-#featured-grid .card:nth-child(1) {
-  margin-top: 60px;
-}
-
-#featured-grid .card:nth-child(2) {
-  margin-top: 0;
-}
-
+.achievement-card:nth-child(1),
+.achievement-card:nth-child(2),
+.achievement-card:nth-child(3),
+#featured-grid .card:nth-child(1),
+#featured-grid .card:nth-child(2),
 #featured-grid .card:nth-child(3) {
-  margin-top: 36px;
+  margin-top: 0 !important;
+}
+
+.achievement-card:nth-child(1),
+#featured-grid .card:nth-child(1) {
+  transform: translate3d(0, calc(var(--card-y, 0px) + 18px), 0) rotateX(var(--card-tilt, 0deg)) scale(var(--card-scale, 1)) !important;
+}
+
+.achievement-card:nth-child(3),
+#featured-grid .card:nth-child(3) {
+  transform: translate3d(0, calc(var(--card-y, 0px) + 34px), 0) rotateX(var(--card-tilt, 0deg)) scale(var(--card-scale, 1)) !important;
 }
 
 .scroll-indicator {
-  color: rgba(247,241,232,.44) !important;
+  color: var(--home-soft-muted) !important;
 }
 
 .footer {
@@ -416,6 +437,7 @@ body::before {
 
   .education-timeline {
     padding-left: 0 !important;
+    max-width: none;
   }
 
   .education-timeline::before {
@@ -423,16 +445,16 @@ body::before {
   }
 
   .edu-card {
-    padding: 96px 24px 28px !important;
+    padding: 84px 22px 24px !important;
     min-height: auto !important;
   }
 
   .logo-slot {
-    left: 24px !important;
-    top: 26px !important;
-    width: 58px !important;
-    height: 58px !important;
-    border-radius: 20px !important;
+    left: 22px !important;
+    top: 22px !important;
+    width: 54px !important;
+    height: 54px !important;
+    border-radius: 18px !important;
     transform: none !important;
   }
 
@@ -440,12 +462,16 @@ body::before {
     display: none;
   }
 
+  .achievement-grid,
+  .project-preview-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
   .achievement-card,
   .project-preview-grid .card,
   #featured-grid .card {
-    grid-column: span 12 !important;
-    margin-top: 0 !important;
     min-height: auto !important;
+    transform: translate3d(0, var(--card-y, 0px), 0) rotateX(var(--card-tilt, 0deg)) scale(var(--card-scale, 1)) !important;
   }
 }
 
