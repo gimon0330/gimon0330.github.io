@@ -13,6 +13,8 @@
   const BASE = RAW_BASE.replace(/\/$/, "");
   const PROJECTS_URL = withBase("/projects.json");
 
+  injectFontStylesheet();
+
   const CAREER = [
     { date: "2021", type: "Club", title: "부산일과학고등학교 AI동아리 Mathcom 동아리원" },
     { date: "2021", type: "Research", title: "수학 교과 R&E 프로그램", desc: "아핀 암호, 힐 암호 연구 및 해독기 개발" },
@@ -72,6 +74,15 @@
     const value = String(path);
     if (/^(https?:|mailto:|tel:|#)/i.test(value)) return value;
     return `${BASE}/${value.replace(/^\/+/, "")}`;
+  }
+
+  function injectFontStylesheet() {
+    if (document.querySelector('link[data-portfolio-font="pretendard"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = withBase("/assets/font.css");
+    link.dataset.portfolioFont = "pretendard";
+    document.head.prepend(link);
   }
 
   function escapeHTML(value) {
