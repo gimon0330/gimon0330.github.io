@@ -79,7 +79,14 @@
   .achievement-grid,
   .project-preview-grid {
     --home-card-gap: 14px;
-    grid-template-columns: minmax(0, min(100%, 330px)) !important;
+    grid-template-columns: minmax(0, 100%) !important;
+    justify-content: stretch !important;
+  }
+
+  .achievement-card,
+  .project-preview-grid .card,
+  #featured-grid .card {
+    width: 100% !important;
   }
 }
 
@@ -90,6 +97,6 @@
 
   .achievement-grid,
   .project-preview-grid {
-    grid-template-columns: minmax(0, min(100%, 280px)) !important;
+    grid-template-columns: minmax(0, 100%) !important;
   }
 }
