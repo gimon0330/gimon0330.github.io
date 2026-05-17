@@ -24,6 +24,14 @@
     "links": { "github": "https://github.com/gimon0330/omok-ai" }
   },
   {
+    "title": "RTbot",
+    "year": 2021,
+    "featured": false,
+    "summary": "2020년부터 2021년까지 개발한 Discord text-based minigame bot. 1,500개 이상의 server와 4,000명 이상의 user가 사용한 프로젝트로, 많은 사람들이 직접 사용해주고 좋은 피드백을 보내줬을 때 큰 성취감을 느꼈습니다. 단순히 개발 실력뿐 아니라, 사용자를 생각하며 계속 개선하려는 개발자의 마음가짐을 배웠고, 지금까지도 개발을 이어가게 만드는 중요한 원동력이 된 프로젝트입니다.",
+    "tech": ["Discord Bot", "Minigame", "Python", "Community", "Side Project"],
+    "links": { "github": "https://github.com/gimon0330/RTbot" }
+  },
+  {
     "title": "Gesture Smart Speaker",
     "year": 2023,
     "featured": false,
