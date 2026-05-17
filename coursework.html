@@ -9,17 +9,48 @@ layout: null
   <title>Coursework Archive · 안강현</title>
   <meta name="description" content="POSTECH Coursework Archive" />
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/font.css' | relative_url }}" />
   <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
 </head>
 <body>
   <div class="page-transition" aria-hidden="true"></div>
   <header class="nav-wrap"><div class="container nav"><a class="brand" data-transition-link href="{{ '/' | relative_url }}">안강현</a><nav class="links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a><a data-transition-link href="{{ '/projects.html' | relative_url }}">Projects</a><a href="{{ '/coursework.html' | relative_url }}" aria-current="page">Coursework</a><a href="{{ '/posts/' | relative_url }}">Posts</a></nav></div></header>
   <main class="container page-main">
-    <section class="page-hero reveal"><p class="eyebrow">Coursework Archive</p><h1>수강 강의 아카이브</h1><p>POSTECH에서 수강한 강의를 학기별로 정리할 수 있는 페이지입니다. 현재는 placeholder이며, 이후 강의명과 링크를 추가하면 됩니다.</p></section>
+    <section class="page-hero reveal"><p class="eyebrow">Coursework Archive</p><h1>수강 강의 아카이브</h1></section>
     <section class="grid cards coursework-grid">
-      <article class="card reveal"><span class="pill">2024</span><h3>Freshman / Foundation</h3><p>미적분학, 일반물리, 프로그래밍 기초 등 기초 과목을 정리할 공간입니다.</p></article>
-      <article class="card reveal delay-1"><span class="pill">2025</span><h3>Computer Science Core</h3><p>자료구조, 디지털시스템설계, 소프트웨어 설계 등 전공 과목을 정리할 공간입니다.</p></article>
-      <article class="card reveal delay-2"><span class="pill">Archive</span><h3>Lecture Notes</h3><p>기존 <code>/posts/lecture</code> 구조와 연결해 강의 노트 목록을 보여줄 수 있습니다.</p><a class="card-link" href="{{ '/posts/lecture/' | relative_url }}">Lecture Posts 보기 →</a></article>
+      <article class="card reveal">
+        <span class="pill">24-2 · MATH261</span>
+        <h3>이산수학 · 김연진 교수</h3>
+        <p>정수론과 그래프 이론을 중심으로 진행된 이산수학 강의였습니다. 중간고사 이전에는 중국인의 나머지 정리, 정수론적 성질 등 일반적인 이산수학의 초반부 내용을 다루었고, 이후에는 그래프 이론의 비중이 매우 컸습니다.</p>
+        <p>시험 난이도는 전반적으로 쉬운 편이었습니다. 특히 중간고사는 평균이 매우 높게 형성될 정도로 쉽게 출제되었습니다. 다만 Computer Science 전공자의 입장에서 기대했던 Automata, Big-O notation 등 전산수학적 주제들이 거의 다뤄지지 않았다는 점은 아쉬웠습니다.</p>
+        <p>개인적으로는 “이산수학”보다는 “그래프 이론”에 가까운 강의처럼 느껴졌습니다. Computer Science 전공자가 전산수학을 대체하는 목적으로 수강한다면 강의계획서와 실제 수업 범위를 미리 확인하는 것이 좋을 것 같습니다. 반대로 수학적 그래프 이론에 더 관심이 있는 학생에게는 잘 맞을 수 있는 강의라고 생각합니다.</p>
+      </article>
+
+      <article class="card reveal delay-1">
+        <span class="pill">25-1 · CSED342</span>
+        <h3>인공지능 · 유환조 교수</h3>
+        <p>고전적인 Artificial Intelligence부터 modern machine learning의 기초까지 넓게 다루는 강의였습니다. Linear Model, MLP, Decision Tree, A* Search, MDP, Reinforcement Learning, Minimax, TD Learning, CSP, Markov Network, Bayesian Network 등 다양한 주제를 배웠습니다.</p>
+        <p>시험 난이도는 적당한 편이었고, 단순 암기보다는 각 모델의 원리를 이해하고 작은 예제에 직접 적용할 수 있는 능력이 중요했습니다. 개인적으로는 Reinforcement Learning 파트가 가장 어렵게 느껴졌습니다.</p>
+        <p>Stanford 강의 자료를 기반으로 수업이 진행되어 내용의 완성도는 높았습니다. 인공지능의 여러 분야를 넓게 훑고, 이후 어떤 분야를 더 깊게 공부할지 감을 잡기에 좋은 강의였습니다.</p>
+      </article>
+
+      <article class="card reveal delay-2">
+        <span class="pill">25-2 · CSED332</span>
+        <h3>소프트웨어 설계 방법 · 박성우 교수</h3>
+        <p>Scala를 이용한 Functional Programming, Concurrent Programming, 그리고 소프트웨어 설계 관련 독서와 토론으로 구성된 강의였습니다. 수업은 크게 함수형 프로그래밍, 동시성 프로그래밍, 책 읽기 세 부분으로 나뉘며, 최종 프로젝트의 비중이 매우 컸습니다.</p>
+        <p>최종 프로젝트는 Scala와 Concurrent Programming 개념을 활용하는 팀 프로젝트였고, 사실상 이 수업에서 가장 중요한 평가 요소였습니다. AI 도구를 사용할 수는 있지만, 과하게 의존하기보다는 수업 내용을 직접 이해하고 설계에 반영하는 것이 중요하다고 느꼈습니다.</p>
+        <p>로드는 꽤 있는 편이지만, 수업을 잘 따라가고 프로젝트를 성실히 수행하면 개발에 대해 많은 것을 배울 수 있는 강의였습니다. 특히 단순히 코드를 작성하는 것을 넘어, 프로그램 구조와 설계를 고민하는 경험을 할 수 있었습니다.</p>
+      </article>
+
+      <article class="card reveal">
+        <span class="pill">25-2 · CSED341</span>
+        <h3>오토마타 및 형식언어 · 조민수 교수</h3>
+        <p>Automata Theory, Formal Language, Computability를 중심으로 다루는 이론 Computer Science 강의였습니다. 이번 학기에는 깊게 다루지 않았지만, 계산 복잡도 이론으로 이어지는 기초도 함께 배울 수 있었습니다.</p>
+        <p>중간고사 이전에는 Finite Automata와 Regular Language를 배웠습니다. 처음에는 이 내용들이 어디에 쓰이는지 잘 와닿지 않았지만, 후반부의 Turing Machine과 Undecidability를 이해하기 위한 중요한 기반이었다는 점을 나중에 알 수 있었습니다.</p>
+        <p>중간고사 이후에는 Context-Free Language, Pushdown Automata, Turing Machine, Undecidability를 다뤘습니다. CFL과 PDA는 앞부분과 흐름이 비슷해 비교적 따라가기 쉬웠지만, Turing Machine 이후부터는 난이도가 올라갔습니다. 특히 계산 불가능한 언어, Reduction, P-NP와 관련된 사고가 필요하기 때문에 알고리즘적 사고에 익숙하면 이해가 더 수월할 것 같습니다.</p>
+        <p>과제는 제출하지 않지만, due 이후 불시에 퀴즈가 출제되므로 사실상 반드시 풀어야 합니다. 과제 문제의 난이도가 높은 편이고, 퀴즈도 과제 기반으로 나오기 때문에 시간을 넉넉히 잡고 준비하는 것이 좋습니다. 시험은 과제, 강의 자료, 개념 문제를 기반으로 출제되며, 난이도 자체보다 시간 관리가 중요했습니다.</p>
+        <p>개인적으로는 매우 흥미로운 강의였습니다. 컴퓨터가 무엇인지, 계산의 한계가 어디까지인지, 기계가 언어를 어떻게 인식하는지에 대해 생각해볼 수 있었습니다. 이론 Computer Science에 관심이 있거나, 철학적인 질문을 좋아한다면 재미있게 들을 수 있는 강의라고 생각합니다.</p>
+      </article>
     </section>
   </main>
   <footer class="footer"><div class="container foot-flex"><span>© <span id="year"></span> 안강현</span><nav class="foot-links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><span>·</span><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a></nav></div></footer>
