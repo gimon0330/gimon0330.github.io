@@ -16,6 +16,14 @@
     "links": {}
   },
   {
+    "title": "Gesture Smart Speaker",
+    "year": 2023,
+    "featured": false,
+    "summary": "MediaPipe Hands로 21개 hand landmark를 추출하고, logistic regression으로 손 포즈를 분류한 뒤, 손의 이동 방향을 gesture로 해석해 음악 재생·일시정지·곡 이동·음량 조절을 수행하는 smart speaker를 제작한 R&E project. 단순한 모델이라도 실제 hardware, camera, music player와 연결되면 하나의 usable interface가 된다는 점을 배웠고, AI project에서는 model accuracy뿐 아니라 사용 맥락과 interaction design이 중요하다는 것을 느꼈습니다.",
+    "tech": ["MediaPipe Hands", "Logistic Regression", "OpenCV", "Python", "Pygame", "Gesture Recognition", "HCI", "Research"],
+    "links": { "docs": "http://www.rne.or.kr/gnuboard5/bbs/download.php?bo_table=rs_year&wr_id=1094&no=0" }
+  },
+  {
     "title": "Omok AI",
     "year": 2022,
     "featured": true,
@@ -32,11 +40,19 @@
     "links": { "github": "https://github.com/gimon0330/RTbot" }
   },
   {
-    "title": "Gesture Smart Speaker",
-    "year": 2023,
+    "title": "Perfect Tictaktoe",
+    "year": 2021,
     "featured": false,
-    "summary": "MediaPipe Hands로 21개 hand landmark를 추출하고, logistic regression으로 손 포즈를 분류한 뒤, 손의 이동 방향을 gesture로 해석해 음악 재생·일시정지·곡 이동·음량 조절을 수행하는 smart speaker를 제작한 R&E project. 단순한 모델이라도 실제 hardware, camera, music player와 연결되면 하나의 usable interface가 된다는 점을 배웠고, AI project에서는 model accuracy뿐 아니라 사용 맥락과 interaction design이 중요하다는 것을 느꼈습니다.",
-    "tech": ["MediaPipe Hands", "Logistic Regression", "OpenCV", "Python", "Pygame", "Gesture Recognition", "HCI", "Research"],
-    "links": { "docs": "http://www.rne.or.kr/gnuboard5/bbs/download.php?bo_table=rs_year&wr_id=1094&no=0" }
+    "summary": "부산일과학고등학교 제9회 승학과학축전의 주제로 제작한 ‘완벽한 틱택토’ game project. 작은 3x3 판을 3x3으로 배열해, 작은 판의 승리가 다시 큰 판의 승리 조건으로 이어지는 확장형 tic-tac-toe를 구현했습니다. 처음으로 직접 만든 game을 다른 사람들이 플레이하고 좋은 평가를 받았을 때 큰 즐거움과 성취감을 느꼈고, 이후에도 직접 만든 결과물을 사람들에게 보여주고 싶다는 마음을 갖게 해준 프로젝트입니다.",
+    "tech": ["Game", "Tic-tac-toe", "Festival", "Mathcom", "Side Project"],
+    "links": { "github": "https://github.com/MATHCOM-BSIS/perfect-tictaktoe" }
+  },
+  {
+    "title": "Mathcom Web",
+    "year": 2021,
+    "featured": false,
+    "summary": "부산일과학고등학교 수학·정보 융합동아리 Mathcom의 공식 홈페이지를 제작한 web project. 동아리 활동과 프로젝트를 외부에 소개하기 위한 공간을 만들며, 단순히 코드를 작성하는 것을 넘어 팀의 정체성과 활동을 웹으로 정리하고 전달하는 경험을 했습니다.",
+    "tech": ["Web", "HTML", "CSS", "JavaScript", "Mathcom", "Club"],
+    "links": { "github": "https://github.com/MATHCOM-BSIS/mathcom_web" }
   }
 ]
