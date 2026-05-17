@@ -12,7 +12,9 @@ layout: null
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
   <link rel="stylesheet" href="{{ '/assets/font.css' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/home-motion.css' | relative_url }}" />
   <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/home-motion.js' | relative_url }}"></script>
 </head>
 <body>
   <div class="page-transition" aria-hidden="true"></div>
@@ -29,8 +31,8 @@ layout: null
     </div>
   </header>
 
-  <main>
-    <section class="hero hero-full container" id="top">
+  <main class="home-main">
+    <section class="hero hero-full" id="top">
       <div class="hero-bg-orb orb-one"></div>
       <div class="hero-bg-orb orb-two"></div>
       <div class="hero-copy reveal">
@@ -53,11 +55,11 @@ layout: null
       <a class="scroll-indicator" href="#education" aria-label="아래로 스크롤"><span>Scroll</span><span class="arrow-down"></span></a>
     </section>
 
-    <section class="section container" id="education">
+    <section class="section home-scene" id="education">
       <div class="section-kicker reveal">Education</div>
       <div class="section-head reveal">
         <h2>학교와 성장의 흐름</h2>
-        <p>현재는 포트폴리오용 SVG school image를 사용합니다. 공식 로고 파일을 받으면 <code>/assets/logos/bsis.svg</code>, <code>/assets/logos/postech.svg</code>만 교체하면 됩니다.</p>
+        <p>학업과 연구의 흐름을 단순한 목록이 아니라 하나의 장면처럼 볼 수 있도록 넓은 타임라인으로 구성했습니다.</p>
       </div>
       <div class="education-timeline">
         <article class="edu-card reveal">
@@ -71,7 +73,7 @@ layout: null
       </div>
     </section>
 
-    <section class="section container">
+    <section class="section home-scene">
       <div class="section-kicker reveal">Featured Achievements</div>
       <div class="section-head reveal"><h2>대표 활동과 수상</h2><a data-transition-link class="ghost" href="{{ '/career.html' | relative_url }}">View More →</a></div>
       <div class="grid cards achievement-grid">
@@ -81,7 +83,7 @@ layout: null
       </div>
     </section>
 
-    <section class="section container">
+    <section class="section home-scene">
       <div class="section-kicker reveal">Projects Preview</div>
       <div class="section-head reveal"><h2>프로젝트 미리보기</h2><a data-transition-link class="ghost" href="{{ '/projects.html' | relative_url }}">Explore Projects →</a></div>
       <div id="featured-grid" class="grid cards project-preview-grid" role="list"></div>
