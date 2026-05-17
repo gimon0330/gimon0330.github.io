@@ -58,6 +58,7 @@
   ];
 
   document.addEventListener("DOMContentLoaded", boot);
+  window.addEventListener("pageshow", restoreFromBackForwardCache);
 
   function boot() {
     setCurrentYear();
@@ -67,6 +68,26 @@
     if (document.getElementById("featured-grid")) renderFeaturedProjects();
     if (document.getElementById("projects-grid")) renderAllProjects();
     if (document.getElementById("career-timeline")) renderCareerTimeline();
+  }
+
+  function restoreFromBackForwardCache() {
+    const layer = document.querySelector(".page-transition");
+    if (layer) layer.classList.remove("is-active");
+
+    document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
+
+    document.querySelectorAll(".home-scene, .hero-full").forEach((scene) => {
+      scene.style.setProperty("--scene-opacity", "1");
+      scene.style.setProperty("--scene-scale", "1");
+      scene.style.setProperty("--scene-y", "0px");
+    });
+
+    document.querySelectorAll(".card, .edu-card").forEach((card) => {
+      card.style.setProperty("--card-opacity", "1");
+      card.style.setProperty("--card-y", "0px");
+      card.style.setProperty("--card-scale", "1");
+      card.style.setProperty("--card-tilt", "0deg");
+    });
   }
 
   function withBase(path) {
