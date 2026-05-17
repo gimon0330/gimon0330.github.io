@@ -1,3 +1,6 @@
+---
+layout: null
+---
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,47 +8,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Projects · 안강현</title>
   <meta name="description" content="안강현의 프로젝트 모음" />
-  <link rel="stylesheet" href="/assets/site.css" />
-  <script defer src="/assets/main.js"></script>
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
 </head>
 <body>
-  <!-- 상단바 -->
-  <header class="nav-wrap">
-    <div class="container nav">
-      <a class="brand" href="/">안강현</a>
-      <nav class="links" aria-label="주요 메뉴">
-        <a href="/">Main</a>
-        <a href="/projects.html" aria-current="page">Projects</a>
-        <a href="/posts/">Posts</a>
-        <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="section">
-      <div class="section-head">
-        <h1 style="margin:0">프로젝트 전체</h1>
-        <a class="ghost" href="/" aria-label="메인으로">메인 ←</a>
-      </div>
-
-      <div id="projects-grid" class="grid cards" role="list"></div>
-      <p id="projects-fallback" class="muted" hidden>
-        <code>projects.json</code>을 아직 못 찾았어요. 루트에 파일을 추가해 주세요.
-      </p>
-      <noscript class="muted">자바스크립트를 켜면 프로젝트 목록이 표시됩니다.</noscript>
-    </section>
+  <div class="page-transition" aria-hidden="true"></div>
+  <header class="nav-wrap"><div class="container nav"><a class="brand" data-transition-link href="{{ '/' | relative_url }}">안강현</a><nav class="links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a><a href="{{ '/projects.html' | relative_url }}" aria-current="page">Projects</a><a data-transition-link href="{{ '/coursework.html' | relative_url }}">Coursework</a><a href="{{ '/posts/' | relative_url }}">Posts</a></nav></div></header>
+  <main class="container page-main">
+    <section class="page-hero reveal"><p class="eyebrow">Projects</p><h1>프로젝트 전체</h1><p>태그, 설명, 외부 링크를 중심으로 정리한 프로젝트 아카이브입니다. 이후 Notion 또는 markdown 기반 데이터로 확장할 수 있습니다.</p></section>
+    <div id="project-filter" class="term-filter reveal" aria-label="프로젝트 태그 필터"></div>
+    <div id="projects-grid" class="grid cards" role="list"></div>
+    <p id="projects-fallback" class="muted" hidden><code>projects.json</code>을 아직 못 찾았습니다.</p>
   </main>
-
-  <footer class="footer">
-    <div class="container foot-flex">
-      <span>© <span id="year"></span> 안강현</span>
-      <nav class="foot-links" aria-label="바닥글">
-        <a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a>
-        <span>·</span><a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a>
-        <span>·</span><a href="mailto:gimon0331@postech.ac.kr">Email</a>
-      </nav>
-    </div>
-  </footer>
+  <footer class="footer"><div class="container foot-flex"><span>© <span id="year"></span> 안강현</span><nav class="foot-links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><span>·</span><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a></nav></div></footer>
 </body>
 </html>

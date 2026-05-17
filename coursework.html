@@ -1,0 +1,27 @@
+---
+layout: null
+---
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Coursework Archive · 안강현</title>
+  <meta name="description" content="POSTECH Coursework Archive" />
+  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
+  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
+</head>
+<body>
+  <div class="page-transition" aria-hidden="true"></div>
+  <header class="nav-wrap"><div class="container nav"><a class="brand" data-transition-link href="{{ '/' | relative_url }}">안강현</a><nav class="links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a><a data-transition-link href="{{ '/projects.html' | relative_url }}">Projects</a><a href="{{ '/coursework.html' | relative_url }}" aria-current="page">Coursework</a><a href="{{ '/posts/' | relative_url }}">Posts</a></nav></div></header>
+  <main class="container page-main">
+    <section class="page-hero reveal"><p class="eyebrow">Coursework Archive</p><h1>수강 강의 아카이브</h1><p>POSTECH에서 수강한 강의를 학기별로 정리할 수 있는 페이지입니다. 현재는 placeholder이며, 이후 강의명과 링크를 추가하면 됩니다.</p></section>
+    <section class="grid cards coursework-grid">
+      <article class="card reveal"><span class="pill">2024</span><h3>Freshman / Foundation</h3><p>미적분학, 일반물리, 프로그래밍 기초 등 기초 과목을 정리할 공간입니다.</p></article>
+      <article class="card reveal delay-1"><span class="pill">2025</span><h3>Computer Science Core</h3><p>자료구조, 디지털시스템설계, 소프트웨어 설계 등 전공 과목을 정리할 공간입니다.</p></article>
+      <article class="card reveal delay-2"><span class="pill">Archive</span><h3>Lecture Notes</h3><p>기존 <code>/posts/lecture</code> 구조와 연결해 강의 노트 목록을 보여줄 수 있습니다.</p><a class="card-link" href="{{ '/posts/lecture/' | relative_url }}">Lecture Posts 보기 →</a></article>
+    </section>
+  </main>
+  <footer class="footer"><div class="container foot-flex"><span>© <span id="year"></span> 안강현</span><nav class="foot-links"><a data-transition-link href="{{ '/' | relative_url }}">Main</a><span>·</span><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a></nav></div></footer>
+</body>
+</html>

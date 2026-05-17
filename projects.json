@@ -1,23 +1,34 @@
 [
   {
-    "title": "임베딩 기반 이미지 검색 API",
-    "year": 2024,
+    "title": "CCDI Internship Platform",
+    "year": 2026,
     "featured": true,
-    "summary": "벡터DB(Milvus)와 임베딩으로 유사 이미지/키워드 검색 API 구축.",
-    "tech": ["Python", "FastAPI", "Milvus", "Docker"],
-    "links": {
-      "github": "https://github.com/your-id/img-search",
-      "docs": "https://example.com/docs/img-search"
-    }
+    "summary": "외국인 유학생 표준현장실습학기제 신청과 관리자 심사를 위한 full-stack platform.",
+    "tech": ["Next.js", "NestJS", "Supabase", "Prisma", "Vercel"],
+    "links": { "overview": "https://ccdi.kr" }
   },
   {
-    "title": "RL 에이전트 실험",
-    "year": 2025,
+    "title": "YOLO V5 Road Hazard Detection",
+    "year": 2024,
     "featured": true,
-    "summary": "멀티에이전트 환경에서 전략 탐색과 보상 설계 실험. ELO로 성능 추정.",
-    "tech": ["Python", "PyTorch", "RL", "Numpy"],
-    "links": {
-      "github": "https://github.com/your-id/rl-agents"
-    }
+    "summary": "YOLO V5를 이용해 도로 위협 요소를 감지하는 computer vision project.",
+    "tech": ["Python", "YOLOv5", "Computer Vision", "Deep Learning"],
+    "links": {}
+  },
+  {
+    "title": "Omok AI",
+    "year": 2022,
+    "featured": true,
+    "summary": "BSIS IT Festival 출전작. 오목 게임 AI를 구현한 프로젝트.",
+    "tech": ["Python", "AI", "Game"],
+    "links": { "github": "https://github.com/gimon0330/omok-ai" }
+  },
+  {
+    "title": "Gesture Smart Speaker",
+    "year": 2023,
+    "featured": false,
+    "summary": "손 포즈 및 제스처 인식을 이용해 지능형 스피커 인터페이스를 개발한 연구 프로젝트.",
+    "tech": ["CNN", "Mediapipe", "Python", "Research"],
+    "links": { "docs": "http://www.rne.or.kr/gnuboard5/bbs/download.php?bo_table=rs_year&wr_id=1094&no=0" }
   }
 ]
