@@ -171,10 +171,6 @@
     const summary = escapeHTML(project.summary || "");
     const link = escapeHTML(getProjectLink(project));
     const image = escapeHTML(getProjectImage(project));
-    const tags = (project.tech || [])
-      .slice(0, 6)
-      .map((tag) => `<span class="pill">${escapeHTML(tag)}</span>`)
-      .join("");
 
     const links = [
       project.links?.github ? `<a class="icon-link" href="${escapeHTML(project.links.github)}" target="_blank" rel="noopener">GitHub →</a>` : "",
@@ -188,7 +184,6 @@
         <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
         <img class="thumb" src="${image}" alt="${title} 썸네일" loading="lazy" onerror="this.style.display='none'">
         <p>${summary}</p>
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">${tags}</div>
         ${links ? `<div class="timeline-links">${links}</div>` : ""}
       </article>`;
   }
@@ -216,39 +211,12 @@
   async function renderAllProjects() {
     const grid = document.getElementById("projects-grid");
     const fallback = document.getElementById("projects-fallback");
-    const filter = document.getElementById("project-filter");
     if (!grid) return;
 
     try {
       const projects = (await getProjects()).sort(sortByRecentYear);
       if (!projects.length) throw new Error("No projects");
-
-      const draw = (tag = "ALL") => {
-        const target = tag === "ALL"
-          ? projects
-          : projects.filter((project) => (project.tech || []).includes(tag));
-        grid.innerHTML = target.map((project) => projectCardHTML(project, 4)).join("");
-      };
-
-      if (filter) {
-        const tags = Array.from(new Set(projects.flatMap((project) => project.tech || []))).sort((a, b) =>
-          String(a).localeCompare(String(b), "ko")
-        );
-
-        filter.innerHTML = [
-          `<button type="button" class="chip is-active" data-tag="ALL">ALL</button>`,
-          ...tags.map((tag) => `<button type="button" class="chip" data-tag="${escapeHTML(tag)}">${escapeHTML(tag)}</button>`),
-        ].join("");
-
-        filter.addEventListener("click", (event) => {
-          const button = event.target.closest(".chip");
-          if (!button) return;
-          filter.querySelectorAll(".chip").forEach((chip) => chip.classList.toggle("is-active", chip === button));
-          draw(button.dataset.tag || "ALL");
-        });
-      }
-
-      draw();
+      grid.innerHTML = projects.map((project) => projectCardHTML(project, 4)).join("");
     } catch (error) {
       console.warn("[portfolio] projects failed:", error);
       if (fallback) fallback.hidden = false;
