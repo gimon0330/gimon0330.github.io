@@ -1,5 +1,5 @@
 /* Homepage alignment refinements.
-   Keeps the current horizontal breathing room, but tightens vertical rhythm and centers each section's content rail. */
+   Keeps the current content rail position, but tightens spacing between inner components. */
 
 .home-scene {
   gap: 0 !important;
@@ -16,15 +16,16 @@
 }
 
 .home-scene > .section-kicker {
-  margin-bottom: 10px !important;
+  margin-bottom: 4px !important;
 }
 
 .home-scene > .section-head {
-  margin-bottom: clamp(26px, 4.2vw, 54px) !important;
+  margin-bottom: clamp(18px, 2.8vw, 36px) !important;
 }
 
 .section-head {
   align-items: center !important;
+  column-gap: clamp(18px, 4vw, 56px) !important;
 }
 
 .section-head h2 {
@@ -38,6 +39,10 @@
 
 .achievement-grid,
 .project-preview-grid {
+  --home-card-gap: clamp(12px, 1.8vw, 20px);
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, calc((100% - (var(--home-card-gap) * 2)) / 3))) !important;
+  gap: var(--home-card-gap) !important;
   justify-content: center !important;
   margin-top: 0 !important;
 }
@@ -46,6 +51,8 @@
 .project-preview-grid .card,
 #featured-grid .card {
   align-self: start !important;
+  width: 100% !important;
+  padding: 18px !important;
 }
 
 @media (max-width: 980px) {
@@ -58,14 +65,31 @@
   }
 
   .home-scene > .section-kicker {
-    margin-bottom: 8px !important;
+    margin-bottom: 4px !important;
   }
 
   .home-scene > .section-head {
-    margin-bottom: 24px !important;
+    margin-bottom: 18px !important;
   }
 
   .section-head .ghost {
     justify-self: start;
+  }
+
+  .achievement-grid,
+  .project-preview-grid {
+    --home-card-gap: 14px;
+    grid-template-columns: minmax(0, min(100%, 330px)) !important;
+  }
+}
+
+@media (max-width: 520px) {
+  .home-scene > .section-head {
+    margin-bottom: 16px !important;
+  }
+
+  .achievement-grid,
+  .project-preview-grid {
+    grid-template-columns: minmax(0, min(100%, 280px)) !important;
   }
 }
