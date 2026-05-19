@@ -3,6 +3,7 @@
     "title": "GR 3D Relativity Simulator",
     "year": 2026,
     "featured": true,
+    "image": "/assets/projects/gr-3d-relativity-simulator.jpg",
     "summary": "일반상대성이론의 Schwarzschild spacetime을 3D game-like simulator로 시각화한 프로젝트. 중심 질량이 black hole에 가까워질수록 light bending, event horizon, photon sphere, gravitational time dilation, coordinate light speed, curved spacetime grid가 어떻게 변하는지 직접 이동하며 확인할 수 있습니다.",
     "links": {
       "github": "https://github.com/gimon0330/gr-3d-relativity-simulator",
@@ -20,6 +21,7 @@
     "title": "YOLO V5 Road Hazard Detection",
     "year": 2024,
     "featured": true,
+    "image": "/assets/projects/yolo-v5-road-hazard-detection.jpg",
     "summary": "YOLO V5를 이용해 도로 위협 요소를 감지하는 computer vision project.",
     "links": {}
   },
