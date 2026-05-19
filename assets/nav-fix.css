@@ -1,10 +1,16 @@
-/* Shared navigation alignment fixes for sub pages. */
+/* Shared navigation UI for pages with the top navigation bar. */
+.nav-wrap {
+  min-height: 0;
+}
+
 .nav-wrap .nav {
-  min-height: 72px;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  min-height: 56px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 16px;
 }
 
 .nav-wrap .brand,
@@ -12,48 +18,80 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 40px;
+  min-height: 32px;
   line-height: 1;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: -0.01em;
 }
 
 .nav-wrap .brand {
   padding: 0;
   margin: 0;
-  font-size: 22px;
-  transform: none;
+  color: var(--text);
 }
 
 .nav-wrap .links {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 18px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
 }
 
 .nav-wrap .links a {
-  padding: 0 14px;
+  position: relative;
+  padding: 0 0 6px;
+  border-radius: 0;
+  color: var(--muted);
+  background: transparent !important;
+  transition: color .2s ease;
+}
+
+.nav-wrap .links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: auto;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .24s ease;
+}
+
+.nav-wrap .links a:hover,
+.nav-wrap .links a:focus-visible,
+.nav-wrap .links a[aria-current="page"] {
+  color: var(--text);
+}
+
+.nav-wrap .links a:hover::after,
+.nav-wrap .links a:focus-visible::after,
+.nav-wrap .links a[aria-current="page"]::after {
+  transform: scaleX(1);
 }
 
 @media (max-width: 880px) {
   .nav-wrap .nav {
-    min-height: 88px;
-    padding-top: 18px;
-    padding-bottom: 18px;
+    min-height: 64px;
+    padding-top: 12px;
+    padding-bottom: 12px;
     align-items: center !important;
   }
 
-  .nav-wrap .brand {
-    min-height: 44px;
-    font-size: 24px;
+  .nav-wrap .brand,
+  .nav-wrap .links a {
+    min-height: 32px;
+    font-size: 14px;
   }
 
   .nav-wrap .links {
     align-items: center;
-    gap: 10px;
-  }
-
-  .nav-wrap .links a {
-    min-height: 44px;
-    padding: 0 14px;
+    gap: 18px;
   }
 }
 
@@ -63,11 +101,10 @@
   }
 
   .nav-wrap .links {
-    gap: 4px;
+    gap: 12px;
   }
 
   .nav-wrap .links a {
-    padding: 0 9px;
     font-size: 13px;
   }
 }
