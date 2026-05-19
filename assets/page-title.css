@@ -1,3 +1,7 @@
+.page-hero {
+  --page-title-gutter: max(24px, calc((100vw - var(--container)) / 2 + 24px));
+}
+
 .page-hero h1 {
   position: relative;
   display: inline-block;
@@ -7,11 +11,12 @@
 .page-hero h1::after {
   content: "";
   display: block;
-  width: min(100%, 520px);
+  width: calc(100vw - (2 * var(--page-title-gutter)));
+  max-width: none;
   height: 4px;
   margin-top: 14px;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(255,255,255,.98), rgba(255,255,255,.78), rgba(255,255,255,.18));
+  background: linear-gradient(90deg, rgba(255,255,255,.98), rgba(255,255,255,.82), rgba(255,255,255,.36));
   box-shadow: 0 0 18px rgba(255,255,255,.20);
 }
 
@@ -20,8 +25,11 @@
 }
 
 @media (max-width: 880px) {
+  .page-hero {
+    --page-title-gutter: max(18px, calc((100vw - var(--container)) / 2 + 18px));
+  }
+
   .page-hero h1::after {
-    width: min(100%, 360px);
     height: 3px;
     margin-top: 10px;
   }
