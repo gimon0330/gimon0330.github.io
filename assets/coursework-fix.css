@@ -1,0 +1,25 @@
+.coursework-grid {
+  align-items: start;
+}
+
+.coursework-grid .card {
+  grid-column: 1 / -1;
+  max-width: 920px;
+  width: 100%;
+}
+
+.coursework-grid .card h3 {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.coursework-grid .card p {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+@media (min-width: 1100px) {
+  .coursework-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
