@@ -6,17 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{ page.title | default: site.title }}</title>
   <meta name="description" content="{{ page.excerpt | strip_html | strip_newlines | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/nav-fix.css?v=20260519-nav3' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/link-icons.css?v=20260519-nav3' | relative_url }}" />
+  <script defer src="{{ '/assets/link-icons.js?v=20260519-nav3' | relative_url }}"></script>
   <style>
     :root { --bg:#0b0c10; --card:#121319; --muted:#9aa1ac; --text:#e6e9ef; --accent:#4f7cff; --accent-2:#8a7dff; --border:#232836; --shadow:rgba(0,0,0,0.25); }
     @media (prefers-color-scheme: light){ :root{ --bg:#fff; --card:#f7f8fa; --muted:#5a6472; --text:#0b1220; --accent:#3056ff; --accent-2:#6a5cff; --border:#e6e8ee; --shadow:rgba(0,0,0,0.08);} }
     *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",sans-serif}
     a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
     .container{max-width:1100px;margin:0 auto;padding:24px}
-    header{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
-    .nav{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:12px 0}
-    .brand{font-weight:700;color:var(--text)}
-    .links a{padding:8px 10px;border-radius:8px;color:var(--text)}
-    .links a:hover{background:var(--card);text-decoration:none}
+    header.nav-wrap{position:sticky;top:0;z-index:10;backdrop-filter:blur(8px);background:color-mix(in sRGB,var(--bg),transparent 25%);border-bottom:1px solid var(--border)}
     .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;border:1px solid var(--border);background:linear-gradient(180deg,color-mix(in sRGB,var(--card),white 4%),var(--card));color:var(--text);box-shadow:0 2px 8px var(--shadow)}
     .grid{display:grid;gap:16px;grid-template-columns:repeat(12,1fr)}
     .col-6{grid-column:span 6} .col-4{grid-column:span 4} .col-8{grid-column:span 8} .col-12{grid-column:span 12}
@@ -30,13 +29,13 @@
   </style>
 </head>
 <body>
-  <header>
+  <header class="nav-wrap">
     <div class="container nav">
       <a class="brand" href="{{ '/' | relative_url }}">안강현</a>
       <nav class="links">
         <a href="{{ '/' | relative_url }}">Main</a>
-        <a href="{{ '/projects/' | relative_url }}">Projects</a>
-        <a href="{{ '/posts/' | relative_url }}">Posts</a>
+        <a href="{{ '/projects.html' | relative_url }}">Projects</a>
+        <a href="{{ '/posts/' | relative_url }}" aria-current="page">Posts</a>
         <a href="https://github.com/gimon0330" target="_blank" rel="noopener">GitHub</a>
       </nav>
     </div>
