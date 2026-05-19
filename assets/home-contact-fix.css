@@ -1,0 +1,43 @@
+.contact-grid {
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.contact-chip {
+  gap: 7px;
+  padding: 8px 11px;
+  font-size: 14px;
+  line-height: 1.1;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+.contact-icon {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 880px) {
+  .contact-grid {
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .contact-chip {
+    width: fit-content;
+    max-width: 100%;
+    padding: 7px 10px;
+    font-size: 13px;
+  }
+
+  .contact-icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-chip {
+    font-size: 12.5px;
+    padding: 6px 9px;
+  }
+}
