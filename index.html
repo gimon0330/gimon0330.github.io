@@ -10,14 +10,15 @@ layout: null
   <meta name="description" content="Portfolio" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="{{ '/assets/site.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/font.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/home-motion.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/home-alignment.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/home-hover-fix.css' | relative_url }}" />
-  <link rel="stylesheet" href="{{ '/assets/education-card-fix.css' | relative_url }}" />
-  <script defer src="{{ '/assets/main.js' | relative_url }}"></script>
-  <script defer src="{{ '/assets/home-motion.js' | relative_url }}"></script>
+  <link rel="stylesheet" href="{{ '/assets/site.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/font.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/link-icons.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/home-motion.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/home-alignment.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/home-hover-fix.css?v=20260519-clean1' | relative_url }}" />
+  <link rel="stylesheet" href="{{ '/assets/education-card-fix.css?v=20260519-clean1' | relative_url }}" />
+  <script defer src="{{ '/assets/main.js?v=20260519-clean1' | relative_url }}"></script>
+  <script defer src="{{ '/assets/home-motion.js?v=20260519-clean1' | relative_url }}"></script>
 </head>
 <body>
   <div class="page-transition" aria-hidden="true"></div>
@@ -79,12 +80,12 @@ layout: null
 
     <section class="section home-scene">
       <div class="section-kicker reveal">Projects</div>
-      <div class="section-head reveal"><h2>프로젝트</h2><a data-transition-link class="ghost" href="{{ '/projects.html' | relative_url }}">Explore Projects →</a></div>
-      <div id="featured-grid" class="grid cards project-preview-grid" role="list"></div>
-      <p id="featured-fallback" class="muted" hidden><code>projects.json</code>을 아직 불러오지 못했습니다.</p>
+      <div class="section-head reveal"><h2>대표 프로젝트</h2><a data-transition-link class="ghost" href="{{ '/projects.html' | relative_url }}">All Projects →</a></div>
+      <div id="featured-grid" class="grid cards project-preview-grid" data-limit="3" role="list"></div>
+      <p id="featured-fallback" class="muted" hidden>프로젝트 데이터를 불러오지 못했습니다.</p>
     </section>
   </main>
 
-  <footer class="footer"><div class="container foot-flex"><span>© <span id="year"></span> 안강현</span><nav class="foot-links" aria-label="바닥글"><a href="https://gimon0330.github.io" target="_blank" rel="noopener">Website</a><span>·</span><a href="https://instagram.com/gimon0303" target="_blank" rel="noopener">Instagram</a><span>·</span><a href="mailto:gimon0331@postech.ac.kr">Email</a></nav></div></footer>
+  <footer class="footer"><div class="container foot-flex"><span>© <span id="year"></span> 안강현</span><nav class="foot-links"><a href="#top">Top</a><span>·</span><a data-transition-link href="{{ '/career.html' | relative_url }}">Career</a><span>·</span><a data-transition-link href="{{ '/projects.html' | relative_url }}">Projects</a></nav></div></footer>
 </body>
 </html>
