@@ -14,6 +14,7 @@
   const PROJECTS_URL = withBase("/projects.json");
 
   injectFontStylesheet();
+  window.__portfolioProjectImageFallback = projectImageFallback;
 
   const CAREER = [
     { date: "2021", type: "Club", title: "부산일과학고등학교 AI동아리 Mathcom 동아리원" },
@@ -140,8 +141,42 @@
   }
 
   const getProjectLink = (project) => project?.links?.overview || project?.links?.github || project?.links?.docs || "#";
-  const getProjectImage = (project) => project?.image ? withBase(project.image) : withBase(`/src/projects/${encodeURIComponent(project?.title || "project")}.jpg`);
   const sortByRecentYear = (a, b) => (Number(b.year) || 0) - (Number(a.year) || 0) || String(a.title || "").localeCompare(String(b.title || ""), "ko");
+
+  function slugifyProjectTitle(title) {
+    return String(title || "project")
+      .trim()
+      .toLowerCase()
+      .normalize("NFKD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/&/g, " and ")
+      .replace(/[^a-z0-9가-힣]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "project";
+  }
+
+  function getProjectImageCandidates(project) {
+    if (project?.image) return [withBase(project.image)];
+    const slug = slugifyProjectTitle(project?.title);
+    return ["webp", "jpg", "png", "jpeg"].map((ext) => withBase(`/assets/projects/${slug}.${ext}`));
+  }
+
+  function projectImageFallback(img) {
+    let candidates = [];
+    try { candidates = JSON.parse(img.dataset.fallbackSrcs || "[]"); } catch (_) { candidates = []; }
+    const next = candidates.shift();
+    if (!next) {
+      img.style.display = "none";
+      img.removeAttribute("src");
+      return;
+    }
+    img.dataset.fallbackSrcs = JSON.stringify(candidates);
+    img.src = next;
+  }
+
+  function projectLinkIcon(key) {
+    const icons = { github: "GitHub", docs: "Docs", overview: "Link" };
+    return icons[key] || "Link";
+  }
 
   async function getProjects() {
     const data = await fetchJSON(PROJECTS_URL);
@@ -153,17 +188,23 @@
     const year = escapeHTML(project.year || "");
     const summary = escapeHTML(project.summary || "");
     const link = escapeHTML(getProjectLink(project));
-    const image = escapeHTML(getProjectImage(project));
-    const links = [
-      project.links?.github ? `<a class="icon-link" href="${escapeHTML(project.links.github)}" target="_blank" rel="noopener">GitHub →</a>` : "",
-      project.links?.docs ? `<a class="icon-link" href="${escapeHTML(project.links.docs)}" target="_blank" rel="noopener">Docs →</a>` : "",
-      project.links?.overview ? `<a class="icon-link" href="${escapeHTML(project.links.overview)}" target="_blank" rel="noopener">Overview →</a>` : "",
-    ].join("");
+    const imageCandidates = getProjectImageCandidates(project);
+    const image = escapeHTML(imageCandidates[0]);
+    const fallbackSrcs = escapeHTML(JSON.stringify(imageCandidates.slice(1)));
+    const linkEntries = [
+      ["github", "GitHub", project.links?.github],
+      ["docs", "Docs", project.links?.docs],
+      ["overview", "Overview", project.links?.overview],
+    ];
+    const links = linkEntries
+      .filter(([, , url]) => url)
+      .map(([key, label, url]) => `<a class="icon-link" href="${escapeHTML(url)}" target="_blank" rel="noopener">${projectLinkIcon(key)} · ${label} →</a>`)
+      .join("");
     return `
       <article class="card reveal is-visible" role="listitem" style="grid-column:span ${Number(span) || 4}">
         <span class="pill">${year}${project.featured ? " · Featured" : ""}</span>
         <h3><a href="${link}" target="_blank" rel="noopener">${title}</a></h3>
-        <img class="thumb" src="${image}" alt="${title} 썸네일" loading="lazy" onerror="this.style.display='none'">
+        <img class="thumb" src="${image}" data-fallback-srcs="${fallbackSrcs}" alt="${title} 썸네일" loading="lazy" onerror="window.__portfolioProjectImageFallback && window.__portfolioProjectImageFallback(this)">
         <p>${summary}</p>
         ${links ? `<div class="timeline-links">${links}</div>` : ""}
       </article>`;
