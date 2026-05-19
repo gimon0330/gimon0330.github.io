@@ -1,0 +1,73 @@
+/* Shared navigation alignment fixes for sub pages. */
+.nav-wrap .nav {
+  min-height: 72px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  display: flex;
+  align-items: center;
+}
+
+.nav-wrap .brand,
+.nav-wrap .links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  line-height: 1;
+}
+
+.nav-wrap .brand {
+  padding: 0;
+  margin: 0;
+  font-size: 22px;
+  transform: none;
+}
+
+.nav-wrap .links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-wrap .links a {
+  padding: 0 14px;
+}
+
+@media (max-width: 880px) {
+  .nav-wrap .nav {
+    min-height: 88px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    align-items: center !important;
+  }
+
+  .nav-wrap .brand {
+    min-height: 44px;
+    font-size: 24px;
+  }
+
+  .nav-wrap .links {
+    align-items: center;
+    gap: 10px;
+  }
+
+  .nav-wrap .links a {
+    min-height: 44px;
+    padding: 0 14px;
+  }
+}
+
+@media (max-width: 520px) {
+  .nav-wrap .nav {
+    gap: 10px;
+  }
+
+  .nav-wrap .links {
+    gap: 4px;
+  }
+
+  .nav-wrap .links a {
+    padding: 0 9px;
+    font-size: 13px;
+  }
+}
