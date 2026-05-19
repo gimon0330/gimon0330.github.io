@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">YOLO V5 Road Hazard Detection placeholder</title>
+  <desc id="desc">A bright road scene with a computer-vision bounding box detecting a road crack.</desc>
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0797ff"/><stop offset="0.58" stop-color="#78d7ff"/><stop offset="1" stop-color="#e7f8ff"/></linearGradient>
+    <linearGradient id="road" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d949d"/><stop offset="0.52" stop-color="#59616c"/><stop offset="1" stop-color="#222936"/></linearGradient>
+    <linearGradient id="panel" x1="0" x2="1"><stop offset="0" stop-color="#06152c"/><stop offset="1" stop-color="#072c5f" stop-opacity="0.45"/></linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#sky)"/>
+  <circle cx="226" cy="136" r="58" fill="#fff" opacity="0.75"/><ellipse cx="330" cy="150" rx="150" ry="38" fill="#fff" opacity="0.42"/><ellipse cx="1230" cy="116" rx="180" ry="44" fill="#fff" opacity="0.35"/>
+  <g fill="#123c2e"><path d="M0 375 C210 302 326 368 510 302 C700 235 922 330 1118 265 C1312 202 1456 282 1600 248 L1600 620 L0 620 Z"/><path d="M0 430 C230 346 450 422 610 350 C800 266 958 376 1180 304 C1358 246 1490 308 1600 286 L1600 662 L0 662 Z" fill="#0d2f25"/></g>
+  <rect x="0" y="480" width="1600" height="420" fill="url(#road)"/>
+  <path d="M734 900 L823 480" stroke="#f8fafc" stroke-width="17" stroke-dasharray="72 76" opacity="0.9"/><path d="M438 900 L565 500" stroke="#f8fafc" stroke-width="12" stroke-dasharray="58 64" opacity="0.78"/><path d="M1102 900 L1010 500" stroke="#f8fafc" stroke-width="11" stroke-dasharray="52 60" opacity="0.68"/>
+  <g transform="translate(0 22)"><rect x="92" y="446" width="118" height="58" rx="16" fill="#f8fafc"/><rect x="248" y="430" width="142" height="72" rx="18" fill="#111827"/><rect x="1182" y="420" width="170" height="88" rx="19" fill="#111827"/><rect x="1360" y="466" width="190" height="78" rx="20" fill="#e2e8f0"/><circle cx="122" cy="504" r="16" fill="#111827"/><circle cx="182" cy="504" r="16" fill="#111827"/><circle cx="284" cy="504" r="17" fill="#0f172a"/><circle cx="356" cy="504" r="17" fill="#0f172a"/><circle cx="1218" cy="510" r="19" fill="#020617"/><circle cx="1320" cy="510" r="19" fill="#020617"/><circle cx="1406" cy="548" r="20" fill="#020617"/><circle cx="1512" cy="548" r="20" fill="#020617"/></g>
+  <g stroke="#172554" stroke-width="4" opacity="0.3"><path d="M60 0 L560 900"/><path d="M0 120 L500 900"/><path d="M0 260 L430 900"/></g>
+  <path d="M0 0 L470 0 L315 900 L0 900 Z" fill="url(#panel)" opacity="0.86"/>
+  <g transform="translate(95 220)" opacity="0.68" stroke="#38bdf8" fill="none"><circle cx="80" cy="80" r="68" fill="#020617" opacity="0.78"/><ellipse cx="80" cy="80" rx="155" ry="46"/><ellipse cx="80" cy="80" rx="200" ry="60" transform="rotate(-22 80 80)"/><circle cx="205" cy="116" r="8" fill="#f472b6" stroke="none"/><circle cx="250" cy="83" r="8" fill="#fbbf24" stroke="none"/><circle cx="160" cy="132" r="8" fill="#e0f2fe" stroke="none"/></g>
+  <g filter="url(#glow)"><rect x="832" y="506" width="216" height="322" rx="12" fill="#0ea5e9" opacity="0.09" stroke="#38bdf8" stroke-width="8"/><rect x="838" y="454" width="204" height="54" rx="12" fill="#0b84ff"/><text x="860" y="490" font-family="Inter, Pretendard, Arial, sans-serif" font-size="28" font-weight="800" fill="white">CRACK: 99%</text></g>
+  <path d="M936 520 C918 570 958 606 932 654 C902 706 946 750 926 820" fill="none" stroke="#1e293b" stroke-width="6" stroke-linecap="round"/><path d="M946 528 C924 582 964 610 942 660 C918 712 952 752 936 818" fill="none" stroke="#38bdf8" stroke-width="2" opacity="0.7"/>
+  <rect x="0" y="642" width="1600" height="258" fill="#020617" opacity="0.68"/>
+  <text x="78" y="762" font-family="Inter, Pretendard, Arial, sans-serif" font-size="88" font-weight="900" fill="#38bdf8">YOLO <tspan fill="#fff">V5</tspan></text>
+  <text x="82" y="835" font-family="Inter, Pretendard, Arial, sans-serif" font-size="54" font-weight="760" fill="#f8fafc">Road Hazard Detection</text>
+  <rect x="82" y="866" width="210" height="8" rx="4" fill="#38bdf8"/><rect x="300" y="866" width="130" height="8" rx="4" fill="#38bdf8" opacity="0.22"/>
+</svg>
