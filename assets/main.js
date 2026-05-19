@@ -20,21 +20,9 @@
     { date: "2021", type: "Research", title: "수학 교과 R&E 프로그램", desc: "아핀 암호, 힐 암호 연구 및 해독기 개발" },
     { date: "2022", type: "Leadership", title: "부산일과학고등학교 AI동아리 Mathcom 동아리장" },
     { date: "2022", type: "Research", title: "정보 교과 R&E 프로그램", desc: "CNN 및 Mediapipe를 이용한 동작 감지 연구" },
-    {
-      date: "2022.12.21",
-      type: "Project",
-      title: "BSIS IT Festival 출전",
-      desc: "오목 AI",
-      links: [{ label: "GitHub", url: "https://github.com/gimon0330/omok-ai", icon: "GitHub" }],
-    },
+    { date: "2022.12.21", type: "Project", title: "BSIS IT Festival 출전", desc: "오목 AI", links: [{ label: "GitHub", url: "https://github.com/gimon0330/omok-ai", icon: "GitHub" }] },
     { date: "2023.6.8 ~ 2023.6.9", type: "Award", title: "부산과학전람회 동상", desc: "손 포즈 및 제스처의 인식을 이용한 지능형 스피커의 개발" },
-    {
-      date: "2023.7.6 ~ 2023.7.8",
-      type: "Activity",
-      title: "독도의용수비대 활동",
-      desc: "Zep Platform 게임 개발",
-      links: [{ label: "YouTube", url: "https://youtu.be/iEmnS4XCC1A?feature=shared", icon: "YouTube" }],
-    },
+    { date: "2023.7.6 ~ 2023.7.8", type: "Activity", title: "독도의용수비대 활동", desc: "Zep Platform 게임 개발", links: [{ label: "YouTube", url: "https://youtu.be/iEmnS4XCC1A?feature=shared", icon: "YouTube" }] },
     { date: "2023.7.10 ~ 2023.7.13", type: "Award", title: "BSIS AIoT Hack 2023 장려상" },
     { date: "2023.7.17 ~ 2023.7.21", type: "Award", title: "유니스트 슈퍼컴퓨팅 청소년캠프 대상" },
     { date: "2024", type: "Campus", title: "포항공과대학교 해맞이한마당 준비위원회 기획 3팀원" },
@@ -64,7 +52,6 @@
     setCurrentYear();
     setupReveal();
     setupPageTransitions();
-
     if (document.getElementById("featured-grid")) renderFeaturedProjects();
     if (document.getElementById("projects-grid")) renderAllProjects();
     if (document.getElementById("career-timeline")) renderCareerTimeline();
@@ -73,15 +60,12 @@
   function restoreFromBackForwardCache() {
     const layer = document.querySelector(".page-transition");
     if (layer) layer.classList.remove("is-active");
-
     document.querySelectorAll(".reveal").forEach((el) => el.classList.add("is-visible"));
-
     document.querySelectorAll(".home-scene, .hero-full").forEach((scene) => {
       scene.style.setProperty("--scene-opacity", "1");
       scene.style.setProperty("--scene-scale", "1");
       scene.style.setProperty("--scene-y", "0px");
     });
-
     document.querySelectorAll(".card, .edu-card").forEach((card) => {
       card.style.setProperty("--card-opacity", "1");
       card.style.setProperty("--card-y", "0px");
@@ -93,7 +77,7 @@
   function withBase(path) {
     if (!path) return "#";
     const value = String(path);
-    if (/^(https?:|mailto:|tel:|#)/i.test(value)) return value;
+    if (/^(https?:|mailto:|tel:|#|data:|blob:)/i.test(value)) return value;
     return `${BASE}/${value.replace(/^\/+/, "")}`;
   }
 
@@ -107,12 +91,7 @@
   }
 
   function escapeHTML(value) {
-    return String(value ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+    return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;").replaceAll("'", "&#039;");
   }
 
   function setCurrentYear() {
@@ -129,57 +108,40 @@
   function setupReveal() {
     const els = Array.from(document.querySelectorAll(".reveal"));
     if (!els.length) return;
-
     if (!("IntersectionObserver" in window)) {
       els.forEach((el) => el.classList.add("is-visible"));
       return;
     }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      { threshold: 0.14 }
-    );
-
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
+      });
+    }, { threshold: 0.14 });
     els.forEach((el) => observer.observe(el));
   }
 
   function setupPageTransitions() {
     const layer = document.querySelector(".page-transition");
     if (!layer) return;
-
     document.querySelectorAll("a[data-transition-link]").forEach((anchor) => {
       if (anchor.dataset.transitionBound === "true") return;
       anchor.dataset.transitionBound = "true";
-
       anchor.addEventListener("click", (event) => {
         const href = anchor.getAttribute("href");
         const target = anchor.getAttribute("target");
         if (!href || href.startsWith("#") || target === "_blank") return;
-
         event.preventDefault();
         layer.classList.add("is-active");
-        window.setTimeout(() => {
-          window.location.href = href;
-        }, 220);
+        window.setTimeout(() => { window.location.href = href; }, 220);
       });
     });
   }
 
-  const getProjectLink = (project) =>
-    project?.links?.overview || project?.links?.github || project?.links?.docs || "#";
-
-  const getProjectImage = (project) =>
-    project?.image ? withBase(project.image) : withBase(`/src/projects/${encodeURIComponent(project?.title || "project")}.jpg`);
-
-  const sortByRecentYear = (a, b) =>
-    (Number(b.year) || 0) - (Number(a.year) || 0) ||
-    String(a.title || "").localeCompare(String(b.title || ""), "ko");
+  const getProjectLink = (project) => project?.links?.overview || project?.links?.github || project?.links?.docs || "#";
+  const getProjectImage = (project) => project?.image ? withBase(project.image) : withBase(`/src/projects/${encodeURIComponent(project?.title || "project")}.jpg`);
+  const sortByRecentYear = (a, b) => (Number(b.year) || 0) - (Number(a.year) || 0) || String(a.title || "").localeCompare(String(b.title || ""), "ko");
 
   async function getProjects() {
     const data = await fetchJSON(PROJECTS_URL);
@@ -192,13 +154,11 @@
     const summary = escapeHTML(project.summary || "");
     const link = escapeHTML(getProjectLink(project));
     const image = escapeHTML(getProjectImage(project));
-
     const links = [
       project.links?.github ? `<a class="icon-link" href="${escapeHTML(project.links.github)}" target="_blank" rel="noopener">GitHub →</a>` : "",
       project.links?.docs ? `<a class="icon-link" href="${escapeHTML(project.links.docs)}" target="_blank" rel="noopener">Docs →</a>` : "",
       project.links?.overview ? `<a class="icon-link" href="${escapeHTML(project.links.overview)}" target="_blank" rel="noopener">Overview →</a>` : "",
     ].join("");
-
     return `
       <article class="card reveal is-visible" role="listitem" style="grid-column:span ${Number(span) || 4}">
         <span class="pill">${year}${project.featured ? " · Featured" : ""}</span>
@@ -213,14 +173,9 @@
     const grid = document.getElementById("featured-grid");
     const fallback = document.getElementById("featured-fallback");
     if (!grid) return;
-
     try {
       const limit = Number(grid.dataset.limit || 3);
-      const projects = (await getProjects())
-        .filter((project) => project.featured)
-        .sort(sortByRecentYear)
-        .slice(0, limit);
-
+      const projects = (await getProjects()).filter((project) => project.featured).sort(sortByRecentYear).slice(0, limit);
       if (!projects.length) throw new Error("No featured projects");
       grid.innerHTML = projects.map((project) => projectCardHTML(project, 4)).join("");
     } catch (error) {
@@ -233,7 +188,6 @@
     const grid = document.getElementById("projects-grid");
     const fallback = document.getElementById("projects-fallback");
     if (!grid) return;
-
     try {
       const projects = (await getProjects()).sort(sortByRecentYear);
       if (!projects.length) throw new Error("No projects");
@@ -247,24 +201,17 @@
   function renderCareerTimeline() {
     const root = document.getElementById("career-timeline");
     if (!root) return;
-
     root.innerHTML = CAREER.map((item) => {
-      const links = (item.links || [])
-        .map((link) => {
-          const label = escapeHTML(link.label || "Link");
-          const icon = escapeHTML(link.icon || "Link");
-          const href = escapeHTML(link.url || "#");
-          return `<a class="icon-link" href="${href}" target="_blank" rel="noopener">${icon} · ${label} →</a>`;
-        })
-        .join("");
-
+      const links = (item.links || []).map((link) => {
+        const label = escapeHTML(link.label || "Link");
+        const icon = escapeHTML(link.icon || "Link");
+        const href = escapeHTML(link.url || "#");
+        return `<a class="icon-link" href="${href}" target="_blank" rel="noopener">${icon} · ${label} →</a>`;
+      }).join("");
       return `
         <article class="timeline-item reveal is-visible">
           <div class="timeline-card">
-            <div class="timeline-meta">
-              <span class="pill">${escapeHTML(item.date)}</span>
-              <span class="pill">${item.icon === "Shield" ? "🛡️ " : ""}${escapeHTML(item.type)}</span>
-            </div>
+            <div class="timeline-meta"><span class="pill">${escapeHTML(item.date)}</span><span class="pill">${item.icon === "Shield" ? "🛡️ " : ""}${escapeHTML(item.type)}</span></div>
             <h3>${escapeHTML(item.title)}</h3>
             ${item.desc ? `<p>${escapeHTML(item.desc)}</p>` : ""}
             ${links ? `<div class="timeline-links">${links}</div>` : ""}
