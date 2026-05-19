@@ -59,6 +59,13 @@
     "links": { "github": "https://github.com/MATHCOM-BSIS/perfect-tictaktoe" }
   },
   {
+    "title": "BSIS Space",
+    "year": 2022,
+    "featured": false,
+    "summary": "부산일과학고등학교 학생들이 자유롭게 소통할 수 있도록 제작한 React 기반 school community web project. Google login과 Firebase Firestore를 이용해 게시글 작성·조회 기능을 구현했고, React Router로 글쓰기, 시간표, 급식 페이지를 분리했습니다. NEIS Open API를 활용해 학년·반별 시간표와 당일 급식 정보를 불러오며, 실제 학교생활에 필요한 정보를 하나의 작은 web app으로 묶어본 프로젝트입니다.",
+    "links": { "github": "https://github.com/MATHCOM-BSIS/bsis-space" }
+  },
+  {
     "title": "Mathcom Web",
     "year": 2021,
     "featured": false,
