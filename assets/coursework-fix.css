@@ -8,6 +8,13 @@
   width: 100%;
 }
 
+.coursework-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
 .coursework-grid .card h3 {
   word-break: keep-all;
   overflow-wrap: anywhere;
