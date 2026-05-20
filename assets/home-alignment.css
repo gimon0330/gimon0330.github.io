@@ -55,6 +55,16 @@
   padding: 18px !important;
 }
 
+.achievement-thumb {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  border-radius: 16px;
+  margin: 14px 0;
+  background: color-mix(in oklab, CanvasText, transparent 94%);
+}
+
 /*
    home-motion.css applies nth-child transforms to create a staggered card layout:
    the first card is pushed down 10px and the third card is pushed down 18px.
