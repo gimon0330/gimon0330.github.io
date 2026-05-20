@@ -1,5 +1,15 @@
 [
   {
+    "title": "Personal Portfolio",
+    "year": 2026,
+    "featured": false,
+    "summary": "개인 소개, 학력, 활동, 프로젝트를 정리한 responsive portfolio website.",
+    "links": {
+      "github": "https://github.com/gimon0330/gimon0330.github.io",
+      "overview": "https://gimon0330.github.io/"
+    }
+  },
+  {
     "title": "GR 3D Relativity Simulator",
     "year": 2026,
     "featured": true,
