@@ -37,6 +37,7 @@
     "title": "Parallel Computing Ray Tracing",
     "year": 2023,
     "featured": false,
+    "image": "/assets/achievements/unist-supercomputing.png",
     "summary": "Python 기반 ray tracing을 parallel computing으로 구현한 프로젝트. UNIST·KISTI 청소년 슈퍼컴퓨팅 캠프 대상 수상작입니다.",
     "links": { "github": "https://github.com/gimon0330/Parallel-Computing-Ray-Tracing" }
   },
