@@ -147,7 +147,7 @@ body::before {
   background-clip: initial !important;
   font-size: clamp(64px, 12vw, 150px) !important;
   line-height: .84 !important;
-  letter-spacing: -.095em !important;
+  letter-spacing: -.025em !important;
   filter: none !important;
 }
 
