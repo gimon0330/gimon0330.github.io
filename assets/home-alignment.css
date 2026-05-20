@@ -55,6 +55,22 @@
   padding: 18px !important;
 }
 
+/*
+   home-motion.css applies nth-child transforms to create a staggered card layout:
+   the first card is pushed down 10px and the third card is pushed down 18px.
+   On the single-column mobile layout, those offsets make only the middle card look
+   raised. This later-loaded file normalizes the visible homepage card groups so
+   all three cards share the same baseline while preserving scroll-driven motion.
+*/
+.achievement-card:nth-child(1),
+.achievement-card:nth-child(2),
+.achievement-card:nth-child(3),
+#featured-grid .card:nth-child(1),
+#featured-grid .card:nth-child(2),
+#featured-grid .card:nth-child(3) {
+  transform: translate3d(0, var(--card-y, 0px), 0) rotateX(var(--card-tilt, 0deg)) scale(var(--card-scale, 1)) !important;
+}
+
 @media (max-width: 980px) {
   .home-scene > .section-kicker,
   .home-scene > .section-head,
