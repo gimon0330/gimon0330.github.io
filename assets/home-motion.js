@@ -21,25 +21,27 @@
       const enter = clamp((vh - rect.top) / (vh + rect.height), 0, 1);
       const signed = clamp(distance, -1.4, 1.4);
 
-      scene.style.setProperty("--scene-opacity", String(lerp(.34, 1, progress).toFixed(3)));
-      scene.style.setProperty("--scene-scale", String(lerp(.955, 1, progress).toFixed(3)));
-      scene.style.setProperty("--scene-y", `${(signed * -34).toFixed(1)}px`);
-      scene.style.setProperty("--scene-head-y", `${((1 - progress) * 42).toFixed(1)}px`);
-      scene.style.setProperty("--orb-x", `${(signed * 42).toFixed(1)}px`);
-      scene.style.setProperty("--orb-y", `${(signed * -64).toFixed(1)}px`);
-      scene.style.setProperty("--hero-visual-y", `${(signed * -42).toFixed(1)}px`);
-      scene.style.setProperty("--hero-visual-x", `${(signed * 18).toFixed(1)}px`);
-      scene.style.setProperty("--hero-visual-scale", String(lerp(.96, 1.02, progress).toFixed(3)));
+      // Keep sections visually stable while preserving a light parallax feel.
+      // Large opacity/translate changes on mobile caused cards to shimmer while scrolling.
+      scene.style.setProperty("--scene-opacity", "1");
+      scene.style.setProperty("--scene-scale", String(lerp(.985, 1, progress).toFixed(3)));
+      scene.style.setProperty("--scene-y", `${(signed * -12).toFixed(1)}px`);
+      scene.style.setProperty("--scene-head-y", `${((1 - progress) * 14).toFixed(1)}px`);
+      scene.style.setProperty("--orb-x", `${(signed * 18).toFixed(1)}px`);
+      scene.style.setProperty("--orb-y", `${(signed * -24).toFixed(1)}px`);
+      scene.style.setProperty("--hero-visual-y", `${(signed * -18).toFixed(1)}px`);
+      scene.style.setProperty("--hero-visual-x", `${(signed * 8).toFixed(1)}px`);
+      scene.style.setProperty("--hero-visual-scale", String(lerp(.985, 1.005, progress).toFixed(3)));
 
       const cards = Array.from(scene.querySelectorAll(".card, .edu-card"));
       cards.forEach((card, index) => {
-        const stagger = index * .095;
-        const local = clamp((enter - stagger) / .48, 0, 1);
+        const stagger = index * .055;
+        const local = clamp((enter - stagger) / .42, 0, 1);
         const eased = 1 - Math.pow(1 - local, 3);
-        card.style.setProperty("--card-opacity", String(lerp(.18, 1, eased).toFixed(3)));
-        card.style.setProperty("--card-y", `${lerp(80, 0, eased).toFixed(1)}px`);
-        card.style.setProperty("--card-scale", String(lerp(.94, 1, eased).toFixed(3)));
-        card.style.setProperty("--card-tilt", `${lerp(7, 0, eased).toFixed(2)}deg`);
+        card.style.setProperty("--card-opacity", "1");
+        card.style.setProperty("--card-y", `${lerp(18, 0, eased).toFixed(1)}px`);
+        card.style.setProperty("--card-scale", String(lerp(.985, 1, eased).toFixed(3)));
+        card.style.setProperty("--card-tilt", `${lerp(1.4, 0, eased).toFixed(2)}deg`);
       });
     }
 
