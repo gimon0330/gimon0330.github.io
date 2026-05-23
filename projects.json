@@ -27,6 +27,13 @@
     "links": { "overview": "https://ccdi.kr" }
   },
   {
+    "title": "AIRA",
+    "year": 2026,
+    "featured": true,
+    "summary": "Riot API를 이용해 League of Legends 전적을 조회하는 Discord bot. discord.py 기반 slash command와 Cog 구조를 사용해 Riot ID 기반 소환사 정보, Solo/Flex rank, 최근 5경기 요약, champion, KDA, CS, vision score를 확인할 수 있도록 구현했습니다.",
+    "links": { "github": "https://github.com/gimon0330/AIRA" }
+  },
+  {
     "title": "YOLO V5 Road Hazard Detection",
     "year": 2024,
     "featured": true,
