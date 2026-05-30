@@ -66,6 +66,29 @@
 }
 
 /*
+   The Achievements section has only three direct grid rows:
+   kicker, heading, cards. With the full-height homepage scene layout,
+   the browser can stretch those rows and create a large vertical gap.
+   Pack only this section's rows so its spacing matches Education/Projects.
+*/
+.achievements-scene {
+  align-content: start !important;
+  row-gap: 0 !important;
+}
+
+.achievements-scene > .section-kicker {
+  margin-bottom: 4px !important;
+}
+
+.achievements-scene > .section-head {
+  margin-bottom: clamp(18px, 2.8vw, 34px) !important;
+}
+
+.achievements-scene > .achievement-grid {
+  margin-top: 0 !important;
+}
+
+/*
    home-motion.css applies nth-child transforms to create a staggered card layout:
    the first card is pushed down 10px and the third card is pushed down 18px.
    On the single-column mobile layout, those offsets make only the middle card look
