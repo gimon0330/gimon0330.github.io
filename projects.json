@@ -10,6 +10,16 @@
     }
   },
   {
+    "title": "Paperplane Flight",
+    "year": 2026,
+    "featured": true,
+    "summary": "Three.js로 구현한 browser-based 3D paper plane flight game. 모바일과 데스크톱에서 조작할 수 있으며, launch angle, limited boost, side boundary wall, moving UFO/plane obstacles, Firebase Firestore leaderboard를 포함합니다.",
+    "links": {
+      "github": "https://github.com/gimon0330/paperplane",
+      "overview": "https://gimon0330.github.io/paperplane/"
+    }
+  },
+  {
     "title": "GR 3D Relativity Simulator",
     "year": 2026,
     "featured": true,
