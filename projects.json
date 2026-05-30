@@ -63,7 +63,7 @@
     "year": 2023,
     "featured": false,
     "summary": "MediaPipe Hands로 21개 hand landmark를 추출하고, logistic regression으로 손 포즈를 분류한 뒤, 손의 이동 방향을 gesture로 해석해 음악 재생·일시정지·곡 이동·음량 조절을 수행하는 smart speaker를 제작한 R&E project. 단순한 모델이라도 실제 hardware, camera, music player와 연결되면 하나의 usable interface가 된다는 점을 배웠고, AI project에서는 model accuracy뿐 아니라 사용 맥락과 interaction design이 중요하다는 것을 느꼈습니다.",
-    "links": { "docs": "http://www.rne.or.kr/gnuboard5/bbs/download.php?bo_table=rs_year&wr_id=1094&no=0" }
+    "links": { "docs": "https://drive.google.com/file/d/1Tkl1uWKZOFN1d8RS_lDQxMp9HHREoNc6/view?usp=sharing" }
   },
   {
     "title": "Omok AI",
