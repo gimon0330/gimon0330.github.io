@@ -3,11 +3,26 @@
    Mobile keeps the current vertical timeline feeling, but inserts year dividers. */
 
 :root {
-  --career-line: color-mix(in oklab, CanvasText, transparent 82%);
-  --career-line-soft: color-mix(in oklab, CanvasText, transparent 90%);
-  --career-muted: color-mix(in oklab, CanvasText, transparent 42%);
-  --career-soft-muted: color-mix(in oklab, CanvasText, transparent 58%);
+  --career-line: color-mix(in oklab, var(--text, CanvasText), transparent 74%);
+  --career-line-soft: color-mix(in oklab, var(--text, CanvasText), transparent 84%);
+  --career-muted: color-mix(in oklab, var(--text, CanvasText), transparent 30%);
+  --career-soft-muted: color-mix(in oklab, var(--text, CanvasText), transparent 40%);
+  --career-title: color-mix(in oklab, var(--text, CanvasText), transparent 5%);
+  --career-year-bg: color-mix(in oklab, var(--card, Canvas), white 7%);
+  --career-year-text: color-mix(in oklab, var(--text, CanvasText), transparent 12%);
   --career-accent: var(--accent3, #48d6ff);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --career-line: rgba(238, 242, 255, .24);
+    --career-line-soft: rgba(238, 242, 255, .16);
+    --career-muted: rgba(238, 242, 255, .68);
+    --career-soft-muted: rgba(238, 242, 255, .52);
+    --career-title: rgba(248, 250, 255, .94);
+    --career-year-bg: rgba(248, 250, 255, .92);
+    --career-year-text: rgba(12, 16, 28, .88);
+  }
 }
 
 .page-main {
@@ -80,15 +95,15 @@
   min-width: 58px;
   min-height: 34px;
   padding: 0 12px;
-  border: 1px solid var(--career-line);
+  border: 1px solid color-mix(in oklab, var(--career-year-bg), black 14%);
   border-radius: 999px;
-  background: color-mix(in oklab, Canvas, CanvasText 3%);
-  color: color-mix(in oklab, CanvasText, transparent 22%);
+  background: var(--career-year-bg);
+  color: var(--career-year-text);
   font-family: var(--font-body, inherit);
   font-size: 13px;
   font-weight: 850;
   letter-spacing: .12em;
-  box-shadow: 0 10px 26px rgba(32, 38, 54, .08);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
 }
 
 .timeline-item {
@@ -183,17 +198,17 @@
 }
 
 .timeline-type {
-  color: color-mix(in oklab, CanvasText, transparent 34%) !important;
+  color: var(--career-muted) !important;
 }
 
 .timeline-card h3 {
   margin: 0 0 10px !important;
-  color: var(--text, CanvasText) !important;
+  color: var(--career-title) !important;
   font-family: var(--font-display, inherit) !important;
-  font-size: clamp(21px, 2.1vw, 31px) !important;
+  font-size: clamp(19px, 1.82vw, 28px) !important;
   font-weight: 700 !important;
   letter-spacing: -.04em !important;
-  line-height: 1.22 !important;
+  line-height: 1.24 !important;
 }
 
 .timeline-card p {
@@ -211,8 +226,8 @@
 }
 
 .timeline-links .icon-link {
-  color: color-mix(in oklab, CanvasText, transparent 22%) !important;
-  opacity: .82 !important;
+  color: var(--career-title) !important;
+  opacity: .78 !important;
 }
 
 .timeline-links .icon-link:hover {
@@ -261,7 +276,6 @@
     min-width: 64px;
     min-height: 30px;
     font-size: 12px;
-    background: color-mix(in oklab, Canvas, CanvasText 5%);
   }
 
   .timeline-item {
@@ -300,7 +314,7 @@
   }
 
   .timeline-card h3 {
-    font-size: clamp(23px, 6vw, 31px) !important;
+    font-size: clamp(21px, 5.45vw, 28px) !important;
   }
 }
 
