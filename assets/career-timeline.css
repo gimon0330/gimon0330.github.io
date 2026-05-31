@@ -8,7 +8,7 @@
   --career-muted: color-mix(in oklab, var(--text, CanvasText), transparent 30%);
   --career-soft-muted: color-mix(in oklab, var(--text, CanvasText), transparent 40%);
   --career-title: color-mix(in oklab, var(--text, CanvasText), transparent 5%);
-  --career-year-text: color-mix(in oklab, var(--text, CanvasText), transparent 30%);
+  --career-year-text: color-mix(in oklab, var(--text, CanvasText), transparent 22%);
   --career-accent: var(--accent3, #48d6ff);
 }
 
@@ -19,7 +19,7 @@
     --career-muted: rgba(238, 242, 255, .68);
     --career-soft-muted: rgba(238, 242, 255, .52);
     --career-title: rgba(248, 250, 255, .94);
-    --career-year-text: rgba(248, 250, 255, .66);
+    --career-year-text: rgba(248, 250, 255, .74);
   }
 }
 
@@ -60,9 +60,8 @@
   position: relative;
   z-index: 2;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) var(--timeline-rail) minmax(0, 1fr);
   align-items: center;
-  gap: clamp(14px, 3vw, 34px);
   margin: clamp(42px, 7vw, 78px) 0 clamp(18px, 2.6vw, 32px);
 }
 
@@ -72,17 +71,7 @@
 
 .timeline-year::before,
 .timeline-year::after {
-  content: "";
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--career-line-soft), transparent);
-}
-
-.timeline-year::before {
-  grid-column: 1;
-}
-
-.timeline-year::after {
-  grid-column: 3;
+  display: none !important;
 }
 
 .timeline-year span {
@@ -91,15 +80,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0 clamp(6px, 1vw, 14px);
+  padding: 0;
   border: 0;
   border-radius: 0;
-  background: var(--bg, Canvas);
+  background: transparent;
   color: var(--career-year-text);
   font-family: var(--font-body, inherit);
-  font-size: clamp(15px, 1.35vw, 20px);
+  font-size: clamp(18px, 1.65vw, 24px);
   font-weight: 780;
-  letter-spacing: .24em;
+  letter-spacing: .28em;
   line-height: 1;
   box-shadow: none;
 }
@@ -273,33 +262,22 @@
 
   .timeline-year {
     grid-template-columns: var(--timeline-rail) minmax(0, 1fr) !important;
-    grid-template-rows: auto 1px !important;
-    gap: 9px 0 !important;
-    margin: 36px 0 14px !important;
+    margin: 40px 0 18px !important;
     align-items: end !important;
   }
 
-  .timeline-year::before {
-    display: none !important;
-  }
-
+  .timeline-year::before,
   .timeline-year::after {
-    display: block !important;
-    grid-column: 2 !important;
-    grid-row: 2 !important;
-    height: 1px !important;
-    width: 100% !important;
-    background: linear-gradient(90deg, var(--career-line-soft), transparent) !important;
+    display: none !important;
   }
 
   .timeline-year span {
     grid-column: 2 !important;
-    grid-row: 1 !important;
     justify-self: start !important;
     padding: 0 !important;
     background: transparent !important;
-    font-size: 15px !important;
-    letter-spacing: .22em !important;
+    font-size: 19px !important;
+    letter-spacing: .25em !important;
   }
 
   .timeline-item {
