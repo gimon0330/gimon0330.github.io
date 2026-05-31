@@ -201,9 +201,87 @@
         indexInYear += 1;
         return `${yearDivider}${itemHTML}`;
       }).join("");
+      setupCareerTimelineLayout(root);
     } catch (error) {
       console.warn("[portfolio] career timeline failed:", error);
     }
+  }
+
+  function setupCareerTimelineLayout(root) {
+    if (root.dataset.layoutReady === "true") {
+      scheduleCareerTimelineLayout(root);
+      return;
+    }
+    root.dataset.layoutReady = "true";
+    let resizeTimer = 0;
+    const schedule = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => scheduleCareerTimelineLayout(root), 40);
+    };
+    window.addEventListener("resize", schedule, { passive: true });
+    window.addEventListener("load", schedule, { once: true });
+    document.fonts?.ready?.then(schedule).catch(() => {});
+    schedule();
+  }
+
+  function scheduleCareerTimelineLayout(root) {
+    window.requestAnimationFrame(() => layoutCareerTimeline(root));
+  }
+
+  function layoutCareerTimeline(root) {
+    const isDesktop = window.matchMedia("(min-width: 821px)").matches;
+    const children = [...root.children];
+
+    root.classList.remove("is-laid-out");
+    root.style.height = "";
+    children.forEach((el) => { el.style.top = ""; });
+
+    if (!isDesktop || !children.length) return;
+
+    const yearGapBefore = 74;
+    const yearGapAfter = 44;
+    const itemGap = 58;
+    const staggerGap = 92;
+    const bottomPad = 100;
+    let leftBottom = 0;
+    let rightBottom = 0;
+    let maxBottom = 0;
+    let yearCount = 0;
+    let previousTop = { left: null, right: null };
+
+    children.forEach((el) => {
+      if (el.classList.contains("timeline-year")) {
+        const top = yearCount === 0 ? 0 : Math.max(leftBottom, rightBottom) + yearGapBefore;
+        el.style.top = `${Math.round(top)}px`;
+        const height = el.getBoundingClientRect().height;
+        const nextStart = top + height + yearGapAfter;
+        leftBottom = nextStart;
+        rightBottom = nextStart;
+        maxBottom = Math.max(maxBottom, nextStart);
+        previousTop = { left: null, right: null };
+        yearCount += 1;
+        return;
+      }
+
+      if (!el.classList.contains("timeline-item")) return;
+
+      const side = el.classList.contains("is-right") ? "right" : "left";
+      const opposite = side === "right" ? "left" : "right";
+      const currentBottom = side === "right" ? rightBottom : leftBottom;
+      const oppositeStaggerTop = previousTop[opposite] == null ? currentBottom : previousTop[opposite] + staggerGap;
+      const top = Math.max(currentBottom, oppositeStaggerTop);
+      el.style.top = `${Math.round(top)}px`;
+
+      const height = el.getBoundingClientRect().height;
+      const bottom = top + height + itemGap;
+      if (side === "right") rightBottom = bottom;
+      else leftBottom = bottom;
+      previousTop[side] = top;
+      maxBottom = Math.max(maxBottom, bottom);
+    });
+
+    root.classList.add("is-laid-out");
+    root.style.height = `${Math.ceil(maxBottom + bottomPad)}px`;
   }
 
   function getCareerYear(date) {
