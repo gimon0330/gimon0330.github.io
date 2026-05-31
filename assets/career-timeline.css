@@ -272,9 +272,11 @@
   }
 
   .timeline-year {
-    grid-template-columns: auto minmax(0, 1fr) !important;
-    gap: 14px !important;
-    margin: 38px 0 14px !important;
+    grid-template-columns: var(--timeline-rail) minmax(0, 1fr) !important;
+    grid-template-rows: auto 1px !important;
+    gap: 9px 0 !important;
+    margin: 36px 0 14px !important;
+    align-items: end !important;
   }
 
   .timeline-year::before {
@@ -284,16 +286,20 @@
   .timeline-year::after {
     display: block !important;
     grid-column: 2 !important;
+    grid-row: 2 !important;
+    height: 1px !important;
+    width: 100% !important;
     background: linear-gradient(90deg, var(--career-line-soft), transparent) !important;
   }
 
   .timeline-year span {
-    grid-column: 1 !important;
+    grid-column: 2 !important;
+    grid-row: 1 !important;
     justify-self: start !important;
     padding: 0 !important;
     background: transparent !important;
     font-size: 15px !important;
-    letter-spacing: .2em !important;
+    letter-spacing: .22em !important;
   }
 
   .timeline-item {
