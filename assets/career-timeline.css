@@ -222,16 +222,16 @@
 }
 
 @media (min-width: 821px) {
-  .timeline-item.is-right:not(.is-year-start) {
-    margin-top: calc(-1 * clamp(42px, 5vw, 76px)) !important;
+  .timeline-item:not(.is-year-start) {
+    margin-top: calc(-1 * clamp(104px, 9.8vw, 178px)) !important;
   }
 
-  .timeline-item.is-right:not(.is-year-start)::before {
-    top: clamp(48px, 5vw, 74px) !important;
+  .timeline-item:not(.is-year-start)::before {
+    top: clamp(64px, 6vw, 102px) !important;
   }
 
-  .timeline-item.is-right:not(.is-year-start)::after {
-    top: calc(clamp(48px, 5vw, 74px) + 5px) !important;
+  .timeline-item:not(.is-year-start)::after {
+    top: calc(clamp(64px, 6vw, 102px) + 5px) !important;
   }
 }
 
