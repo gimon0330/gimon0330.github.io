@@ -30,14 +30,14 @@
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
   border: 0 !important;
-  border-top: 1px solid color-mix(in oklab, CanvasText, transparent 88%) !important;
+  border-top: 1px solid color-mix(in oklab, var(--text, CanvasText), transparent 86%) !important;
   overflow: visible !important;
   transform: none !important;
   opacity: 1 !important;
 }
 
 .edu-card:last-child {
-  border-bottom: 1px solid color-mix(in oklab, CanvasText, transparent 88%) !important;
+  border-bottom: 1px solid color-mix(in oklab, var(--text, CanvasText), transparent 86%) !important;
 }
 
 .edu-card:hover,
@@ -53,7 +53,7 @@
 }
 
 .edu-period {
-  color: color-mix(in oklab, CanvasText, transparent 44%) !important;
+  color: color-mix(in oklab, var(--text, CanvasText), transparent 42%) !important;
   font-family: var(--font-body, inherit) !important;
   font-size: clamp(12px, 1.1vw, 14px) !important;
   font-weight: 750 !important;
@@ -65,7 +65,7 @@
 
 .edu-content {
   display: grid !important;
-  grid-template-columns: clamp(46px, 5.2vw, 62px) minmax(0, 1fr) !important;
+  grid-template-columns: clamp(48px, 5.4vw, 66px) minmax(0, 1fr) !important;
   column-gap: clamp(18px, 3vw, 28px) !important;
   row-gap: 4px !important;
   align-items: start !important;
@@ -82,18 +82,22 @@
   top: auto !important;
   grid-column: 1 !important;
   grid-row: 1 / span 4 !important;
-  width: clamp(46px, 5.2vw, 62px) !important;
-  height: clamp(46px, 5.2vw, 62px) !important;
+  width: clamp(48px, 5.4vw, 66px) !important;
+  height: clamp(48px, 5.4vw, 66px) !important;
   min-width: 0 !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  border: 0 !important;
+  padding: 8px !important;
+  border-radius: clamp(14px, 1.7vw, 20px) !important;
+  background:
+    linear-gradient(145deg, rgba(255, 255, 255, .98), rgba(245, 247, 252, .92)) !important;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, .22),
+    inset 0 1px 0 rgba(255, 255, 255, .94),
+    inset 0 -1px 0 rgba(20, 30, 60, .06) !important;
+  border: 1px solid rgba(255, 255, 255, .72) !important;
   outline: 0 !important;
   transform: none !important;
   display: grid !important;
-  place-items: start center !important;
+  place-items: center !important;
 }
 
 .edu-header .logo-slot::before,
@@ -106,7 +110,7 @@
   max-width: 100% !important;
   max-height: 100% !important;
   object-fit: contain !important;
-  filter: none !important;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, .10)) !important;
 }
 
 .edu-header .logo-slot span,
@@ -117,7 +121,7 @@
 .edu-header .eyebrow {
   grid-column: 2 !important;
   margin: 0 0 6px !important;
-  color: color-mix(in oklab, CanvasText, transparent 54%) !important;
+  color: color-mix(in oklab, var(--text, CanvasText), transparent 50%) !important;
   font-size: 12px !important;
   font-weight: 800 !important;
   letter-spacing: .2em !important;
@@ -127,7 +131,7 @@
 .edu-content h3 {
   grid-column: 2 !important;
   margin: 0 0 8px !important;
-  color: var(--home-ink, CanvasText) !important;
+  color: var(--home-ink, var(--text, CanvasText)) !important;
   font-family: var(--font-display, inherit) !important;
   font-size: clamp(25px, 3.1vw, 38px) !important;
   font-weight: 700 !important;
@@ -139,7 +143,7 @@
   grid-column: 2 !important;
   margin: 0 !important;
   max-width: 620px !important;
-  color: color-mix(in oklab, CanvasText, transparent 38%) !important;
+  color: color-mix(in oklab, var(--text, CanvasText), transparent 36%) !important;
   font-size: clamp(14px, 1.15vw, 16px) !important;
   line-height: 1.6 !important;
 }
@@ -148,13 +152,23 @@
   grid-column: 2 !important;
   width: fit-content !important;
   margin-top: 12px !important;
-  color: var(--home-ink, CanvasText) !important;
+  color: var(--home-ink, var(--text, CanvasText)) !important;
   opacity: .72 !important;
   font-weight: 800 !important;
 }
 
 .edu-content .inline-link:hover {
   opacity: 1 !important;
+}
+
+@media (prefers-color-scheme: light) {
+  .edu-header .logo-slot,
+  .logo-slot {
+    box-shadow:
+      0 10px 26px rgba(32, 38, 54, .11),
+      inset 0 1px 0 rgba(255, 255, 255, .96),
+      inset 0 -1px 0 rgba(20, 30, 60, .05) !important;
+  }
 }
 
 @media (max-width: 980px) {
@@ -174,14 +188,16 @@
   }
 
   .edu-content {
-    grid-template-columns: 46px minmax(0, 1fr) !important;
+    grid-template-columns: 48px minmax(0, 1fr) !important;
     column-gap: 14px !important;
   }
 
   .edu-header .logo-slot,
   .logo-slot {
-    width: 46px !important;
-    height: 46px !important;
+    width: 48px !important;
+    height: 48px !important;
+    padding: 7px !important;
+    border-radius: 15px !important;
   }
 
   .edu-content h3 {
@@ -196,14 +212,16 @@
   }
 
   .edu-content {
-    grid-template-columns: 38px minmax(0, 1fr) !important;
+    grid-template-columns: 42px minmax(0, 1fr) !important;
     column-gap: 12px !important;
   }
 
   .edu-header .logo-slot,
   .logo-slot {
-    width: 38px !important;
-    height: 38px !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 6px !important;
+    border-radius: 13px !important;
   }
 
   .edu-header .eyebrow {
