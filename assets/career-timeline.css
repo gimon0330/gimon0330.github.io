@@ -1,6 +1,6 @@
 /* Career page: dense, line-based timeline layout.
-   Desktop uses both left/right rails around a center timeline.
-   Mobile keeps the current vertical timeline feeling, but inserts year dividers. */
+   Desktop uses measured left/right positions to avoid collisions.
+   Mobile keeps the vertical timeline flow. */
 
 :root {
   --career-line: color-mix(in oklab, var(--text, CanvasText), transparent 74%);
@@ -238,16 +238,28 @@
 }
 
 @media (min-width: 821px) {
+  .career-timeline.is-laid-out {
+    display: block !important;
+  }
+
+  .career-timeline.is-laid-out > .timeline-year,
+  .career-timeline.is-laid-out > .timeline-item {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 !important;
+  }
+
   .timeline-item:not(.is-year-start) {
-    margin-top: calc(-1 * clamp(104px, 9.8vw, 178px)) !important;
+    margin-top: 0 !important;
   }
 
   .timeline-item:not(.is-year-start)::before {
-    top: clamp(64px, 6vw, 102px) !important;
+    top: clamp(26px, 3vw, 34px) !important;
   }
 
   .timeline-item:not(.is-year-start)::after {
-    top: calc(clamp(64px, 6vw, 102px) + 5px) !important;
+    top: calc(clamp(26px, 3vw, 34px) + 5px) !important;
   }
 }
 
