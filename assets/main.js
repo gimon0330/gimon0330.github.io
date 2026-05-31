@@ -190,12 +190,16 @@
     try {
       const career = await fetchJSON(CAREER_URL);
       let currentYear = "";
-      root.innerHTML = career.map((item, index) => {
+      let indexInYear = 0;
+      root.innerHTML = career.map((item) => {
         const year = getCareerYear(item.date);
-        const yearDivider = year && year !== currentYear
-          ? (currentYear = year, `<div class="timeline-year reveal is-visible"><span>${escapeHTML(year)}</span></div>`)
+        const startsNewYear = Boolean(year && year !== currentYear);
+        const yearDivider = startsNewYear
+          ? (currentYear = year, indexInYear = 0, `<div class="timeline-year reveal is-visible"><span>${escapeHTML(year)}</span></div>`)
           : "";
-        return `${yearDivider}${careerItemHTML(item, index)}`;
+        const itemHTML = careerItemHTML(item, indexInYear, startsNewYear);
+        indexInYear += 1;
+        return `${yearDivider}${itemHTML}`;
       }).join("");
     } catch (error) {
       console.warn("[portfolio] career timeline failed:", error);
@@ -207,13 +211,14 @@
     return match ? match[0] : "";
   }
 
-  function careerItemHTML(item, index = 0) {
+  function careerItemHTML(item, index = 0, isYearStart = false) {
     const links = (item.links || [])
       .map((link) => iconLink(link.label || "Link", link.url || "#", link.icon || "link"))
       .join("");
     const side = index % 2 === 0 ? "is-left" : "is-right";
+    const yearStartClass = isYearStart ? " is-year-start" : "";
     return `
-      <article class="timeline-item ${side} reveal is-visible">
+      <article class="timeline-item ${side}${yearStartClass} reveal is-visible">
         <div class="timeline-card">
           <div class="timeline-meta"><span class="timeline-date">${escapeHTML(item.date)}</span><span class="timeline-type">${item.icon === "Shield" ? "🛡️ " : ""}${escapeHTML(item.type)}</span></div>
           <h3>${escapeHTML(item.title)}</h3>
