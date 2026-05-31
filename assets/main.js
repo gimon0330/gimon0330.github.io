@@ -189,20 +189,33 @@
     if (!root) return;
     try {
       const career = await fetchJSON(CAREER_URL);
-      root.innerHTML = career.map(careerItemHTML).join("");
+      let currentYear = "";
+      root.innerHTML = career.map((item, index) => {
+        const year = getCareerYear(item.date);
+        const yearDivider = year && year !== currentYear
+          ? (currentYear = year, `<div class="timeline-year reveal is-visible"><span>${escapeHTML(year)}</span></div>`)
+          : "";
+        return `${yearDivider}${careerItemHTML(item, index)}`;
+      }).join("");
     } catch (error) {
       console.warn("[portfolio] career timeline failed:", error);
     }
   }
 
-  function careerItemHTML(item) {
+  function getCareerYear(date) {
+    const match = String(date || "").match(/\d{4}/);
+    return match ? match[0] : "";
+  }
+
+  function careerItemHTML(item, index = 0) {
     const links = (item.links || [])
       .map((link) => iconLink(link.label || "Link", link.url || "#", link.icon || "link"))
       .join("");
+    const side = index % 2 === 0 ? "is-left" : "is-right";
     return `
-      <article class="timeline-item reveal is-visible">
+      <article class="timeline-item ${side} reveal is-visible">
         <div class="timeline-card">
-          <div class="timeline-meta"><span class="pill">${escapeHTML(item.date)}</span><span class="pill">${item.icon === "Shield" ? "🛡️ " : ""}${escapeHTML(item.type)}</span></div>
+          <div class="timeline-meta"><span class="timeline-date">${escapeHTML(item.date)}</span><span class="timeline-type">${item.icon === "Shield" ? "🛡️ " : ""}${escapeHTML(item.type)}</span></div>
           <h3>${escapeHTML(item.title)}</h3>
           ${item.desc ? `<p>${escapeHTML(item.desc)}</p>` : ""}
           ${links ? `<div class="timeline-links">${links}</div>` : ""}
