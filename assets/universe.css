@@ -646,3 +646,7 @@ button { font: inherit; }
   .world-node.is-hovered .node-copy { transform: translateY(85px); }
   .map-inspector { top:auto; bottom:42px; }
 }
+
+/* Give screen blending an opaque local backdrop; retain the surrounding live grid. */
+.universe-map { background: #090e18; isolation: isolate; }
+.world-node { mix-blend-mode: screen; }
