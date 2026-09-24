@@ -9,8 +9,8 @@ layout: null
   <meta name="theme-color" content="#090e18" />
   <meta name="description" content="안강현의 개인 우주 — 프로젝트, 연구, 학업과 활동 기록" />
   <title>안강현 · Personal Universe</title>
-  <link rel="stylesheet" href="{{ '/assets/universe.css?v=20260924-2' | relative_url }}" />
-  <script defer src="{{ '/assets/universe.js?v=20260924-2' | relative_url }}"></script>
+  <link rel="stylesheet" href="{{ '/assets/universe.css?v=20260924-3' | relative_url }}" />
+  <script defer src="{{ '/assets/universe.js?v=20260924-3' | relative_url }}"></script>
 </head>
 <body class="universe-body">
   <div id="universe-app" data-base="{{ site.baseurl }}">
@@ -42,14 +42,12 @@ layout: null
           <div class="readout-line"><span>KNOWN WORLDS</span><strong id="world-count">05</strong></div>
           <div class="readout-line"><span>CATALOGUED OBJECTS</span><strong id="object-count">—</strong></div>
           <div class="readout-line"><span>STATUS</span><strong class="readout-online">ONLINE</strong></div>
-          <p>커서가 중력이 됩니다.<br />행성은 열어볼 수 있습니다.</p>
         </div>
       </section>
 
       <section class="explore-section" id="explore" aria-labelledby="explore-title">
         <div class="section-heading">
           <div><p class="section-index">01 / MAP</p><h2 id="explore-title">나의 세계를 탐험해보세요.</h2></div>
-          <p class="section-note">마우스를 움직이거나 화면을 터치하면<br />주변의 격자가 중력처럼 휘어집니다.</p>
         </div>
 
         <div class="universe-map" id="universe-map" tabindex="0" aria-label="개인 우주 지도. 다섯 개의 영역을 선택할 수 있습니다.">
@@ -59,31 +57,60 @@ layout: null
           <span class="map-coordinate coordinate-one" aria-hidden="true">00° 00′</span>
           <span class="map-coordinate coordinate-two" aria-hidden="true">POSTECH / KR</span>
 
-          <button class="world-node node-profile" type="button" data-world="profile" aria-controls="detail-panel" aria-expanded="false">
-            <span class="node-orb orb-profile"><span class="orb-core"></span></span><span class="node-copy"><strong>나</strong><small>PROFILE</small></span>
+          <button class="world-node node-profile" type="button" data-world="profile" data-planet="earth" aria-controls="detail-panel" aria-expanded="false">
+            <span class="node-orb orb-profile">
+              <span class="planet-aura" aria-hidden="true"></span>
+              <img class="planet-art" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Earth_Western_Hemisphere_transparent_background.png/1200px-Earth_Western_Hemisphere_transparent_background.png" alt="" width="180" height="180" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+              <span class="planet-shine" aria-hidden="true"></span>
+            </span>
+            <span class="node-copy"><strong>나</strong><small>PROFILE</small></span>
           </button>
-          <button class="world-node node-projects" type="button" data-world="projects" aria-controls="detail-panel" aria-expanded="false">
-            <span class="node-orb orb-projects"><span class="orb-core"></span><span class="orb-ring"></span></span><span class="node-copy"><strong>프로젝트</strong><small>PROJECTS</small></span>
+          <button class="world-node node-projects" type="button" data-world="projects" data-planet="saturn" aria-controls="detail-panel" aria-expanded="false">
+            <span class="node-orb orb-projects has-ring">
+              <span class="planet-aura" aria-hidden="true"></span>
+              <img class="planet-art" src="https://upload.wikimedia.org/wikipedia/commons/e/ea/8423_20181_1saturn2016.jpg" alt="" width="180" height="180" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+              <span class="planet-shine" aria-hidden="true"></span>
+              <span class="orb-ring" aria-hidden="true"></span>
+            </span>
+            <span class="node-copy"><strong>프로젝트</strong><small>PROJECTS</small></span>
           </button>
-          <button class="world-node node-path" type="button" data-world="path" aria-controls="detail-panel" aria-expanded="false">
-            <span class="node-orb orb-path"><span class="orb-core"></span></span><span class="node-copy"><strong>발자취</strong><small>PATH</small></span>
+          <button class="world-node node-path" type="button" data-world="path" data-planet="mars" aria-controls="detail-panel" aria-expanded="false">
+            <span class="node-orb orb-path">
+              <span class="planet-aura" aria-hidden="true"></span>
+              <img class="planet-art" src="https://mars.nasa.gov/images/Mars_globe_1584x1584_2.jpg" alt="" width="180" height="180" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+              <span class="planet-shine" aria-hidden="true"></span>
+            </span>
+            <span class="node-copy"><strong>발자취</strong><small>PATH</small></span>
           </button>
-          <button class="world-node node-research" type="button" data-world="research" aria-controls="detail-panel" aria-expanded="false">
-            <span class="node-orb orb-research"><span class="orb-core"></span><span class="orb-ring"></span></span><span class="node-copy"><strong>연구</strong><small>RESEARCH</small></span>
+          <button class="world-node node-research" type="button" data-world="research" data-planet="jupiter" aria-controls="detail-panel" aria-expanded="false">
+            <span class="node-orb orb-research">
+              <span class="planet-aura" aria-hidden="true"></span>
+              <img class="planet-art" src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Voyager_1_Image_of_Jupiter_%28cropped%29.jpg" alt="" width="180" height="180" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+              <span class="planet-shine" aria-hidden="true"></span>
+            </span>
+            <span class="node-copy"><strong>연구</strong><small>RESEARCH</small></span>
           </button>
-          <button class="world-node node-learning" type="button" data-world="learning" aria-controls="detail-panel" aria-expanded="false">
-            <span class="node-orb orb-learning"><span class="orb-core"></span></span><span class="node-copy"><strong>배움</strong><small>LEARNING</small></span>
+          <button class="world-node node-learning" type="button" data-world="learning" data-planet="neptune" aria-controls="detail-panel" aria-expanded="false">
+            <span class="node-orb orb-learning">
+              <span class="planet-aura" aria-hidden="true"></span>
+              <img class="planet-art" src="https://www.astroevents.no/bilder/Neptune_Full.jpg" alt="" width="180" height="180" loading="eager" decoding="async" referrerpolicy="no-referrer" />
+              <span class="planet-shine" aria-hidden="true"></span>
+            </span>
+            <span class="node-copy"><strong>배움</strong><small>LEARNING</small></span>
           </button>
-
+          <div class="map-inspector" id="map-inspector" aria-live="polite" hidden>
+            <p class="inspector-kicker" id="inspector-kicker"></p>
+            <h3 id="inspector-title"></h3>
+            <p id="inspector-description"></p>
+          </div>
           <div class="map-center-mark" aria-hidden="true"><span></span><small>MOVE TO DISCOVER</small></div>
           <span class="map-caption">THE PERSONAL SYSTEM / 2026</span>
         </div>
-        <div class="map-footer"><span id="interaction-hint">영역을 선택하면 그곳의 기록이 열립니다.</span><span id="map-coordinates">FIELD 00.00 / 00.00</span></div>
+        <div class="map-footer"><span id="map-coordinates">FIELD 00.00 / 00.00</span></div>
       </section>
 
-      <section class="detail-panel" id="detail-panel" aria-labelledby="detail-title" aria-live="polite">
-        <div class="detail-empty"><span class="detail-empty-mark" aria-hidden="true">+</span><p>행성을 선택해<br />기록을 열어보세요.</p></div>
-        <div class="detail-content" hidden>
+      <section class="detail-panel" id="detail-panel" aria-labelledby="detail-title" aria-live="polite" hidden>
+        <div class="detail-content">
           <div class="detail-header"><div><p class="detail-kicker" id="detail-kicker"></p><h2 id="detail-title"></h2><p class="detail-description" id="detail-description"></p></div><button type="button" class="detail-close" aria-label="기록 닫기">닫기 <span aria-hidden="true">×</span></button></div>
           <div class="detail-meta" id="detail-meta"></div>
           <div class="detail-list" id="detail-list"></div>
