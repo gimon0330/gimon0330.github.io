@@ -447,7 +447,7 @@
     updateMapCoordinates(center.x, center.y);
   }
 
-  $(".planet-art").forEach((image) => {
+  Array.from(document.querySelectorAll(".planet-art")).forEach((image) => {
     image.addEventListener("error", () => image.classList.add("is-missing"), { once: true });
   });
 
