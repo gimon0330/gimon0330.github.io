@@ -383,109 +383,46 @@ button { font: inherit; }
 
 .world-node.is-displaced .node-orb { transform: scale(.84); }
 
-.orb-core { position: absolute; inset: 8px; display: block; border-radius: 50%; }
 
-.planet-aura {
-  position: absolute;
-  inset: -18%;
-  z-index: -1;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--planet-glow, rgba(145,213,255,.34)) 0, transparent 68%);
-  filter: blur(9px);
-  opacity: .62;
-  transition: opacity .55s ease, transform .8s ease;
+/* Preserve the original photographic silhouettes, including Saturn's rings. */
+.planet-aura, .planet-shine, .orb-ring { display: none; }
+.node-orb {
+  isolation: auto;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
 }
-
 .planet-art {
   position: absolute;
-  inset: -8px;
-  z-index: 1;
-  width: calc(100% + 16px);
-  height: calc(100% + 16px);
-  display: block;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  mix-blend-mode: screen;
-  opacity: .94;
-  filter: saturate(1.12) contrast(1.06) brightness(.94) drop-shadow(0 0 13px var(--planet-shadow, rgba(145,213,255,.22)));
-  transition: opacity .35s ease, filter .55s ease;
-}
-
-.planet-art.is-missing { opacity: 0; }
-
-.planet-shine {
-  position: absolute;
   inset: 0;
-  z-index: 2;
-  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+  border-radius: 0;
+  opacity: 1;
+  mix-blend-mode: normal;
+  filter: none;
   pointer-events: none;
-  background:
-    radial-gradient(circle at 28% 21%, rgba(255,255,255,.6), transparent 10%),
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,.13), transparent 32%),
-    linear-gradient(125deg, rgba(255,255,255,.19), transparent 38%, rgba(0,0,0,.36) 87%);
+}
+.orb-projects .planet-art { width: 190%; max-width: none; left: -45%; }
+.planet-art.is-missing { visibility: hidden; }
+.world-node {
   mix-blend-mode: screen;
-  opacity: .62;
+  background: transparent;
+  border-color: transparent;
 }
-
-.orb-profile {
-  --planet-glow: rgba(109,190,255,.45);
-  --planet-shadow: rgba(109,190,255,.35);
-  background: radial-gradient(circle at 33% 28%, #d9f1ff, #4c98bd 34%, #163c63 69%, #08111e 100%);
-  box-shadow: 0 0 28px rgba(109,190,255,.22);
+.world-node:hover, .world-node:focus-visible,
+.world-node.is-active, .world-node.is-hovered {
+  background: transparent;
+  border-color: transparent;
 }
-
-.orb-projects {
-  --planet-glow: rgba(250,182,114,.42);
-  --planet-shadow: rgba(250,182,114,.34);
-  background: radial-gradient(circle at 34% 25%, #f7dfc5, #bd6e56 36%, #4b2b3a 69%, #120f18 100%);
-  box-shadow: 0 0 30px rgba(224,140,101,.24);
-}
-
-.orb-path {
-  --planet-glow: rgba(235,117,72,.36);
-  --planet-shadow: rgba(235,117,72,.3);
-  background: radial-gradient(circle at 33% 25%, #ffd9a3, #bd5a3d 36%, #4a2022 72%, #140c12 100%);
-  box-shadow: 0 0 28px rgba(235,117,72,.2);
-}
-
-.orb-research {
-  --planet-glow: rgba(238,190,112,.4);
-  --planet-shadow: rgba(238,190,112,.32);
-  background: radial-gradient(circle at 34% 25%, #ffe3b4, #d08b56 35%, #59423c 67%, #171219 100%);
-  box-shadow: 0 0 30px rgba(238,190,112,.22);
-}
-
-.orb-learning {
-  --planet-glow: rgba(113,194,255,.42);
-  --planet-shadow: rgba(113,194,255,.34);
-  background: radial-gradient(circle at 34% 25%, #d9f8ff, #5ca9cf 36%, #194b72 69%, #0b1420 100%);
-  box-shadow: 0 0 30px rgba(113,194,255,.24);
-}
-
-.orb-ring {
-  position: absolute;
-  inset: -22px -37px;
-  z-index: 0;
-  border: 1px solid rgba(238, 223, 203, .7);
-  border-radius: 50%;
-  transform: rotate(-24deg);
-  box-shadow: 0 0 9px rgba(232, 215, 194, .16);
-  transition: transform .78s cubic-bezier(.2,.85,.2,1), opacity .5s ease;
-}
-
-.orb-ring::after {
-  content: "";
-  position: absolute;
-  top: -3px;
-  left: 9px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--u-ink);
-  box-shadow: 0 0 9px var(--u-ink);
-}
-
+.world-node.is-hovered .node-orb { filter: none; }
+.world-node.is-hovered .node-copy { transform: translateY(105px); }
+.map-center-mark { display: none; }
 .node-copy { position: relative; z-index: 4; display: grid; gap: 5px; text-align: center; transition: transform .65s ease, opacity .45s ease; }
 .node-copy strong { font-size: 14px; font-weight: 500; letter-spacing: -.02em; }
 .node-copy small { color: var(--u-muted); font-size: 9px; letter-spacing: .16em; }
@@ -494,7 +431,7 @@ button { font: inherit; }
   position: absolute;
   top: 22px;
   right: 22px;
-  z-index: 8;
+  z-index: 20;
   width: min(285px, calc(100% - 44px));
   padding: 17px 18px 18px;
   border: 1px solid rgba(145, 213, 255, .22);
@@ -703,4 +640,9 @@ button { font: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+@media(max-width:680px) {
+  .world-node.is-hovered .node-copy { transform: translateY(85px); }
+  .map-inspector { top:auto; bottom:42px; }
 }
