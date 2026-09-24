@@ -23,15 +23,18 @@
     { date: "2023", type: "Award", title: "유니스트 슈퍼컴퓨팅 청소년캠프 대상" }
   ];
 
-  const state = { projects: fallbackProjects, career: fallbackCareer, activeWorld: null };
+  const state = { projects: fallbackProjects, career: fallbackCareer, activeWorld: null, hoverWorld: null };
 
   const canvas = $("#universe-canvas");
   const ctx = canvas?.getContext("2d", { alpha: true });
   const map = $("#universe-map");
   const mapCoordinates = $("#map-coordinates");
   const panel = $("#detail-panel");
-  const emptyPanel = $(".detail-empty", panel);
   const contentPanel = $(".detail-content", panel);
+  const mapInspector = $("#map-inspector");
+  const inspectorKicker = $("#inspector-kicker");
+  const inspectorTitle = $("#inspector-title");
+  const inspectorDescription = $("#inspector-description");
   const detailKicker = $("#detail-kicker");
   const detailTitle = $("#detail-title");
   const detailDescription = $("#detail-description");
@@ -196,6 +199,59 @@
     else detailList.append(makeElement("p", "catalog-empty", "아직 기록된 항목이 없습니다."));
   }
 
+  function showInspector(key) {
+    if (!mapInspector || !key) return;
+    const data = regionData(key);
+    inspectorKicker.textContent = data.kicker;
+    inspectorTitle.textContent = data.title;
+    inspectorDescription.textContent = data.description;
+    mapInspector.hidden = false;
+  }
+
+  function clearWorldPreview() {
+    state.hoverWorld = null;
+    nodes.forEach((node) => {
+      node.classList.remove("is-hovered", "is-displaced");
+      node.style.setProperty("--node-shift-x", "0px");
+      node.style.setProperty("--node-shift-y", "0px");
+    });
+    if (state.activeWorld) showInspector(state.activeWorld);
+    else if (mapInspector) mapInspector.hidden = true;
+  }
+
+  function previewWorld(key) {
+    if (!map || !key) return;
+    state.hoverWorld = key;
+    nodes.forEach((node) => {
+      node.classList.remove("is-hovered", "is-displaced");
+      node.style.setProperty("--node-shift-x", "0px");
+      node.style.setProperty("--node-shift-y", "0px");
+    });
+    const focus = nodes.find((node) => node.dataset.world === key);
+    if (!focus) return;
+    const focusCenter = nodeCenter(focus);
+    const mapRect = map.getBoundingClientRect();
+    const maxDistance = Math.max(mapRect.width, mapRect.height);
+    nodes.forEach((node) => {
+      if (node === focus) {
+        node.classList.add("is-hovered");
+        return;
+      }
+      const center = nodeCenter(node);
+      const dx = center.x - focusCenter.x;
+      const dy = center.y - focusCenter.y;
+      const distance = Math.hypot(dx, dy);
+      const weight = 1 - Math.min(distance / maxDistance, 1);
+      const push = 58 + weight * 108;
+      const nx = distance ? dx / distance : 0;
+      const ny = distance ? dy / distance : 0;
+      node.style.setProperty("--node-shift-x", `${Math.round(nx * push)}px`);
+      node.style.setProperty("--node-shift-y", `${Math.round(ny * push)}px`);
+      node.classList.add("is-displaced");
+    });
+    showInspector(key);
+  }
+
   function openRegion(key, shouldScroll = true) {
     state.activeWorld = key;
     nodes.forEach((node) => {
@@ -204,9 +260,9 @@
       node.classList.toggle("is-active", active);
     });
     renderRegion(key);
-    emptyPanel.hidden = true;
+    panel.hidden = false;
     contentPanel.hidden = false;
-    $("#interaction-hint").textContent = "다른 영역을 선택하거나, 닫기를 눌러 지도로 돌아가세요.";
+    previewWorld(key);
     if (shouldScroll && window.matchMedia("(max-width: 680px)").matches) {
       window.requestAnimationFrame(() => panel.scrollIntoView({ behavior: reduceMotion.matches ? "auto" : "smooth", block: "nearest" }));
     }
@@ -218,9 +274,8 @@
       node.setAttribute("aria-expanded", "false");
       node.classList.remove("is-active");
     });
-    contentPanel.hidden = true;
-    emptyPanel.hidden = false;
-    $("#interaction-hint").textContent = "영역을 선택하면 그곳의 기록이 열립니다.";
+    panel.hidden = true;
+    clearWorldPreview();
   }
 
   function updateCounts() {
@@ -392,10 +447,26 @@
     updateMapCoordinates(center.x, center.y);
   }
 
+  $(".planet-art").forEach((image) => {
+    image.addEventListener("error", () => image.classList.add("is-missing"), { once: true });
+  });
+
   nodes.forEach((node) => {
     node.addEventListener("click", () => openRegion(node.dataset.world));
-    node.addEventListener("pointerenter", () => attractToNode(node));
-    node.addEventListener("focus", () => attractToNode(node));
+    node.addEventListener("pointerenter", () => {
+      previewWorld(node.dataset.world);
+      attractToNode(node);
+    });
+    node.addEventListener("pointerdown", (event) => {
+      if (event.pointerType === "touch") {
+        previewWorld(node.dataset.world);
+        attractToNode(node);
+      }
+    }, { passive: true });
+    node.addEventListener("focus", () => {
+      previewWorld(node.dataset.world);
+      attractToNode(node);
+    });
   });
 
   if (map) {
@@ -408,7 +479,10 @@
       }
     }, { passive: true });
     map.addEventListener("pointermove", (event) => updateMapCoordinates(event.clientX, event.clientY), { passive: true });
-    map.addEventListener("pointerleave", () => { if (!state.activeWorld) resetPointer(); });
+    map.addEventListener("pointerleave", () => {
+      clearWorldPreview();
+      if (!state.activeWorld) resetPointer();
+    });
   }
 
   document.addEventListener("pointermove", (event) => {
@@ -426,6 +500,7 @@
   });
   actions.close?.addEventListener("click", closeRegion);
   $("#current-year").textContent = String(new Date().getFullYear());
+  if (panel) panel.hidden = true;
 
   updateCounts();
   resizeCanvas();
