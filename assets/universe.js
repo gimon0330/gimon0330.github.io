@@ -229,26 +229,35 @@
     });
     const focus = nodes.find((node) => node.dataset.world === key);
     if (!focus) return;
-    const focusCenter = nodeCenter(focus);
     const mapRect = map.getBoundingClientRect();
-    const maxDistance = Math.max(mapRect.width, mapRect.height);
+    const localCenter = (node) => ({ x: node.offsetLeft, y: node.offsetTop });
+    const focusCenter = localCenter(focus);
+    const narrow = mapRect.width < 640;
+    const halfX = key === "projects" ? (narrow ? 190 : 248) : (narrow ? 108 : 140);
+    const halfY = narrow ? 120 : 150;
+    const targetX = Math.max(Math.min(halfX, mapRect.width / 2), Math.min(mapRect.width - halfX, focusCenter.x));
+    const targetY = Math.max(halfY, Math.min(mapRect.height - halfY - 70, focusCenter.y));
     nodes.forEach((node) => {
       if (node === focus) {
         node.classList.add("is-hovered");
+        node.style.setProperty("--node-shift-x", (targetX - focusCenter.x) + "px");
+        node.style.setProperty("--node-shift-y", (targetY - focusCenter.y) + "px");
         return;
       }
-      const center = nodeCenter(node);
-      const dx = center.x - focusCenter.x;
-      const dy = center.y - focusCenter.y;
-      const distance = Math.hypot(dx, dy);
-      const weight = 1 - Math.min(distance / maxDistance, 1);
-      const push = 58 + weight * 108;
-      const nx = distance ? dx / distance : 0;
-      const ny = distance ? dy / distance : 0;
-      node.style.setProperty("--node-shift-x", `${Math.round(nx * push)}px`);
-      node.style.setProperty("--node-shift-y", `${Math.round(ny * push)}px`);
+      const center = localCenter(node);
+      const dx = center.x - targetX, dy = center.y - targetY;
+      const distance = Math.hypot(dx, dy) || 1;
+      const push = Math.max(35, 160 - distance * .15);
+      const x = Math.max(60, Math.min(mapRect.width - 60, center.x + dx / distance * push));
+      const y = Math.max(65, Math.min(mapRect.height - 85, center.y + dy / distance * push));
+      node.style.setProperty("--node-shift-x", (x - center.x) + "px");
+      node.style.setProperty("--node-shift-y", (y - center.y) + "px");
       node.classList.add("is-displaced");
     });
+    if (!narrow && mapInspector) {
+      mapInspector.style.left = targetX > mapRect.width / 2 ? "22px" : "auto";
+      mapInspector.style.right = targetX > mapRect.width / 2 ? "auto" : "22px";
+    }
     showInspector(key);
   }
 
