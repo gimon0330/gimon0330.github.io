@@ -274,8 +274,8 @@
     const distance = Math.sqrt(dx * dx + dy * dy);
     const radius = Math.min(canvasWidth, canvasHeight) * .31;
     const influence = pointer.current.force * Math.exp(-(distance * distance) / (radius * radius));
-    const pull = .27 * influence;
-    return [x - dx * pull, y - dy * pull + influence * 26];
+    const pull = .34 * influence;
+    return [x - dx * pull, y - dy * pull + influence * 36];
   }
 
   function nodeCenter(node) {
@@ -324,7 +324,7 @@
       ctx.fill();
     });
 
-    ctx.globalAlpha = .2;
+    ctx.globalAlpha = .34;
     ctx.strokeStyle = gridColor;
     ctx.lineWidth = .65;
     const step = Math.max(54, Math.min(76, Math.round(canvasWidth / 19)));
