@@ -423,7 +423,7 @@ button { font: inherit; }
 }
 
 .map-center-mark span { position: absolute; inset: -9px; border: 1px solid rgba(145,213,255,.24); border-radius: 50%; }
-.map-center-mark small { position: absolute; top: 19px; left: 50%; transform: translateX(-50%); color: var(--u-dim); font-size: 8px; letter-spacing: .16em; white-space: nowrap; }
+.map-center-mark small { display: none; }
 
 .map-caption { position: absolute; left: 22px; bottom: 20px; color: var(--u-dim); font-size: 9px; }
 
