@@ -666,3 +666,17 @@ button { font: inherit; }
 }
 .map-axis, .map-coordinate, .map-caption, .map-footer { display: none; }
 .world-node { mix-blend-mode: screen; }
+
+/* Extend the map's night sky past its edges so its backdrop has no visible rectangle. */
+.explore-section { position: relative; }
+.explore-section::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -190px;
+  bottom: -160px;
+  left: calc(50% - 50vw);
+  width: 100vw;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent 0%, #090e18 25%, #090e18 74%, transparent 100%);
+}
