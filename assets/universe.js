@@ -450,6 +450,41 @@
     mapCoordinates.textContent = `FIELD ${(x * 100).toFixed(2)} / ${(y * 100).toFixed(2)}`;
   }
 
+  // Gently pull each resting world toward the pointer, with a stable maximum offset.
+  let driftFrame = 0;
+  let driftX = null;
+  let driftY = null;
+  function renderDrift() {
+    driftFrame = 0;
+    if (!map) return;
+    const rect = map.getBoundingClientRect();
+    nodes.forEach((node, index) => {
+      if (state.hoverWorld === node.dataset.world) {
+        node.style.setProperty("--drift-x", "0px");
+        node.style.setProperty("--drift-y", "0px");
+        return;
+      }
+      const centerX = node.offsetLeft, centerY = node.offsetTop;
+      const dx = driftX - centerX, dy = driftY - centerY;
+      const distance = Math.hypot(dx, dy) || 1;
+      const influence = driftX === null ? 0 : Math.max(0, 1 - distance / Math.max(rect.width * .7, 240));
+      const amount = Math.min(9, 7 + index * .55) * influence;
+      node.style.setProperty("--drift-x", (dx / distance * amount).toFixed(2) + "px");
+      node.style.setProperty("--drift-y", (dy / distance * amount).toFixed(2) + "px");
+    });
+  }
+  function setDrift(clientX, clientY) {
+    if (reduceMotion.matches || !map) return;
+    const rect = map.getBoundingClientRect();
+    driftX = clientX - rect.left;
+    driftY = clientY - rect.top;
+    if (!driftFrame) driftFrame = requestAnimationFrame(renderDrift);
+  }
+  function resetDrift() {
+    driftX = driftY = null;
+    if (!driftFrame) driftFrame = requestAnimationFrame(renderDrift);
+  }
+
   function attractToNode(node) {
     const center = nodeCenter(node);
     setPointer(center.x, center.y, .9);
@@ -487,9 +522,13 @@
         touchFadeTimer = window.setTimeout(() => { if (!state.activeWorld) resetPointer(); }, 900);
       }
     }, { passive: true });
-    map.addEventListener("pointermove", (event) => updateMapCoordinates(event.clientX, event.clientY), { passive: true });
+    map.addEventListener("pointermove", (event) => {
+      updateMapCoordinates(event.clientX, event.clientY);
+      if (event.pointerType !== "touch") setDrift(event.clientX, event.clientY);
+    }, { passive: true });
     map.addEventListener("pointerleave", () => {
       clearWorldPreview();
+      resetDrift();
       if (!state.activeWorld) resetPointer();
     });
   }
@@ -497,7 +536,11 @@
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType === "touch") return;
     setPointer(event.clientX, event.clientY, 1);
-    if (map) updateMapCoordinates(event.clientX, event.clientY);
+    if (map) {
+      updateMapCoordinates(event.clientX, event.clientY);
+      const rect = map.getBoundingClientRect();
+      if (event.clientX >= rect.left && event.clientX <= rect.right && event.clientY >= rect.top && event.clientY <= rect.bottom) setDrift(event.clientX, event.clientY);
+    }
   }, { passive: true });
   window.addEventListener("blur", resetPointer, { passive: true });
   window.addEventListener("resize", resizeCanvas, { passive: true });
