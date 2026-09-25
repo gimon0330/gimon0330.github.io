@@ -341,7 +341,7 @@ button { font: inherit; }
   background: transparent;
   color: var(--u-ink);
   cursor: pointer;
-  transform: translate(-50%, -50%) translate3d(var(--node-shift-x, 0px), var(--node-shift-y, 0px), 0);
+  transform: translate(-50%, -50%) translate3d(calc(var(--node-shift-x, 0px) + var(--drift-x, 0px)), calc(var(--node-shift-y, 0px) + var(--drift-y, 0px)), 0);
   transition: background .32s ease, border-color .32s ease, transform .72s cubic-bezier(.2,.85,.2,1), opacity .5s ease;
   will-change: transform;
 }
@@ -647,6 +647,22 @@ button { font: inherit; }
   .map-inspector { top:auto; bottom:42px; }
 }
 
-/* Give screen blending an opaque local backdrop; retain the surrounding live grid. */
-.universe-map { background: #090e18; isolation: isolate; }
+/* A seamless opaque backdrop lets black areas of the photos blend away. */
+.universe-map {
+  border: 0;
+  border-radius: 0;
+  background: #090e18;
+  isolation: isolate;
+}
+.universe-map:focus-visible { border: 0; outline: 1px solid var(--u-cyan); outline-offset: -2px; box-shadow: none; }
+.map-vignette {
+  background:
+    linear-gradient(rgba(115, 161, 203, .055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(115, 161, 203, .055) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: .45;
+  -webkit-mask-image: radial-gradient(ellipse 60% 60% at center, #000 15%, transparent 100%);
+  mask-image: radial-gradient(ellipse 60% 60% at center, #000 15%, transparent 100%);
+}
+.map-axis, .map-coordinate, .map-caption, .map-footer { display: none; }
 .world-node { mix-blend-mode: screen; }
