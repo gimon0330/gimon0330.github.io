@@ -495,9 +495,24 @@
     image.addEventListener("error", () => image.classList.add("is-missing"), { once: true });
   });
 
+  function closePreviewOutsideOriginalOrbit(clientX, clientY) {
+    if (!map || !state.hoverWorld) return;
+    const node = nodes.find((candidate) => candidate.dataset.world === state.hoverWorld);
+    if (!node) return;
+    const rect = map.getBoundingClientRect();
+    const x = rect.left + node.offsetLeft;
+    const y = rect.top + node.offsetTop;
+    const radius = node.dataset.world === "projects" ? 82 : 70;
+    if (Math.hypot(clientX - x, clientY - y) > radius) clearWorldPreview();
+  }
+
   nodes.forEach((node) => {
     node.addEventListener("click", () => openRegion(node.dataset.world));
-    node.addEventListener("pointerenter", () => {
+    node.addEventListener("pointerenter", (event) => {
+      if (event.pointerType === "touch") return;
+      // The zoomed image is much larger than the original hit area.
+      const rect = map.getBoundingClientRect();
+      if (Math.hypot(event.clientX - rect.left - node.offsetLeft, event.clientY - rect.top - node.offsetTop) > 83) return;
       previewWorld(node.dataset.world);
       attractToNode(node);
     });
@@ -535,6 +550,7 @@
 
   document.addEventListener("pointermove", (event) => {
     if (event.pointerType === "touch") return;
+    closePreviewOutsideOriginalOrbit(event.clientX, event.clientY);
     setPointer(event.clientX, event.clientY, 1);
     if (map) {
       updateMapCoordinates(event.clientX, event.clientY);
