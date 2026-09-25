@@ -467,7 +467,7 @@
       const centerX = node.offsetLeft, centerY = node.offsetTop;
       const dx = driftX - centerX, dy = driftY - centerY;
       const distance = Math.hypot(dx, dy) || 1;
-      const influence = driftX === null ? 0 : Math.max(0, 1 - distance / Math.max(rect.width * .7, 240));
+      const influence = driftX === null ? 0 : .2 + .8 * Math.max(0, 1 - distance / Math.max(rect.width * .7, 240));
       const amount = Math.min(9, 7 + index * .55) * influence;
       node.style.setProperty("--drift-x", (dx / distance * amount).toFixed(2) + "px");
       node.style.setProperty("--drift-y", (dy / distance * amount).toFixed(2) + "px");
