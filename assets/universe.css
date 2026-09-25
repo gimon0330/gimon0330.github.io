@@ -342,7 +342,7 @@ button { font: inherit; }
   color: var(--u-ink);
   cursor: pointer;
   transform: translate(-50%, -50%) translate3d(calc(var(--node-shift-x, 0px) + var(--drift-x, 0px)), calc(var(--node-shift-y, 0px) + var(--drift-y, 0px)), 0);
-  transition: background .32s ease, border-color .32s ease, transform .72s cubic-bezier(.2,.85,.2,1), opacity .5s ease;
+  transition: background .32s ease, border-color .32s ease, transform .42s cubic-bezier(.2,.85,.2,1), opacity .35s ease;
   will-change: transform;
 }
 
@@ -372,7 +372,7 @@ button { font: inherit; }
   display: block;
   border-radius: 50%;
   isolation: isolate;
-  transition: transform .78s cubic-bezier(.2,.85,.2,1), filter .45s ease;
+  transition: transform .42s cubic-bezier(.2,.85,.2,1), filter .35s ease;
   transform-origin: center;
 }
 
@@ -423,7 +423,7 @@ button { font: inherit; }
 .world-node.is-hovered .node-orb { filter: none; }
 .world-node.is-hovered .node-copy { transform: translateY(105px); }
 .map-center-mark { display: none; }
-.node-copy { position: relative; z-index: 4; display: grid; gap: 5px; text-align: center; transition: transform .65s ease, opacity .45s ease; }
+.node-copy { position: relative; z-index: 4; display: grid; gap: 5px; text-align: center; transition: transform .35s ease, opacity .3s ease; }
 .node-copy strong { font-size: 14px; font-weight: 500; letter-spacing: -.02em; }
 .node-copy small { color: var(--u-muted); font-size: 9px; letter-spacing: .16em; }
 
